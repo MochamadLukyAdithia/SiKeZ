@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:hmj_apps/core/theme/app_text_theme.dart';
 
 class CustomTextField extends StatelessWidget {
   final String name;
@@ -14,7 +15,11 @@ class CustomTextField extends StatelessWidget {
       name: name,
       validator: validator,
       onTapOutside: (_) => FocusScope.of(context).unfocus(),
-      decoration: InputDecoration(hintText: hintText),
+      style: const TextStyle(height: 1.0),
+      decoration: InputDecoration(
+        hintText: hintText,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+      ),
     );
   }
 }
@@ -32,7 +37,13 @@ class CustomTextWithTitle extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(name),
+          Container(
+            margin: const EdgeInsets.only(left: 15, bottom: 10, top: 10),
+            child: Text(
+              name,
+              style: AppTextStyle.body2.copyWith(fontWeight: FontWeight.bold),
+            ),
+          ),
           CustomTextField(
             name: name,
             validator: validator,

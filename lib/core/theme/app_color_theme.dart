@@ -6,8 +6,8 @@ class AppColorTheme {
     required this.navigationColor,
     required this.primaryTextColor,
   });
-  final Color primaryColor = const Color(0xFFCB982B);
-  final Color secondaryColor = const Color(0xFFF2C573);
+  final Color primaryColor = const Color(0xFFD3ECA7);
+  final Color secondaryColor = const Color(0xFFB33030);
 
   final Grey grey = Grey();
   final Danger danger = Danger();
@@ -21,8 +21,8 @@ class AppColorTheme {
 class Gradient {
   final LinearGradient shade1 = const LinearGradient(
     colors: [
-      Color(0xFFF5B01D),
-      Color(0xFFE39B02),
+      Color(0xFFD3ECA7),
+      Color(0xFFA1B57D),
     ],
   );
 }

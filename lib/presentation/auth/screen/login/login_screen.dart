@@ -3,6 +3,7 @@ import "package:flutter_form_builder/flutter_form_builder.dart";
 import "package:get/get.dart";
 import "package:hmj_apps/core/helper/form_validation.dart";
 import "package:hmj_apps/core/theme/theme_controller.dart";
+import "package:hmj_apps/core/utils/images.dart";
 import "package:hmj_apps/presentation/auth/controller/auth_controller.dart";
 import 'package:hmj_apps/presentation/shared/custom_text_field.dart';
 
@@ -17,12 +18,30 @@ class LoginScreen extends GetView<AuthController> {
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          margin: const EdgeInsets.all(10),
+          margin: const EdgeInsets.all(30),
           child: FormBuilder(
             key: controller.formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Image.asset(
+                  Images.logoPpk,
+                  width: 102,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "SIKEPI",
+                  style: TextStyle(
+                      color: themeController.theme.secondaryColor,
+                      fontSize: 48,
+                      fontWeight: FontWeight.bold),
+                ),
+                const Text("\"Sistem Keuangan Kopi\""),
+                const SizedBox(
+                  height: 60,
+                ),
                 CustomTextWithTitle(
                   name: "email",
                   validator: FormValidation.isEmail,
@@ -41,12 +60,10 @@ class LoginScreen extends GetView<AuthController> {
                 ),
                 ElevatedButton(
                     onPressed: () {
-                    
-                        if (controller.formKey.currentState != null &&
-                                controller.formKey.currentState!
-                                    .saveAndValidate()) {
-                                controller.login();
-                            }
+                      if (controller.formKey.currentState != null &&
+                          controller.formKey.currentState!.saveAndValidate()) {
+                        controller.login();
+                      }
                     },
                     child: const Text("Login"))
               ],
