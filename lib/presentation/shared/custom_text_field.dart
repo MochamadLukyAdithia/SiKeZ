@@ -15,7 +15,11 @@ class SiKePiTextField extends StatelessWidget {
       name: name,
       validator: validator,
       onTapOutside: (_) => FocusScope.of(context).unfocus(),
-      decoration: InputDecoration(hintText: hintText),
+      style: const TextStyle(height: 1.0),
+      decoration: InputDecoration(
+        hintText: hintText,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+      ),
     );
   }
 }

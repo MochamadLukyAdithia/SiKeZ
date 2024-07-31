@@ -1,0 +1,91 @@
+import 'package:flutter/material.dart';
+import 'package:hmj_apps/core/utils/images.dart';
+
+
+class DasboardHeader extends StatelessWidget {
+  const DasboardHeader({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return  Container(
+                padding: const EdgeInsets.all(20),
+                height: 235,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                    Color(0xff19282F),
+                    Color(0xffB33030),
+                    Color.fromARGB(255, 210, 57, 57)
+                  ], stops: [
+                    0.01,
+                    0.5,
+                    0.9
+                  ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Total Aset",
+                      style: TextStyle(fontSize: 14, color: Colors.white),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const Text(
+                      "Rp52.000.000",
+                      style: TextStyle(
+                          fontSize: 24,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 3,
+                      color: Colors.white,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        const Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Laba bulan ini:",
+                              style:
+                                  TextStyle(fontSize: 14, color: Colors.white),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              "Rp20.000.000",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              "20% dari bulan sebelumnya",
+                              style:
+                                  TextStyle(fontSize: 14, color: Colors.amber),
+                            ),
+                          ],
+                        ),
+                        const Spacer(),
+                        Image.asset(Images.iconBullish)
+                      ],
+                    )
+                  ],
+                ),
+              );
+  }
+}

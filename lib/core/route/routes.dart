@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:hmj_apps/presentation/auth/controller/auth_binding.dart';
-import 'package:hmj_apps/presentation/auth/screen/login_screen.dart';
+import 'package:hmj_apps/presentation/auth/screen/login/login_screen.dart';
+import 'package:hmj_apps/presentation/dasboard/screen/dashboard_screen.dart';
 
 class AppRoute {
   static const loginPage = "/";
@@ -8,7 +9,7 @@ class AppRoute {
   static final List<GetPage> routes = [
     GetPage(
       name: AppRoute.loginPage,
-      page: () => const LoginScreen(),
+      page: () => const DashboardSceen(),
       binding: AuthBinding(),
     ),
   ];
