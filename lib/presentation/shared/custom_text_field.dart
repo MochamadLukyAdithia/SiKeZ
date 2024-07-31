@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:get/get.dart';
 
-class CustomTextField extends StatelessWidget {
+class SiKePiTextField extends StatelessWidget {
   final String name;
   final String? Function(String?) validator;
   final String? hintText;
-  const CustomTextField(
+  const SiKePiTextField(
       {super.key, required this.name, required this.validator, this.hintText});
 
   @override
@@ -21,25 +22,36 @@ class CustomTextField extends StatelessWidget {
 
 class CustomTextWithTitle extends StatelessWidget {
   final String name;
+  final String label;
   final String? Function(String?) validator;
   final String? hintText;
-  const CustomTextWithTitle(
-      {super.key, required this.name, required this.validator, this.hintText});
+  const CustomTextWithTitle({
+    super.key,
+    required this.name,
+    required this.validator,
+    this.hintText,
+    required this.label,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(name),
-          CustomTextField(
-            name: name,
-            validator: validator,
-            hintText: hintText,
-          )
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 20, bottom: 8),
+          child: Text(
+            label,
+            style:
+                Get.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+          ),
+        ),
+        SiKePiTextField(
+          name: name,
+          validator: validator,
+          hintText: hintText,
+        ),
+      ],
     );
   }
 }
