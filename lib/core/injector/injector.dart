@@ -24,9 +24,9 @@ void configureDependencies() {
   // getIt.registerSingleton(Connectivity());
   // getIt.registerSingleton(ConnectionChecker(getIt<Connectivity>()));
 
-  getIt.registerSingleton(AuthRepository(
-    firestore: FirebaseFirestore.instance,
-  ));
+  // getIt.registerSingleton(AuthRepository(
+  //   firestore: FirebaseFirestore.instance,
+  // ));
 
   getIt.registerSingleton(ImagePicker());
   getIt.registerFactory(() => AuthController(getIt<AuthRepository>()));

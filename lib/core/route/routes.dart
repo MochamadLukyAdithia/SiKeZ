@@ -10,7 +10,7 @@ class AppRoute {
     GetPage(
       name: AppRoute.loginPage,
       page: () => const DashboardSceen(),
-      binding: AuthBinding(),
+      // binding: AuthBinding(),
     ),
   ];
 }
