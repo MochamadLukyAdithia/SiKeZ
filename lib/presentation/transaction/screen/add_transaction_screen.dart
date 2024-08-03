@@ -17,55 +17,57 @@ class AddTransactionScreen extends StatelessWidget {
         title: Text("Tambah Transaksi"),
         backgroundColor: AppColors.primaryColor,
       ),
-      body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 15,
-            ),
-            CustomDatePicker(),
-            const SizedBox(
-              height: 15,
-            ),
-            DropDownButtonWithSearch(
-              title: "Jenis Transaksi*",
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            DropDownButtonWithSearch(
-              title: "Simpan Ke*",
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            DropDownButtonWithSearch(
-              title: "Diterima*",
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            const CustomTextWithTitle(
-              name: "nominal",
-              validator: FormValidation.isNotNullAndRequired,
-              label: "Nominal",
-              hintText: "Masukkan Nominal transaksi...",
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            const CustomTextWithTitle(
-              name: "catatan",
-              validator: FormValidation.isNotNullAndRequired,
-              label: "Catatan",
-              hintText: "Masukkan Catatan Anda...",
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            TakeImageButton()
-          ],
+      body: SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 15,
+              ),
+              CustomDatePicker(),
+              const SizedBox(
+                height: 15,
+              ),
+              DropDownButtonWithSearch(
+                title: "Jenis Transaksi*",
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              DropDownButtonWithSearch(
+                title: "Simpan Ke*",
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              DropDownButtonWithSearch(
+                title: "Diterima*",
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              const CustomTextWithTitle(
+                name: "nominal",
+                validator: FormValidation.isNotNullAndRequired,
+                label: "Nominal",
+                hintText: "Masukkan Nominal transaksi...",
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              const CustomTextWithTitle(
+                name: "catatan",
+                validator: FormValidation.isNotNullAndRequired,
+                label: "Catatan",
+                hintText: "Masukkan Catatan Anda...",
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              TakeImageButton()
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: Container(

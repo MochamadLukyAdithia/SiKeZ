@@ -4,9 +4,9 @@ import 'package:hmj_apps/core/controller/base_controller.dart';
 import 'package:hmj_apps/data/repository/auth_repository.dart';
 
 class AuthController extends BaseController {
-  final AuthRepository authRepository;
-  final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
-  AuthController(this.authRepository);
+  // final AuthRepository authRepository;
+  // final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
+  // AuthController(this.authRepository);
 
   // login() async {
   //   String email = formKey.currentState!.value['email'];

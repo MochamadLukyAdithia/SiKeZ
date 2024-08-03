@@ -29,5 +29,5 @@ void configureDependencies() {
   // ));
 
   getIt.registerSingleton(ImagePicker());
-  getIt.registerFactory(() => AuthController(getIt<AuthRepository>()));
+  getIt.registerFactory(() => AuthController());
 }

@@ -7,12 +7,18 @@ import 'package:hmj_apps/presentation/transaction/screen/add_transaction_screen.
 
 class AppRoute {
   static const loginPage = "/";
+  static const dashboardPage = "/dashboard";
+  static const addTransaction = "/transaction/add";
 
   static final List<GetPage> routes = [
     GetPage(
       name: AppRoute.loginPage,
-      page: () => const AddTransactionScreen(),
-      // binding: AuthBinding(),
+      page: () => const LoginScreen(),
+      binding: AuthBinding(),
     ),
+    GetPage(name: AppRoute.dashboardPage, page: () => const DashboardSceen()),
+    GetPage(
+        name: AppRoute.addTransaction,
+        page: () => const AddTransactionScreen()),
   ];
 }
