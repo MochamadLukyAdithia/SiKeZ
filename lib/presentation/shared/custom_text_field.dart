@@ -42,13 +42,13 @@ class CustomTextWithTitle extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 20, bottom: 8),
-          child: Text(
-            label,
-            style:
-                Get.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
-          ),
+        Text(
+          label,
+          style:
+              Get.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),
+        ),
+        const SizedBox(
+          height: 5,
         ),
         SiKePiTextField(
           name: name,
