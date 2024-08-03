@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:flutter_form_builder/flutter_form_builder.dart";
 import "package:get/get.dart";
 import "package:hmj_apps/core/helper/form_validation.dart";
+import "package:hmj_apps/core/route/routes.dart";
 import "package:hmj_apps/core/theme/app_colors.dart";
 import "package:hmj_apps/presentation/auth/controller/auth_controller.dart";
 import "package:hmj_apps/presentation/shared/custom_button.dart";
@@ -34,7 +35,7 @@ class LoginScreen extends GetView<AuthController> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: FormBuilder(
-                    key: controller.formKey,
+                    // key: controller.formKey,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -71,7 +72,11 @@ class LoginScreen extends GetView<AuthController> {
                           hintText: "Masukkan kata sandi anda...",
                         ),
                         const SizedBox(height: 48),
-                        SiKePeLinearButton(title: "Masuk", onPressed: () {}),
+                        SiKePeLinearButton(
+                            title: "Masuk",
+                            onPressed: () {
+                              Get.toNamed(AppRoute.dashboardPage);
+                            }),
                         const SizedBox(height: 24),
                         Row(
                           children: [
