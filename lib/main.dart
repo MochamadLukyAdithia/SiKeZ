@@ -4,7 +4,13 @@ import 'package:hmj_apps/core/injector/injector.dart';
 import 'package:hmj_apps/core/route/routes.dart';
 import 'package:hmj_apps/core/theme/app_theme.dart';
 
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
   runApp(const MyApp());
