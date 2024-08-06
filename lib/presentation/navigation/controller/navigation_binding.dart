@@ -5,7 +5,6 @@ import 'package:hmj_apps/presentation/navigation/controller/navigation_controlle
 class NavigationBinding extends Bindings {
   @override
   void dependencies() {
-    // TODO: implement dependencies
     Get.put(getIt<NavigationController>());
   }
 }

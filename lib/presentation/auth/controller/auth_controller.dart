@@ -21,7 +21,7 @@ class AuthController extends BaseController {
     authStream.listen((user) {
       if (user != null) {
         getUser();
-        Get.offAllNamed(AppRoute.dashboardPage);
+        Get.offAllNamed(AppRoute.navigation);
       } else {
         if (!(Get.currentRoute == "/")) {
           Get.offAllNamed(AppRoute.loginPage);
@@ -114,7 +114,8 @@ class AuthController extends BaseController {
         await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: email, password: password);
         Get.back();
-        Get.toNamed(AppRoute.dashboardPage);
+        //Get.toNamed(AppRoute.dashboardPage);
+        Get.toNamed(AppRoute.navigation);
         showSuccessSnackbar(message: "Berhasil masuk!");
       } on FirebaseAuthException catch (error) {
         Get.back();

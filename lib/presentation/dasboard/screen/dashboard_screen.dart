@@ -37,7 +37,8 @@ class DashboardSceen extends StatelessWidget {
             backgroundColor: Colors.transparent,
             elevation: 0,
             onPressed: () async {
-              AuthController.find.getUser();
+              // AuthController.find.getUser();
+              Get.toNamed(AppRoute.addTransaction);
             },
             child: const Icon(
               Icons.add,
