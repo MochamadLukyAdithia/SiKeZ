@@ -100,7 +100,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
               ],
             ),
             const Spacer(),
-            Icon(
+            const Icon(
               Icons.edit,
               color: AppColors.secondaryColor,
             )

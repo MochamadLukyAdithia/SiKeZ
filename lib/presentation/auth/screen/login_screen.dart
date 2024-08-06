@@ -2,7 +2,6 @@ import "package:flutter/material.dart";
 import "package:flutter_form_builder/flutter_form_builder.dart";
 import "package:get/get.dart";
 import "package:hmj_apps/core/helper/form_validation.dart";
-import "package:hmj_apps/core/route/routes.dart";
 import "package:hmj_apps/core/theme/app_colors.dart";
 import "package:hmj_apps/presentation/auth/controller/auth_controller.dart";
 import "package:hmj_apps/presentation/shared/custom_button.dart";
@@ -35,7 +34,7 @@ class LoginScreen extends GetView<AuthController> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: FormBuilder(
-                    // key: controller.formKey,
+                    key: controller.formKey,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -60,7 +59,7 @@ class LoginScreen extends GetView<AuthController> {
                         const SizedBox(height: 62),
                         const CustomTextWithTitle(
                           name: "email",
-                          validator: FormValidation.isNotNullAndRequired,
+                          validator: FormValidation.isEmail,
                           label: "Email",
                           hintText: "Masukkan email anda...",
                         ),
@@ -73,10 +72,9 @@ class LoginScreen extends GetView<AuthController> {
                         ),
                         const SizedBox(height: 48),
                         SiKePeLinearButton(
-                            title: "Masuk",
-                            onPressed: () {
-                              Get.toNamed(AppRoute.dashboardPage);
-                            }),
+                          title: "Masuk",
+                          onPressed: controller.loginWithEmailAndPassword,
+                        ),
                         const SizedBox(height: 24),
                         Row(
                           children: [
@@ -110,7 +108,7 @@ class LoginScreen extends GetView<AuthController> {
                         const SizedBox(height: 24),
                         SiKePeLinearButton(
                           title: "Masuk dengan Google",
-                          onPressed: () {},
+                          onPressed: controller.loginWithGoogle,
                           customWidget: Assets.icons.google.svg(width: 24),
                           color: Colors.black,
                           linearGradient: const LinearGradient(

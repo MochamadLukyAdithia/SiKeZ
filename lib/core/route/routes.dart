@@ -1,8 +1,7 @@
 import 'package:get/get.dart';
 import 'package:hmj_apps/presentation/auth/controller/auth_binding.dart';
-import 'package:hmj_apps/presentation/auth/screen/login/login_screen.dart';
+import 'package:hmj_apps/presentation/auth/screen/login_screen.dart';
 import 'package:hmj_apps/presentation/dasboard/screen/dashboard_screen.dart';
-import 'package:hmj_apps/presentation/profile/screen/profile_screen.dart';
 import 'package:hmj_apps/presentation/transaction/screen/add_transaction_screen.dart';
 
 class AppRoute {
@@ -16,9 +15,13 @@ class AppRoute {
       page: () => const LoginScreen(),
       binding: AuthBinding(),
     ),
-    GetPage(name: AppRoute.dashboardPage, page: () => const DashboardSceen()),
     GetPage(
-        name: AppRoute.addTransaction,
-        page: () => const AddTransactionScreen()),
+      name: AppRoute.dashboardPage,
+      page: () => const DashboardSceen(),
+    ),
+    GetPage(
+      name: AppRoute.addTransaction,
+      page: () => const AddTransactionScreen(),
+    ),
   ];
 }

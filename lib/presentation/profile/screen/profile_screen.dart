@@ -1,6 +1,4 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/utils/images.dart';
 import 'package:hmj_apps/presentation/profile/component/text_icon.dart';
@@ -53,19 +51,19 @@ class ProfileScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   gradient: AppColors.primaryGradient,
                 ),
-                child: Column(
+                child: const Column(
                   children: [
                     TextIcon(icon: Icons.person, dataText: "Nama User"),
-                    const SizedBox(
+                    SizedBox(
                       height: 30,
                     ),
                     TextIcon(icon: Icons.phone, dataText: "081234124893"),
-                    const SizedBox(
+                    SizedBox(
                       height: 30,
                     ),
                     TextIcon(
                         icon: Icons.calendar_month, dataText: "3 feb 2024"),
-                    const SizedBox(
+                    SizedBox(
                       height: 30,
                     ),
                     TextIcon(
@@ -79,7 +77,7 @@ class ProfileScreen extends StatelessWidget {
                   child: SiKePeLinearButton(
                     title: "Edit Profile",
                     onPressed: () {},
-                    linearGradient: LinearGradient(
+                    linearGradient: const LinearGradient(
                         colors: [Color(0xffA1B57D), Color(0xff464F37)],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter),

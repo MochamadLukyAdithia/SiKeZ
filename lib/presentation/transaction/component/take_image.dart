@@ -25,7 +25,7 @@ class TakeImageButton extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter),
           ),
-          child: Center(child: Text("Ambil Gambar")),
+          child: const Center(child: Text("Ambil Gambar")),
         ),
       ],
     );

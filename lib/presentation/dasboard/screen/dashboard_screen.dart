@@ -1,9 +1,10 @@
-import 'dart:ui';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/route/routes.dart';
-import 'package:hmj_apps/core/utils/images.dart';
+import 'package:hmj_apps/model/user_model.dart';
+import 'package:hmj_apps/presentation/auth/controller/auth_controller.dart';
 import 'package:hmj_apps/presentation/dasboard/component/dasboard_body.dart';
 import 'package:hmj_apps/presentation/dasboard/component/dasboard_header.dart';
 import 'package:hmj_apps/presentation/dasboard/component/dashboard_center.dart';
@@ -13,29 +14,30 @@ class DashboardSceen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AuthController authController = AuthController.find;
     return SafeArea(
       child: Scaffold(
         body: Container(
-          child: Column(
+          child: const Column(
             children: [
-              const DasboardHeader(),
-              const DashboardCenter(),
-              const DashboardBody()
+              DasboardHeader(),
+              DashboardCenter(),
+              DashboardBody(),
             ],
           ),
         ),
         floatingActionButton: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                   colors: [Color(0xffA1B57D), Color(0xff464F37)],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter)),
           child: FloatingActionButton(
             backgroundColor: Colors.transparent,
             elevation: 0,
-            onPressed: () {
-              Get.toNamed(AppRoute.addTransaction);
+            onPressed: () async {
+              AuthController.find.getUser();
             },
             child: const Icon(
               Icons.add,

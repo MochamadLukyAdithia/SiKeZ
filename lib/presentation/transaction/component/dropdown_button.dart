@@ -19,7 +19,7 @@ class DropDownButtonWithSearch extends StatelessWidget {
           child: DropdownButton2<String>(
             isExpanded: true,
             iconStyleData: const IconStyleData(iconEnabledColor: Colors.green),
-            items: [
+            items: const [
               DropdownMenuItem(
                 value: "nama_list",
                 child: Center(

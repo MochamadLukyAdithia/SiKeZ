@@ -14,55 +14,55 @@ class AddTransactionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Tambah Transaksi"),
+        title: const Text("Tambah Transaksi"),
         backgroundColor: AppColors.primaryColor,
       ),
       body: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
+          child: const Column(
             children: [
-              const SizedBox(
+              SizedBox(
                 height: 15,
               ),
               CustomDatePicker(),
-              const SizedBox(
+              SizedBox(
                 height: 15,
               ),
               DropDownButtonWithSearch(
                 title: "Jenis Transaksi*",
               ),
-              const SizedBox(
+              SizedBox(
                 height: 15,
               ),
               DropDownButtonWithSearch(
                 title: "Simpan Ke*",
               ),
-              const SizedBox(
+              SizedBox(
                 height: 15,
               ),
               DropDownButtonWithSearch(
                 title: "Diterima*",
               ),
-              const SizedBox(
+              SizedBox(
                 height: 15,
               ),
-              const CustomTextWithTitle(
+              CustomTextWithTitle(
                 name: "nominal",
                 validator: FormValidation.isNotNullAndRequired,
                 label: "Nominal",
                 hintText: "Masukkan Nominal transaksi...",
               ),
-              const SizedBox(
+              SizedBox(
                 height: 15,
               ),
-              const CustomTextWithTitle(
+              CustomTextWithTitle(
                 name: "catatan",
                 validator: FormValidation.isNotNullAndRequired,
                 label: "Catatan",
                 hintText: "Masukkan Catatan Anda...",
               ),
-              const SizedBox(
+              SizedBox(
                 height: 15,
               ),
               TakeImageButton()

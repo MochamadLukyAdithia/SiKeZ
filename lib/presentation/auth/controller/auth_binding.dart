@@ -5,7 +5,6 @@ import 'package:hmj_apps/presentation/auth/controller/auth_controller.dart';
 class AuthBinding extends Bindings {
   @override
   void dependencies() {
-    // TODO: implement dependencies
-    Get.put(getIt<AuthController>());
+    Get.put(getIt<AuthController>(), permanent: true);
   }
 }

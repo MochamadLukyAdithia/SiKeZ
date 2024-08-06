@@ -8,7 +8,7 @@ class NavigationScreen extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: Container(
         padding: const EdgeInsets.only(left: 12, right: 12, top: 8),
-        child: BottomNavigationBar(items: [
+        child: BottomNavigationBar(items: const [
           
         ]),
       ),

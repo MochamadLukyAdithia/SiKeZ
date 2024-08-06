@@ -14,7 +14,7 @@ class DashboardCenter extends StatelessWidget {
           const SizedBox(
             width: 10,
           ),
-          Text("19 juli 2024 (hari ini)"),
+          const Text("19 juli 2024 (hari ini)"),
           const Spacer(),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),

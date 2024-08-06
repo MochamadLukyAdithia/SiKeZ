@@ -29,12 +29,12 @@ class DashboardBody extends StatelessWidget {
                         width: 72,
                         height: 72,
                         decoration: BoxDecoration(
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                                 colors: [Color(0xffA1B57D), Color(0xff464F37)],
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter),
                             borderRadius: BorderRadius.circular(15)),
-                        child: Icon(
+                        child: const Icon(
                           Icons.arrow_outward_outlined,
                           color: Colors.white,
                         ),
@@ -48,7 +48,7 @@ class DashboardBody extends StatelessWidget {
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.black26),
                               borderRadius: BorderRadius.circular(15)),
-                          child: Column(
+                          child: const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
@@ -59,7 +59,7 @@ class DashboardBody extends StatelessWidget {
                                         fontSize: 12,
                                         fontWeight: FontWeight.w600),
                                   ),
-                                  const Spacer(),
+                                  Spacer(),
                                   Text(
                                     "19 juli 2024",
                                     style: TextStyle(
@@ -68,14 +68,14 @@ class DashboardBody extends StatelessWidget {
                                   )
                                 ],
                               ),
-                              const SizedBox(
+                              SizedBox(
                                 height: 5,
                               ),
                               Text("kas -> Beban Pokok Pendapatan",
                                   style: TextStyle(
                                       fontSize: 8,
                                       fontWeight: FontWeight.w400)),
-                              const SizedBox(
+                              SizedBox(
                                 height: 5,
                               ),
                               Text(

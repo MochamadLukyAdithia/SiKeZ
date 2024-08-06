@@ -68,6 +68,9 @@ dependencies:
   url_launcher: ^6.2.5
   webview_flutter: ^4.5.0
 
+  vector_graphics: any
+  firebase_auth: ^4.17.8
+  google_sign_in: ^6.2.1
 dev_dependencies:
   build_runner: ^2.4.9
   flutter_gen_runner: ^5.6.0
