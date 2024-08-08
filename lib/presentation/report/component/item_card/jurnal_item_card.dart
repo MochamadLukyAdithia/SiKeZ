@@ -53,7 +53,7 @@ class JurnalItemCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "5-50000 Beban Pokok Pendapatan (D) dsfafsafadsfafasfa",
+                      "5-50000 Beban Pokok Pendapatan (D)",
                       style: TextStyle(color: AppColors.secondaryColor),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
@@ -61,7 +61,15 @@ class JurnalItemCard extends StatelessWidget {
                     const SizedBox(
                       height: 3,
                     ),
-                    Text("   Rp 25.000.000"),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.subdirectory_arrow_right,
+                          color: Colors.black26,
+                        ),
+                        Text("Rp 25.000.000"),
+                      ],
+                    ),
                     const SizedBox(
                       height: 3,
                     ),
@@ -72,7 +80,15 @@ class JurnalItemCard extends StatelessWidget {
                     const SizedBox(
                       height: 3,
                     ),
-                    Text("   Rp 25.000.000"),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.subdirectory_arrow_right,
+                          color: Colors.black26,
+                        ),
+                        Text("Rp 25.000.000"),
+                      ],
+                    ),
                   ],
                 ),
               )

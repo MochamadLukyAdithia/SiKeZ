@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/presentation/report/component/date_filter.dart';
+import 'package:hmj_apps/presentation/report/component/item_card/modal_item_card.dart';
 
 class ModalListScreen extends StatelessWidget {
   const ModalListScreen({super.key});
@@ -12,9 +13,9 @@ class ModalListScreen extends StatelessWidget {
         backgroundColor: AppColors.primaryColor,
         title: const Text("Perubahan Modal"),
       ),
-       body: Container(
+      body: Container(
         child: Column(
-          children: [DateFilter()],
+          children: [DateFilter(), ModalItemCard()],
         ),
       ),
     );

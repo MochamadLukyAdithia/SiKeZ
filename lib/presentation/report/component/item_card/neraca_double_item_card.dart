@@ -3,8 +3,8 @@ import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/theme/app_text_theme.dart';
 import 'package:hmj_apps/presentation/report/component/date_filter.dart';
 
-class BukuItemCard extends StatelessWidget {
-  const BukuItemCard({super.key});
+class NeracaDoubleItemCard extends StatelessWidget {
+  const NeracaDoubleItemCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,34 +19,20 @@ class BukuItemCard extends StatelessWidget {
             offset: Offset(2, 2))
       ]),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Text(
-                "nama akun",
-                style: AppTextStyle.body3.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.secondaryColor),
-              ),
-              const Spacer(),
-              Text(
-                "1-00002",
-                style: AppTextStyle.body3.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.secondaryColor),
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 10,
+          Text(
+            "Hutang",
+            style: AppTextStyle.body2.copyWith(
+                fontWeight: FontWeight.bold, color: AppColors.secondaryColor),
           ),
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Container(
                 margin: const EdgeInsets.only(right: 5),
                 width: 3,
-                height: 70,
+                height: 40,
                 color: AppColors.primaryColor,
               ),
               Expanded(
@@ -54,20 +40,17 @@ class BukuItemCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Tanggal",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      "2-2100 Hutang Bank",
+                      style: TextStyle(color: Colors.black54),
                     ),
                     const SizedBox(
                       height: 5,
                     ),
                     Text(
-                      "31 Jul 24",
-                      style: AppTextStyle.body4,
+                      "Total Hutang",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black54),
                     ),
-                    Text(
-                      "Saldo Awal",
-                      style: AppTextStyle.body4,
-                    )
                   ],
                 ),
               ),
@@ -76,64 +59,95 @@ class BukuItemCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      "Debit",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      "Rp 20.000.000",
+                      style: TextStyle(color: Colors.black54),
                     ),
                     const SizedBox(
                       height: 5,
                     ),
                     Text(
-                      "Rp500000",
-                      style: AppTextStyle.body4,
-                    )
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Credit",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      "Rp500000",
-                      style: AppTextStyle.body4,
-                    )
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Saldo",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      "Rp0",
-                      style: AppTextStyle.body4,
+                      "Rp 21.000.000",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black54),
                     )
                   ],
                 ),
               ),
             ],
           ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            "Modal",
+            style: AppTextStyle.body2.copyWith(
+                fontWeight: FontWeight.bold, color: AppColors.secondaryColor),
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(right: 5),
+                width: 3,
+                height: 40,
+                color: AppColors.primaryColor,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "3-1100 Modal Pemilik",
+                      style: TextStyle(color: Colors.black54),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      "Total Modal",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black54),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      "Rp 20.000.000",
+                      style: TextStyle(color: Colors.black54),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      "Rp 21.000.000",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black54),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
           Row(
             children: [
               Text(
-                "Saldo Akhir",
+                "TOTAL HUTANG DAN MODAL",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              const Spacer(),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  color: AppColors.primaryColor,
+                  height: 2,
+                ),
+              ),
               Text(
                 "Rp800000",
                 style: TextStyle(fontWeight: FontWeight.bold),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/presentation/report/component/date_filter.dart';
+import 'package:hmj_apps/presentation/report/component/item_card/neraca_double_item_card.dart';
+import 'package:hmj_apps/presentation/report/component/item_card/neraca_item_card.dart';
 
 class NeracaListScreen extends StatelessWidget {
   const NeracaListScreen({super.key});
@@ -14,7 +16,7 @@ class NeracaListScreen extends StatelessWidget {
       ),
       body: Container(
         child: Column(
-          children: [DateFilter()],
+          children: [DateFilter(), NeracaItemCard(), NeracaDoubleItemCard()],
         ),
       ),
     );

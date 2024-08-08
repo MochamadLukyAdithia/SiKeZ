@@ -40,15 +40,14 @@ class ReportScreen extends StatelessWidget {
               height: 15,
             ),
             ReportItem(
-              title: "Laporan Laba Rugi",
+              title: "Laba Rugi",
               route: AppRoute.reportLabaRugiList,
             ),
             SizedBox(
               height: 15,
             ),
             ReportItem(
-                title: "Laporan Perubahan Modal",
-                route: AppRoute.reportModalList),
+                title: "Perubahan Modal", route: AppRoute.reportModalList),
             SizedBox(
               height: 15,
             ),
