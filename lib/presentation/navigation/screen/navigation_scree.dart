@@ -19,6 +19,7 @@ class NavigationScreen extends GetView<NavigationController> {
             },
             indicatorColor: AppColors.primaryColor,
             selectedIndex: controller.currentIndex.value,
+            height: 60,
             destinations: [
               NavigationDestination(
                   selectedIcon: const Icon(Icons.home),
