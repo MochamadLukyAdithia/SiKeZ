@@ -14,7 +14,7 @@ class JurnalListScreen extends StatelessWidget {
         title: const Text("Jurnal Umum"),
       ),
       body: Container(
-        child: Column(
+        child: const Column(
           children: [DateFilter(), JurnalItemCard()],
         ),
       ),

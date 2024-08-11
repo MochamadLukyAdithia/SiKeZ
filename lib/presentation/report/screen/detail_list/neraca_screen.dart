@@ -15,7 +15,7 @@ class NeracaListScreen extends StatelessWidget {
         title: const Text("Neraca"),
       ),
       body: Container(
-        child: Column(
+        child: const Column(
           children: [DateFilter(), NeracaItemCard(), NeracaDoubleItemCard()],
         ),
       ),

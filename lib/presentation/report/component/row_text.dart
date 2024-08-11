@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hmj_apps/core/theme/app_text_theme.dart';
 
 class RowText extends StatelessWidget {
   final bool isBold;

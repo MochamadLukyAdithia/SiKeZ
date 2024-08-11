@@ -16,14 +16,14 @@ class LabaRugiListScreen extends StatelessWidget {
         title: const Text("Laba Rugi"),
       ),
       body: Container(
-        child: Column(
+        child: const Column(
           children: [DateFilter(), LabaItemCard(), LabaTotalItemCard()],
         ),
       ),
       bottomSheet: Container(
         padding: const EdgeInsets.all(10),
         height: MediaQuery.of(context).size.height / 4 + 45,
-        child: Column(
+        child: const Column(
           children: [
             RowText(
                 isBold: false,
@@ -35,7 +35,7 @@ class LabaRugiListScreen extends StatelessWidget {
                 nominal: "Rp20000"),
             Divider(),
             RowText(isBold: true, title: "Laba Kotor", nominal: "Rp30000"),
-            const SizedBox(
+            SizedBox(
               height: 5,
             ),
             RowText(isBold: false, title: "Beban Operasional", nominal: "Rp0"),
@@ -44,7 +44,7 @@ class LabaRugiListScreen extends StatelessWidget {
                 isBold: true,
                 title: "Laba Beban Operasional",
                 nominal: "Rp30000"),
-            const SizedBox(
+            SizedBox(
               height: 5,
             ),
             RowText(isBold: false, title: "Pendapatan Lainnya", nominal: "Rp0"),

@@ -7,7 +7,7 @@ class ReportDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Detail laporan"),
+        title: const Text("Detail laporan"),
       ),
     );
   }

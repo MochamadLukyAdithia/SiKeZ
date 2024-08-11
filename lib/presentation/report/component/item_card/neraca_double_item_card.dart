@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/theme/app_text_theme.dart';
-import 'package:hmj_apps/presentation/report/component/date_filter.dart';
 
 class NeracaDoubleItemCard extends StatelessWidget {
   const NeracaDoubleItemCard({super.key});
@@ -11,7 +10,7 @@ class NeracaDoubleItemCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
       padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(color: Colors.white, boxShadow: [
+      decoration: const BoxDecoration(color: Colors.white, boxShadow: [
         BoxShadow(
             color: Colors.black12,
             spreadRadius: 2,
@@ -35,7 +34,7 @@ class NeracaDoubleItemCard extends StatelessWidget {
                 height: 40,
                 color: AppColors.primaryColor,
               ),
-              Expanded(
+              const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -43,7 +42,7 @@ class NeracaDoubleItemCard extends StatelessWidget {
                       "2-2100 Hutang Bank",
                       style: TextStyle(color: Colors.black54),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 5,
                     ),
                     Text(
@@ -54,7 +53,7 @@ class NeracaDoubleItemCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(
+              const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -62,7 +61,7 @@ class NeracaDoubleItemCard extends StatelessWidget {
                       "Rp 20.000.000",
                       style: TextStyle(color: Colors.black54),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 5,
                     ),
                     Text(
@@ -92,7 +91,7 @@ class NeracaDoubleItemCard extends StatelessWidget {
                 height: 40,
                 color: AppColors.primaryColor,
               ),
-              Expanded(
+              const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -100,7 +99,7 @@ class NeracaDoubleItemCard extends StatelessWidget {
                       "3-1100 Modal Pemilik",
                       style: TextStyle(color: Colors.black54),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 5,
                     ),
                     Text(
@@ -111,7 +110,7 @@ class NeracaDoubleItemCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(
+              const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -119,7 +118,7 @@ class NeracaDoubleItemCard extends StatelessWidget {
                       "Rp 20.000.000",
                       style: TextStyle(color: Colors.black54),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 5,
                     ),
                     Text(
@@ -137,7 +136,7 @@ class NeracaDoubleItemCard extends StatelessWidget {
           ),
           Row(
             children: [
-              Text(
+              const Text(
                 "TOTAL HUTANG DAN MODAL",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
@@ -148,7 +147,7 @@ class NeracaDoubleItemCard extends StatelessWidget {
                   height: 2,
                 ),
               ),
-              Text(
+              const Text(
                 "Rp800000",
                 style: TextStyle(fontWeight: FontWeight.bold),
               )

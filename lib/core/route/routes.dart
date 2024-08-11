@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:hmj_apps/presentation/auth/controller/auth_binding.dart';
 import 'package:hmj_apps/presentation/auth/screen/login_screen.dart';
-import 'package:hmj_apps/presentation/dasboard/screen/dashboard_screen.dart';
+import 'package:hmj_apps/presentation/dasboard/screen/dashboard_page.dart';
 import 'package:hmj_apps/presentation/navigation/controller/navigation_binding.dart';
-import 'package:hmj_apps/presentation/navigation/screen/navigation_scree.dart';
+import 'package:hmj_apps/presentation/navigation/screen/navigation_page.dart';
 import 'package:hmj_apps/presentation/report/screen/detail_list/buku_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/detail_list/laba_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/detail_list/modal_screen.dart';
@@ -34,7 +34,7 @@ class AppRoute {
     ),
     GetPage(
       name: AppRoute.dashboardPage,
-      page: () => const DashboardSceen(),
+      page: () => const DashboardPage(),
     ),
     GetPage(
       name: AppRoute.addTransaction,
@@ -42,7 +42,7 @@ class AppRoute {
     ),
     GetPage(
         name: AppRoute.navigation,
-        page: () => const NavigationScreen(),
+        page: () => const NavigationPage(),
         binding: NavigationBinding()),
     GetPage(
       name: AppRoute.detailReport,

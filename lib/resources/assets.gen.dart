@@ -18,8 +18,45 @@ class $AssetsIconsGen {
   /// File path: assets/icons/google.svg
   SvgGenImage get google => const SvgGenImage('assets/icons/google.svg');
 
+  /// File path: assets/icons/home-icon-off.svg
+  SvgGenImage get homeIconOff =>
+      const SvgGenImage('assets/icons/home-icon-off.svg');
+
+  /// File path: assets/icons/home-icon-on.svg
+  SvgGenImage get homeIconOn =>
+      const SvgGenImage('assets/icons/home-icon-on.svg');
+
+  /// File path: assets/icons/profile-icon-off.svg
+  SvgGenImage get profileIconOff =>
+      const SvgGenImage('assets/icons/profile-icon-off.svg');
+
+  /// File path: assets/icons/profile-icon-on.svg
+  SvgGenImage get profileIconOn =>
+      const SvgGenImage('assets/icons/profile-icon-on.svg');
+
+  /// File path: assets/icons/report-icon-off.svg
+  SvgGenImage get reportIconOff =>
+      const SvgGenImage('assets/icons/report-icon-off.svg');
+
+  /// File path: assets/icons/report-icon-on.svg
+  SvgGenImage get reportIconOn =>
+      const SvgGenImage('assets/icons/report-icon-on.svg');
+
+  /// File path: assets/icons/solar_calendar-bold.svg
+  SvgGenImage get solarCalendarBold =>
+      const SvgGenImage('assets/icons/solar_calendar-bold.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [google];
+  List<SvgGenImage> get values => [
+        google,
+        homeIconOff,
+        homeIconOn,
+        profileIconOff,
+        profileIconOn,
+        reportIconOff,
+        reportIconOn,
+        solarCalendarBold
+      ];
 }
 
 class $AssetsImagesGen {
@@ -29,11 +66,20 @@ class $AssetsImagesGen {
   AssetGenImage get coffeeBackground =>
       const AssetGenImage('assets/images/coffee_background.png');
 
+  /// File path: assets/images/icon_bullish.png
+  AssetGenImage get iconBullish =>
+      const AssetGenImage('assets/images/icon_bullish.png');
+
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
+  /// File path: assets/images/logo_ppk.png
+  AssetGenImage get logoPpk =>
+      const AssetGenImage('assets/images/logo_ppk.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [coffeeBackground, logo];
+  List<AssetGenImage> get values =>
+      [coffeeBackground, iconBullish, logo, logoPpk];
 }
 
 class Assets {

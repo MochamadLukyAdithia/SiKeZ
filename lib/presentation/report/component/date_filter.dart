@@ -18,21 +18,21 @@ class DateFilter extends StatelessWidget {
           Expanded(
             child: DropdownButton(
                 value: "01",
-                items: [
+                items: const [
                   DropdownMenuItem(
+                    value: "01",
                     child: Row(
                       children: [
                         Text(
                           "Hari ini",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           width: 10,
                         ),
                         Text("08 Agu 2024")
                       ],
                     ),
-                    value: "01",
                   )
                 ],
                 onChanged: (value) {}),

@@ -14,7 +14,7 @@ class NeracaSaldoListScreen extends StatelessWidget {
         title: const Text("Neraca Saldo"),
       ),
       body: Container(
-        child: Column(
+        child: const Column(
           children: [DateFilter(), NecaraSaldoItemCard()],
         ),
       ),

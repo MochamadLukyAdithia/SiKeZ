@@ -14,7 +14,7 @@ class ModalListScreen extends StatelessWidget {
         title: const Text("Perubahan Modal"),
       ),
       body: Container(
-        child: Column(
+        child: const Column(
           children: [DateFilter(), ModalItemCard()],
         ),
       ),

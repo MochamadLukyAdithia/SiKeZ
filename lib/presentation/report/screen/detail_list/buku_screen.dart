@@ -14,7 +14,7 @@ class BukuBesarListScreen extends StatelessWidget {
         title: const Text("Buku Besar"),
       ),
       body: Container(
-        child: Column(
+        child: const Column(
           children: [DateFilter(), BukuItemCard()],
         ),
       ),

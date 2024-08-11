@@ -24,73 +24,75 @@ class DasboardHeader extends StatelessWidget {
         ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
       ),
       child: Obx(
-        () => Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Halo, ${authController.currentUser?.name?.split(' ')[0] ?? ''}",
-              style: AppTextStyle.body1.copyWith(color: Colors.white),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              "Total Aset",
-              style: TextStyle(fontSize: 14, color: Colors.white),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            const Text(
-              "Rp52.000.000",
-              style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-              width: double.infinity,
-              height: 3,
-              color: Colors.white,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              children: [
-                const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Laba bulan ini:",
-                      style: TextStyle(fontSize: 14, color: Colors.white),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      "Rp20.000.000",
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      "20% dari bulan sebelumnya",
-                      style: TextStyle(fontSize: 14, color: Colors.amber),
-                    ),
-                  ],
-                ),
-                const Spacer(),
-                Image.asset(Images.iconBullish)
-              ],
-            )
-          ],
+        () => SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Halo, ${authController.currentUser?.name?.split(' ')[0] ?? ''}",
+                style: AppTextStyle.body1.copyWith(color: Colors.white),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                "Total Aset",
+                style: TextStyle(fontSize: 14, color: Colors.white),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              const Text(
+                "Rp52.000.000",
+                style: TextStyle(
+                    fontSize: 24,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: double.infinity,
+                height: 3,
+                color: Colors.white,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Laba bulan ini:",
+                        style: TextStyle(fontSize: 14, color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "Rp20.000.000",
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "20% dari bulan sebelumnya",
+                        style: TextStyle(fontSize: 14, color: Colors.amber),
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  Image.asset(Images.iconBullish)
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
