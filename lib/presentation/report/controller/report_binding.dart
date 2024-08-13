@@ -1,0 +1,11 @@
+import 'package:get/get.dart';
+import 'package:hmj_apps/core/injector/injector.dart';
+import 'package:hmj_apps/presentation/report/controller/report_controller.dart';
+
+class ReportBinding extends Bindings {
+  @override
+  void dependencies() {
+
+   Get.put(getIt<ReportController>());
+  }
+}

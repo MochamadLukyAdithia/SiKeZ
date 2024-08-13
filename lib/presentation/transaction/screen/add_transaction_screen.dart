@@ -36,13 +36,13 @@ class AddTransactionScreen extends StatelessWidget {
                 height: 15,
               ),
               DropDownButtonWithSearch(
-                title: "Simpan Ke*",
+                title: "Debit*",
               ),
               SizedBox(
                 height: 15,
               ),
               DropDownButtonWithSearch(
-                title: "Diterima*",
+                title: "Kredit*",
               ),
               SizedBox(
                 height: 15,

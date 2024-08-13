@@ -12,10 +12,16 @@ class BukuBesarListScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
         title: const Text("Buku Besar"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.print),
+            onPressed: () {},
+          )
+        ],
       ),
       body: Container(
         child: Column(
-          children: [DateFilter(), BukuItemCard()],
+          children: [DateFilter("bukuBesar"), BukuItemCard()],
         ),
       ),
     );
