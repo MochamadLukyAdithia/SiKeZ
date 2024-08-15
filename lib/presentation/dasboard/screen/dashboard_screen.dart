@@ -1,9 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/route/routes.dart';
-import 'package:hmj_apps/model/user_model.dart';
 import 'package:hmj_apps/presentation/auth/controller/auth_controller.dart';
 import 'package:hmj_apps/presentation/dasboard/component/dasboard_body.dart';
 import 'package:hmj_apps/presentation/dasboard/component/dasboard_header.dart';

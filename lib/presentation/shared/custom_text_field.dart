@@ -4,14 +4,20 @@ import 'package:get/get.dart';
 
 class SiKePiTextField extends StatelessWidget {
   final String name;
+  final String? initial;
   final String? Function(String?) validator;
   final String? hintText;
   const SiKePiTextField(
-      {super.key, required this.name, required this.validator, this.hintText});
+      {super.key,
+      required this.name,
+      required this.validator,
+      this.hintText,
+      this.initial});
 
   @override
   Widget build(BuildContext context) {
     return FormBuilderTextField(
+      initialValue: initial,
       name: name,
       validator: validator,
       onTapOutside: (_) => FocusScope.of(context).unfocus(),
@@ -27,6 +33,7 @@ class SiKePiTextField extends StatelessWidget {
 class CustomTextWithTitle extends StatelessWidget {
   final String name;
   final String label;
+  final String? initial;
   final String? Function(String?) validator;
   final String? hintText;
   const CustomTextWithTitle({
@@ -34,7 +41,7 @@ class CustomTextWithTitle extends StatelessWidget {
     required this.name,
     required this.validator,
     this.hintText,
-    required this.label,
+    required this.label, this.initial,
   });
 
   @override
@@ -51,6 +58,7 @@ class CustomTextWithTitle extends StatelessWidget {
           height: 5,
         ),
         SiKePiTextField(
+          initial: initial,
           name: name,
           validator: validator,
           hintText: hintText,

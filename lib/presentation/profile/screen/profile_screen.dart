@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hmj_apps/core/route/routes.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/utils/images.dart';
 import 'package:hmj_apps/presentation/profile/component/text_icon.dart';
@@ -76,7 +78,9 @@ class ProfileScreen extends StatelessWidget {
                   margin: const EdgeInsets.all(20),
                   child: SiKePeLinearButton(
                     title: "Edit Profile",
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(AppRoute.editProfile);
+                    },
                     linearGradient: const LinearGradient(
                         colors: [Color(0xffA1B57D), Color(0xff464F37)],
                         begin: Alignment.topCenter,

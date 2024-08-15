@@ -20,18 +20,18 @@ class NavigationScreen extends GetView<NavigationController> {
             indicatorColor: AppColors.primaryColor,
             selectedIndex: controller.currentIndex.value,
             height: 60,
-            destinations: [
+            destinations: const [
               NavigationDestination(
-                  selectedIcon: const Icon(Icons.home),
-                  icon: const Icon(Icons.home_outlined),
+                  selectedIcon: Icon(Icons.home),
+                  icon: Icon(Icons.home_outlined),
                   label: "dashboard"),
               NavigationDestination(
-                  selectedIcon: const Icon(Icons.document_scanner),
-                  icon: const Icon(Icons.document_scanner_outlined),
+                  selectedIcon: Icon(Icons.document_scanner),
+                  icon: Icon(Icons.document_scanner_outlined),
                   label: "report"),
               NavigationDestination(
-                  selectedIcon: const Icon(Icons.person_2_rounded),
-                  icon: const Icon(Icons.person_2_outlined),
+                  selectedIcon: Icon(Icons.person_2_rounded),
+                  icon: Icon(Icons.person_2_outlined),
                   label: "profile")
             ]),
         body: <Widget>[

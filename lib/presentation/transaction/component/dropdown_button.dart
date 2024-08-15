@@ -56,8 +56,6 @@ class DropDownButtonWithSearch extends StatelessWidget {
             ],
             value: "nama_list",
             onChanged: (value) {
-              
-
               //   setState(() {
               //     selectedValue = value;
               //   });

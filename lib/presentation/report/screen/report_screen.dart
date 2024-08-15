@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:hmj_apps/core/route/routes.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/presentation/report/component/report_item.dart';
@@ -14,12 +13,7 @@ class ReportScreen extends StatelessWidget {
         title: const Text("Laporan"),
         centerTitle: true,
         backgroundColor: AppColors.primaryColor,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.print),
-            onPressed: () {},
-          )
-        ],
+       
       ),
       body: Container(
         margin: const EdgeInsets.only(left: 15, top: 10, right: 15),
