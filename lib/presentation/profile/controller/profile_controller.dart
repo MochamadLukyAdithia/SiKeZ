@@ -1,22 +1,29 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/controller/base_controller.dart';
 import 'package:hmj_apps/presentation/profile/model/user_model.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileController extends BaseController {
   final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
   CollectionReference userData = FirebaseFirestore.instance.collection('users');
+  final ImagePicker picker = ImagePicker();
+  var selectedImage = Rxn<File>();
+  // var storage = Firebases.instance;
 
   var userProfileData = Rxn<UserProfle>();
 
   @override
   void onInit() {
     super.onInit();
+    selectedImage = Rxn<File>();
     getProfileData();
   }
 
@@ -25,12 +32,10 @@ class ProfileController extends BaseController {
       .doc(FirebaseAuth.instance.currentUser!.uid);
 
   Future<void> getProfileData() async {
-    log("get data from fetch data");
     try {
       var dataProfileFromServer = await readProfileData();
 
       if (dataProfileFromServer != null) {
-        log("data not null");
         userProfileData.value = dataProfileFromServer;
       }
     } catch (e) {
@@ -52,6 +57,26 @@ class ProfileController extends BaseController {
     }
   }
 
+  Future<void> uploadUserImage(String imagePath) async {
+    String imageName = imagePath.substring(
+        imagePath.lastIndexOf("/") + 1, imagePath.lastIndexOf("."));
+
+    String path = imagePath.substring(
+        imagePath.indexOf("/") + 1, imagePath.lastIndexOf("/"));
+
+    final Directory systemTempDir = Directory.systemTemp;
+    final byteData = await rootBundle.load(imagePath);
+    final file = File('${systemTempDir.path}/$imageName.jpg');
+
+    await file.writeAsBytes(byteData.buffer
+        .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+
+    //       Tasks taskSnapshot = await storage.ref('$path/$imageName').putFile(file);
+    // final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+
+    // await FirebaseFirestore.instance.collection(path).add({"url": downloadUrl, "name": imageName});
+  }
+
   Future<void> updateProfileData() async {
     if (formKey.currentState?.saveAndValidate() ?? false) {
       try {
@@ -69,6 +94,14 @@ class ProfileController extends BaseController {
         showErrorSnackbar(
             errorMessage: "Terjadi Kesalahan Ketika Mengubah Data");
       }
+    }
+  }
+
+  Future<void> getImageFromGallery() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      selectedImage.value = File(pickedFile.path);
     }
   }
 }

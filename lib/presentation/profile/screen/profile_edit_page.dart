@@ -7,6 +7,7 @@ import "package:hmj_apps/presentation/profile/controller/profile_controller.dart
 import "package:hmj_apps/presentation/profile/model/user_model.dart";
 import "package:hmj_apps/presentation/shared/custom_button.dart";
 import "package:hmj_apps/presentation/shared/custom_text_field.dart";
+import "package:image_picker/image_picker.dart";
 
 class ProfileEditPage extends GetView<ProfileController> {
   const ProfileEditPage({super.key});
@@ -41,9 +42,17 @@ class ProfileEditPage extends GetView<ProfileController> {
               margin: const EdgeInsets.all(20),
               child: Column(
                 children: [
-                  const CircleAvatar(
-                    radius: 50,
-                    child: Icon(Icons.camera),
+                  InkWell(
+                    onTap: () {
+                      controller.getImageFromGallery();
+                    },
+                    child: CircleAvatar(
+                      backgroundImage: controller.selectedImage.value != null
+                          ? FileImage(controller.selectedImage.value!)
+                          : null,
+                      radius: 50,
+                      child: Icon(Icons.camera),
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
@@ -53,8 +62,7 @@ class ProfileEditPage extends GetView<ProfileController> {
                       child: Column(
                         children: [
                           CustomTextWithTitle(
-                            initial:
-                                profile.name,
+                            initial: profile.name,
                             name: "nama",
                             validator: FormValidation.isNotNullAndRequired,
                             label: "Nama",
@@ -64,8 +72,7 @@ class ProfileEditPage extends GetView<ProfileController> {
                             height: 10,
                           ),
                           CustomTextWithTitle(
-                            initial:
-                                profile.phone ,
+                            initial: profile.phone,
                             name: "nomor",
                             validator: FormValidation.isNotNullAndRequired,
                             label: "Nomor HP",
@@ -75,8 +82,7 @@ class ProfileEditPage extends GetView<ProfileController> {
                             height: 10,
                           ),
                           CustomTextWithTitle(
-                            initial: profile.joined
-                                    .toString() ,
+                            initial: profile.joined.toString(),
                             name: "tanggalLahir",
                             validator: FormValidation.isNotNullAndRequired,
                             label: "Tanggal Lahir",
@@ -86,8 +92,7 @@ class ProfileEditPage extends GetView<ProfileController> {
                             height: 10,
                           ),
                           CustomTextWithTitle(
-                            initial:
-                                profile.address ,
+                            initial: profile.address,
                             name: "alamat",
                             validator: FormValidation.isNotNullAndRequired,
                             label: "Alamat",
