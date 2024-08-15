@@ -12,10 +12,16 @@ class ModalListScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
         title: const Text("Perubahan Modal"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.print),
+            onPressed: () {},
+          )
+        ],
       ),
       body: Container(
         child: const Column(
-          children: [DateFilter(), ModalItemCard()],
+          children: [DateFilter("modal"), ModalItemCard()],
         ),
       ),
     );

@@ -14,10 +14,20 @@ class LabaRugiListScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
         title: const Text("Laba Rugi"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.print),
+            onPressed: () {},
+          )
+        ],
       ),
       body: Container(
         child: const Column(
-          children: [DateFilter(), LabaItemCard(), LabaTotalItemCard()],
+          children: [
+            DateFilter("labarRugi"),
+            LabaItemCard(),
+            LabaTotalItemCard()
+          ],
         ),
       ),
       bottomSheet: Container(

@@ -12,10 +12,16 @@ class JurnalListScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
         title: const Text("Jurnal Umum"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.print),
+            onPressed: () {},
+          )
+        ],
       ),
       body: Container(
         child: const Column(
-          children: [DateFilter(), JurnalItemCard()],
+          children: [DateFilter("jurnal"), JurnalItemCard()],
         ),
       ),
     );

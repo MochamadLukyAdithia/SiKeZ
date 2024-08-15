@@ -4,20 +4,24 @@ import 'package:get/get.dart';
 
 class SiKePiTextField extends StatelessWidget {
   final String name;
+  final String? initial;
   final String? Function(String?) validator;
   final String? hintText;
   final TextInputType textInputType;
+
   const SiKePiTextField({
     super.key,
     required this.name,
     required this.validator,
     this.hintText,
+    this.initial,
     this.textInputType = TextInputType.none,
   });
 
   @override
   Widget build(BuildContext context) {
     return FormBuilderTextField(
+      initialValue: initial,
       name: name,
       validator: validator,
       keyboardType: textInputType,
@@ -34,6 +38,7 @@ class SiKePiTextField extends StatelessWidget {
 class CustomTextWithTitle extends StatelessWidget {
   final String name;
   final String label;
+  final String? initial;
   final String? Function(String?) validator;
   final String? hintText;
   final TextInputType textInputType;
@@ -45,6 +50,7 @@ class CustomTextWithTitle extends StatelessWidget {
     this.hintText,
     required this.label,
     this.textInputType = TextInputType.none,
+    this.initial,
   });
 
   @override
@@ -61,6 +67,7 @@ class CustomTextWithTitle extends StatelessWidget {
           height: 5,
         ),
         SiKePiTextField(
+          initial: initial,
           name: name,
           validator: validator,
           hintText: hintText,

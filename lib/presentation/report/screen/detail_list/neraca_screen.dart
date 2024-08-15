@@ -13,10 +13,20 @@ class NeracaListScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
         title: const Text("Neraca"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.print),
+            onPressed: () {},
+          )
+        ],
       ),
       body: Container(
         child: const Column(
-          children: [DateFilter(), NeracaItemCard(), NeracaDoubleItemCard()],
+          children: [
+            DateFilter("neraca"),
+            NeracaItemCard(),
+            NeracaDoubleItemCard()
+          ],
         ),
       ),
     );

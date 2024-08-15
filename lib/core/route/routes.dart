@@ -3,7 +3,8 @@ import 'package:hmj_apps/presentation/auth/controller/auth_binding.dart';
 import 'package:hmj_apps/presentation/auth/screen/login_screen.dart';
 import 'package:hmj_apps/presentation/dasboard/screen/dashboard_page.dart';
 import 'package:hmj_apps/presentation/navigation/controller/navigation_binding.dart';
-import 'package:hmj_apps/presentation/navigation/screen/navigation_page.dart';
+import 'package:hmj_apps/presentation/profile/controller/profile_binding.dart';
+import 'package:hmj_apps/presentation/profile/screen/profile_edit_page.dart';
 import 'package:hmj_apps/presentation/report/screen/detail_list/buku_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/detail_list/laba_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/detail_list/modal_screen.dart';
@@ -13,6 +14,7 @@ import 'package:hmj_apps/presentation/report/screen/report_detail_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/detail_list/jurnal_screen.dart';
 import 'package:hmj_apps/presentation/transaction/controller/add_transaction_binding.dart';
 import 'package:hmj_apps/presentation/transaction/screen/add_transaction_screen.dart';
+import 'package:hmj_apps/presentation/navigation/screen/navigation_page.dart';
 
 class AppRoute {
   static const loginPage = "/";
@@ -26,6 +28,7 @@ class AppRoute {
   static const reportModalList = "/report/list/modal";
   static const reportLabaRugiList = "/report/list/labaRugi";
   static const reportBukuBesarList = "/report/list/bukuBesar";
+  static const editProfile = "/profile/edit";
 
   static final List<GetPage> routes = [
     GetPage(
@@ -44,7 +47,8 @@ class AppRoute {
     ),
     GetPage(
         name: AppRoute.navigation,
-        page: () => const NavigationPage(),
+        // page: () => const NavigationPage(),
+        page: () => NavigationPage(),
         binding: NavigationBinding()),
     GetPage(
       name: AppRoute.detailReport,
@@ -74,5 +78,9 @@ class AppRoute {
       name: AppRoute.reportBukuBesarList,
       page: () => const BukuBesarListScreen(),
     ),
+    GetPage(
+        name: AppRoute.editProfile,
+        page: () => const ProfileEditPage(),
+        binding: ProfileBinding())
   ];
 }

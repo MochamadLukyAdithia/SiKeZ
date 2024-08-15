@@ -13,12 +13,7 @@ class ReportScreen extends StatelessWidget {
         title: const Text("Laporan"),
         centerTitle: true,
         backgroundColor: AppColors.primaryColor,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.print),
-            onPressed: () {},
-          )
-        ],
+       
       ),
       body: Container(
         margin: const EdgeInsets.only(left: 15, top: 10, right: 15),
