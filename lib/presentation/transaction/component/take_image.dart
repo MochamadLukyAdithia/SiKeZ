@@ -1,33 +1,98 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:hmj_apps/core/theme/app_colors.dart';
+import 'package:image_picker/image_picker.dart';
 
 class TakeImageButton extends StatelessWidget {
-  const TakeImageButton({super.key});
+  const TakeImageButton({
+    super.key,
+    required this.onImageCaptured,
+  });
+  final Function(XFile? xFile) onImageCaptured;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text("Bukti"),
-        const SizedBox(
-          height: 5,
-        ),
-        Container(
-          height: 45,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.black26,
+    return GestureDetector(
+      onTap: () {
+        showModalBottomSheet(
+          context: context,
+          showDragHandle: true,
+          builder: (context) => SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 16),
+                  child: Text("Sumber Foto",
+                      style: Get.textTheme.titleLarge
+                          ?.copyWith(fontWeight: FontWeight.w700)),
+                ),
+                const SizedBox(height: 12),
+                InkWell(
+                  onTap: () async {
+                    final file = await ImagePicker()
+                        .pickImage(source: ImageSource.camera);
+                    if (file != null) {
+                      onImageCaptured(file);
+                      Get.back();
+                    }
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 12),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.camera),
+                        const SizedBox(width: 8),
+                        Text("Kamera", style: Get.textTheme.bodyLarge),
+                      ],
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () async {
+                    final file = await ImagePicker()
+                        .pickImage(source: ImageSource.gallery);
+                    if (file != null) {
+                      onImageCaptured(file);
+                      Get.back();
+                    }
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 12),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.photo),
+                        const SizedBox(width: 8),
+                        Text("Galeri", style: Get.textTheme.bodyLarge),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-            borderRadius: BorderRadius.circular(10),
-            gradient: const LinearGradient(
-                colors: [Colors.white, Color.fromARGB(255, 212, 212, 212)],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter),
           ),
-          child: const Center(child: Text("Ambil Gambar")),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: AppColors.borderColor,
+          ),
+          borderRadius: BorderRadius.circular(10),
+          gradient: AppColors.secondaryGradient,
         ),
-      ],
+        child: const Center(
+          child: Text(
+            "Ambil Gambar",
+          ),
+        ),
+      ),
     );
   }
 }

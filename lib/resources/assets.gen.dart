@@ -15,6 +15,10 @@ import 'package:vector_graphics/vector_graphics.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/dropdown-icon.svg
+  SvgGenImage get dropdownIcon =>
+      const SvgGenImage('assets/icons/dropdown-icon.svg');
+
   /// File path: assets/icons/google.svg
   SvgGenImage get google => const SvgGenImage('assets/icons/google.svg');
 
@@ -48,6 +52,7 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
+        dropdownIcon,
         google,
         homeIconOff,
         homeIconOn,
@@ -66,9 +71,20 @@ class $AssetsImagesGen {
   AssetGenImage get coffeeBackground =>
       const AssetGenImage('assets/images/coffee_background.png');
 
+  /// File path: assets/images/hmja.png
+  AssetGenImage get hmja => const AssetGenImage('assets/images/hmja.png');
+
   /// File path: assets/images/icon_bullish.png
   AssetGenImage get iconBullish =>
       const AssetGenImage('assets/images/icon_bullish.png');
+
+  /// File path: assets/images/kampusmerdeka.png
+  AssetGenImage get kampusmerdeka =>
+      const AssetGenImage('assets/images/kampusmerdeka.png');
+
+  /// File path: assets/images/kemendikbud.png
+  AssetGenImage get kemendikbud =>
+      const AssetGenImage('assets/images/kemendikbud.png');
 
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
@@ -77,9 +93,39 @@ class $AssetsImagesGen {
   AssetGenImage get logoPpk =>
       const AssetGenImage('assets/images/logo_ppk.png');
 
+  /// File path: assets/images/ojk.png
+  AssetGenImage get ojk => const AssetGenImage('assets/images/ojk.png');
+
+  /// File path: assets/images/ppkcompo.png
+  AssetGenImage get ppkcompo =>
+      const AssetGenImage('assets/images/ppkcompo.png');
+
+  /// File path: assets/images/ppkormawa.png
+  AssetGenImage get ppkormawa =>
+      const AssetGenImage('assets/images/ppkormawa.png');
+
+  /// File path: assets/images/simbelmawa.png
+  AssetGenImage get simbelmawa =>
+      const AssetGenImage('assets/images/simbelmawa.png');
+
+  /// File path: assets/images/unej.png
+  AssetGenImage get unej => const AssetGenImage('assets/images/unej.png');
+
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [coffeeBackground, iconBullish, logo, logoPpk];
+  List<AssetGenImage> get values => [
+        coffeeBackground,
+        hmja,
+        iconBullish,
+        kampusmerdeka,
+        kemendikbud,
+        logo,
+        logoPpk,
+        ojk,
+        ppkcompo,
+        ppkormawa,
+        simbelmawa,
+        unej
+      ];
 }
 
 class Assets {

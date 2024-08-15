@@ -6,14 +6,21 @@ class SiKePiTextField extends StatelessWidget {
   final String name;
   final String? Function(String?) validator;
   final String? hintText;
-  const SiKePiTextField(
-      {super.key, required this.name, required this.validator, this.hintText});
+  final TextInputType textInputType;
+  const SiKePiTextField({
+    super.key,
+    required this.name,
+    required this.validator,
+    this.hintText,
+    this.textInputType = TextInputType.none,
+  });
 
   @override
   Widget build(BuildContext context) {
     return FormBuilderTextField(
       name: name,
       validator: validator,
+      keyboardType: textInputType,
       onTapOutside: (_) => FocusScope.of(context).unfocus(),
       style: const TextStyle(height: 1.0),
       decoration: InputDecoration(
@@ -29,12 +36,15 @@ class CustomTextWithTitle extends StatelessWidget {
   final String label;
   final String? Function(String?) validator;
   final String? hintText;
+  final TextInputType textInputType;
+
   const CustomTextWithTitle({
     super.key,
     required this.name,
     required this.validator,
     this.hintText,
     required this.label,
+    this.textInputType = TextInputType.none,
   });
 
   @override
@@ -54,6 +64,7 @@ class CustomTextWithTitle extends StatelessWidget {
           name: name,
           validator: validator,
           hintText: hintText,
+          textInputType: textInputType,
         ),
       ],
     );

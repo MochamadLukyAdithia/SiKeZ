@@ -11,6 +11,7 @@ import 'package:hmj_apps/presentation/report/screen/detail_list/neraca_saldo_scr
 import 'package:hmj_apps/presentation/report/screen/detail_list/neraca_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/report_detail_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/detail_list/jurnal_screen.dart';
+import 'package:hmj_apps/presentation/transaction/controller/add_transaction_binding.dart';
 import 'package:hmj_apps/presentation/transaction/screen/add_transaction_screen.dart';
 
 class AppRoute {
@@ -39,6 +40,7 @@ class AppRoute {
     GetPage(
       name: AppRoute.addTransaction,
       page: () => const AddTransactionScreen(),
+      binding: AddTransactionBinding(),
     ),
     GetPage(
         name: AppRoute.navigation,
