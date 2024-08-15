@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/presentation/dasboard/screen/dashboard_screen.dart';
 import 'package:hmj_apps/presentation/navigation/controller/navigation_controller.dart';
-import 'package:hmj_apps/presentation/profile/screen/profile_screen.dart';
+import 'package:hmj_apps/presentation/profile/screen/profile_page.dart';
 import 'package:hmj_apps/presentation/report/screen/report_screen.dart';
 
 class NavigationScreen extends GetView<NavigationController> {
@@ -18,7 +18,7 @@ class NavigationScreen extends GetView<NavigationController> {
               controller.changeNavigationIndex(index);
             },
             indicatorColor: AppColors.primaryColor,
-            selectedIndex: controller.currentIndex.value,
+            selectedIndex: controller.currentIndex,
             height: 60,
             destinations: const [
               NavigationDestination(
@@ -37,8 +37,8 @@ class NavigationScreen extends GetView<NavigationController> {
         body: <Widget>[
           const DashboardSceen(),
           const ReportScreen(),
-          const ProfileScreen()
-        ][controller.currentIndex.value],
+          const ProfilePage()
+        ][controller.currentIndex],
       ),
     );
   }

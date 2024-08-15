@@ -12,7 +12,7 @@ class JurnalListScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
         title: const Text("Jurnal Umum"),
-         actions: [
+        actions: [
           IconButton(
             icon: const Icon(Icons.print),
             onPressed: () {},

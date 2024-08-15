@@ -13,7 +13,7 @@ class NeracaSaldoListScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
         title: const Text("Neraca Saldo"),
-         actions: [
+        actions: [
           IconButton(
             icon: const Icon(Icons.print),
             onPressed: () {},

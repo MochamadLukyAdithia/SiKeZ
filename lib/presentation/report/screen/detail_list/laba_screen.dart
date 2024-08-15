@@ -14,7 +14,7 @@ class LabaRugiListScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
         title: const Text("Laba Rugi"),
-         actions: [
+        actions: [
           IconButton(
             icon: const Icon(Icons.print),
             onPressed: () {},
@@ -23,7 +23,11 @@ class LabaRugiListScreen extends StatelessWidget {
       ),
       body: Container(
         child: const Column(
-          children: [DateFilter("labarRugi"), LabaItemCard(), LabaTotalItemCard()],
+          children: [
+            DateFilter("labarRugi"),
+            LabaItemCard(),
+            LabaTotalItemCard()
+          ],
         ),
       ),
       bottomSheet: Container(

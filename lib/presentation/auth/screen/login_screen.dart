@@ -38,10 +38,22 @@ class LoginScreen extends GetView<AuthController> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Assets.images.logo.image(
-                          width: Get.width * 0.3,
+                        Wrap(
+                          spacing: 10,
+                          runSpacing: 10,
+                          alignment: WrapAlignment.center,
+                          children: [
+                            Assets.images.kemendikbud.image(height: 42),
+                            Assets.images.kampusmerdeka.image(height: 42),
+                            Assets.images.simbelmawa.image(height: 42),
+                            Assets.images.ppkormawa.image(height: 42),
+                            Assets.images.unej.image(height: 42),
+                            Assets.images.hmja.image(height: 42),
+                            Assets.images.ppkcompo.image(height: 42),
+                            Assets.images.ojk.image(height: 42),
+                          ],
                         ),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 24),
                         Text(
                           "SIKEPI",
                           style: Get.textTheme.displayMedium?.copyWith(
@@ -50,7 +62,7 @@ class LoginScreen extends GetView<AuthController> {
                           ),
                         ),
                         Text(
-                          "\"Sistem Keuangan Kopi\"",
+                          "\"Sistem Keuangan Petani Kopi\"",
                           style: Get.textTheme.titleSmall?.copyWith(
                             // fontWeight: FontWeight.w700,
                             color: AppColors.tertiaryColor,

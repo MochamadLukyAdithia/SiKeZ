@@ -48,7 +48,8 @@ class DateFilter extends GetView<ReportController> {
                           children: [
                             Text(
                               controller.chosedFilterListForPage(page)[i],
-                              style: const TextStyle(fontWeight: FontWeight.bold),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(
                               width: 10,

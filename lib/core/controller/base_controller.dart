@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
@@ -6,6 +7,8 @@ import 'package:hmj_apps/core/theme/app_text_theme.dart';
 class BaseController extends GetxController {
   final RxBool _isLoading = false.obs;
   final RxBool _isError = false.obs;
+
+  FirebaseFirestore get firestore => FirebaseFirestore.instance;
 
   bool get isError => _isError.value;
 
@@ -54,7 +57,7 @@ class BaseController extends GetxController {
     );
   }
 
-  showErrorSnackbar({required String errorMessage}) {
+  showErrorSnackbar({String? errorMessage}) {
     if (!Get.isSnackbarOpen) {
       Get.rawSnackbar(
         borderRadius: 8,
@@ -63,7 +66,7 @@ class BaseController extends GetxController {
         backgroundColor: Colors.red,
         snackPosition: SnackPosition.TOP,
         messageText: Text(
-          errorMessage,
+          errorMessage ?? "Terjadi kesalahan server. Silahkan coba kembali.",
           style: AppTextStyle.body3.copyWith(
             color: Colors.white,
           ),

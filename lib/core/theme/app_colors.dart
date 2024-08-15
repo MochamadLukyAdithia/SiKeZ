@@ -16,4 +16,13 @@ class AppColors {
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   );
+
+  static const secondaryGradient = LinearGradient(
+    colors: [
+      Colors.white,
+      lightGrey,
+    ],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
 }

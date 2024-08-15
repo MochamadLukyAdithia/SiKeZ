@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/route/routes.dart';
@@ -6,8 +7,8 @@ import 'package:hmj_apps/core/utils/images.dart';
 import 'package:hmj_apps/presentation/profile/component/text_icon.dart';
 import 'package:hmj_apps/presentation/shared/custom_button.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +92,7 @@ class ProfileScreen extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   child: SiKePeLinearButton(
                     title: "Log out",
-                    onPressed: () {},
+                    onPressed: FirebaseAuth.instance.signOut,
                   ))
             ],
           ),

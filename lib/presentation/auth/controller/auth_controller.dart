@@ -46,7 +46,7 @@ class AuthController extends BaseController {
             .collection('users')
             .doc(firebaseCrrentUser?.uid)
             .set({
-          'name': firebaseCrrentUser?.displayName,
+          'name': FirebaseAuth.instance.currentUser?.displayName,
           'address': '',
           'phoneNumber': firebaseCrrentUser?.phoneNumber,
           'joinedAt': DateTime.now().millisecondsSinceEpoch,
