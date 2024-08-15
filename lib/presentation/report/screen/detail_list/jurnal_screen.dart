@@ -20,7 +20,7 @@ class JurnalListScreen extends StatelessWidget {
         ],
       ),
       body: Container(
-        child: Column(
+        child: const Column(
           children: [DateFilter("jurnal"), JurnalItemCard()],
         ),
       ),

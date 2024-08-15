@@ -20,7 +20,7 @@ class BukuBesarListScreen extends StatelessWidget {
         ],
       ),
       body: Container(
-        child: Column(
+        child: const Column(
           children: [DateFilter("bukuBesar"), BukuItemCard()],
         ),
       ),

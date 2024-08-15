@@ -20,7 +20,7 @@ class ModalListScreen extends StatelessWidget {
         ],
       ),
       body: Container(
-        child: Column(
+        child: const Column(
           children: [DateFilter("modal"), ModalItemCard()],
         ),
       ),

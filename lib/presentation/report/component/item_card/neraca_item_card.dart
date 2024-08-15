@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/theme/app_text_theme.dart';
-import 'package:hmj_apps/presentation/report/component/date_filter.dart';
 
 class NeracaItemCard extends StatelessWidget {
   const NeracaItemCard({super.key});
@@ -11,7 +10,7 @@ class NeracaItemCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
       padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(color: Colors.white, boxShadow: [
+      decoration: const BoxDecoration(color: Colors.white, boxShadow: [
         BoxShadow(
             color: Colors.black12,
             spreadRadius: 2,
@@ -35,7 +34,7 @@ class NeracaItemCard extends StatelessWidget {
                 height: 20,
                 color: AppColors.primaryColor,
               ),
-              Expanded(
+              const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -54,7 +53,7 @@ class NeracaItemCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(
+              const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -80,7 +79,7 @@ class NeracaItemCard extends StatelessWidget {
           ),
           Row(
             children: [
-              Text(
+              const Text(
                 "TOTAL ASET",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
@@ -91,7 +90,7 @@ class NeracaItemCard extends StatelessWidget {
                   height: 2,
                 ),
               ),
-              Text(
+              const Text(
                 "Rp800000",
                 style: TextStyle(fontWeight: FontWeight.bold),
               )

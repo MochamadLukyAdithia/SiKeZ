@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/theme/app_text_theme.dart';
-import 'package:hmj_apps/presentation/report/component/date_filter.dart';
 
 class LabaItemCard extends StatelessWidget {
   const LabaItemCard({super.key});
@@ -11,7 +10,7 @@ class LabaItemCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
       padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(color: Colors.white, boxShadow: [
+      decoration: const BoxDecoration(color: Colors.white, boxShadow: [
         BoxShadow(
             color: Colors.black12,
             spreadRadius: 2,
@@ -49,25 +48,25 @@ class LabaItemCard extends StatelessWidget {
                 height: 30,
                 color: AppColors.primaryColor,
               ),
-              Expanded(
+              const Expanded(
                 child: Text(
                   "4-40000 Pendapatan",
                   style: AppTextStyle.body4,
                 ),
               ),
-              Text(
+              const Text(
                 "Rp500000",
                 style: AppTextStyle.body4,
               ),
             ],
           ),
-          Row(
+          const Row(
             children: [
               Text(
                 "Total",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              const Spacer(),
+              Spacer(),
               Text(
                 "Rp800000",
                 style: TextStyle(fontWeight: FontWeight.bold),

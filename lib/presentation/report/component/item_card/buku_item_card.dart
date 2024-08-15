@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/theme/app_text_theme.dart';
-import 'package:hmj_apps/presentation/report/component/date_filter.dart';
 
 class BukuItemCard extends StatelessWidget {
   const BukuItemCard({super.key});
@@ -11,7 +10,7 @@ class BukuItemCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
       padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(color: Colors.white, boxShadow: [
+      decoration: const BoxDecoration(color: Colors.white, boxShadow: [
         BoxShadow(
             color: Colors.black12,
             spreadRadius: 2,
@@ -49,7 +48,7 @@ class BukuItemCard extends StatelessWidget {
                 height: 70,
                 color: AppColors.primaryColor,
               ),
-              Expanded(
+              const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -57,7 +56,7 @@ class BukuItemCard extends StatelessWidget {
                       "Tanggal",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 5,
                     ),
                     Text(
@@ -71,7 +70,7 @@ class BukuItemCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(
+              const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -79,7 +78,7 @@ class BukuItemCard extends StatelessWidget {
                       "Debit",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 5,
                     ),
                     Text(
@@ -89,7 +88,7 @@ class BukuItemCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(
+              const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -97,7 +96,7 @@ class BukuItemCard extends StatelessWidget {
                       "Credit",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 5,
                     ),
                     Text(
@@ -107,7 +106,7 @@ class BukuItemCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(
+              const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -115,7 +114,7 @@ class BukuItemCard extends StatelessWidget {
                       "Saldo",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 5,
                     ),
                     Text(
@@ -127,13 +126,13 @@ class BukuItemCard extends StatelessWidget {
               ),
             ],
           ),
-          Row(
+          const Row(
             children: [
               Text(
                 "Saldo Akhir",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              const Spacer(),
+              Spacer(),
               Text(
                 "Rp800000",
                 style: TextStyle(fontWeight: FontWeight.bold),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/theme/app_text_theme.dart';
-import 'package:hmj_apps/presentation/report/component/date_filter.dart';
 
 class ModalItemCard extends StatelessWidget {
   const ModalItemCard({super.key});
@@ -11,7 +10,7 @@ class ModalItemCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
       padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(color: Colors.white, boxShadow: [
+      decoration: const BoxDecoration(color: Colors.white, boxShadow: [
         BoxShadow(
             color: Colors.black12,
             spreadRadius: 2,
@@ -38,7 +37,7 @@ class ModalItemCard extends StatelessWidget {
                 height: 70,
                 color: AppColors.primaryColor,
               ),
-              Expanded(
+              const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -50,7 +49,7 @@ class ModalItemCard extends StatelessWidget {
                       "Laba Bersih",
                       style: TextStyle(color: Colors.black54),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 5,
                     ),
                     Text(
@@ -61,7 +60,7 @@ class ModalItemCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(
+              const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -69,7 +68,7 @@ class ModalItemCard extends StatelessWidget {
                       "Rp 20.000.000",
                       style: TextStyle(color: Colors.black54),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 5,
                     ),
                     Text(
@@ -87,7 +86,7 @@ class ModalItemCard extends StatelessWidget {
           ),
           Row(
             children: [
-              Text(
+              const Text(
                 "Saldo Akhir",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
@@ -98,7 +97,7 @@ class ModalItemCard extends StatelessWidget {
                   height: 2,
                 ),
               ),
-              Text(
+              const Text(
                 "Rp800000",
                 style: TextStyle(fontWeight: FontWeight.bold),
               )

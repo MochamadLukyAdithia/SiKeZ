@@ -21,7 +21,7 @@ class NeracaSaldoListScreen extends StatelessWidget {
         ],
       ),
       body: Container(
-        child: Column(
+        child: const Column(
           children: [DateFilter("neracaSaldo"), NecaraSaldoItemCard()],
         ),
       ),
@@ -43,7 +43,7 @@ class NeracaSaldoListScreen extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Debit',
                 ),
                 Text(
@@ -56,7 +56,7 @@ class NeracaSaldoListScreen extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Kredit'),
+                const Text('Kredit'),
                 Text(
                   "Rp.200000",
                   style:

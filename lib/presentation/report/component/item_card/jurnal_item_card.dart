@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
-import 'package:hmj_apps/presentation/report/component/date_filter.dart';
 
 class JurnalItemCard extends StatelessWidget {
   const JurnalItemCard({super.key});
@@ -10,7 +9,7 @@ class JurnalItemCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
       padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(color: Colors.white, boxShadow: [
+      decoration: const BoxDecoration(color: Colors.white, boxShadow: [
         BoxShadow(
             color: Colors.black12,
             spreadRadius: 2,
@@ -20,20 +19,20 @@ class JurnalItemCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          const Row(
             children: [
               Text(
                 "Pemasukan",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
-              const Spacer(),
+              Spacer(),
               Text("08 Agu 2024")
             ],
           ),
           const SizedBox(
             height: 5,
           ),
-          Text("title transaction"),
+          const Text("title transaction"),
           const SizedBox(
             height: 5,
           ),
@@ -48,7 +47,7 @@ class JurnalItemCard extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              Expanded(
+              const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -58,7 +57,7 @@ class JurnalItemCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 3,
                     ),
                     Row(
@@ -70,14 +69,14 @@ class JurnalItemCard extends StatelessWidget {
                         Text("Rp 25.000.000"),
                       ],
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 3,
                     ),
                     Text(
                       "1-10000 Beban Pokok",
                       style: TextStyle(color: AppColors.secondaryColor),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 3,
                     ),
                     Row(
