@@ -12,8 +12,12 @@ class ReportScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Laporan"),
         centerTitle: true,
-        backgroundColor: AppColors.primaryColor,
-       
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: AppColors.primaryGradient,
+          ),
+        ),
+        foregroundColor: Colors.white,
       ),
       body: Container(
         margin: const EdgeInsets.only(left: 15, top: 10, right: 15),

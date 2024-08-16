@@ -15,7 +15,7 @@ class SiKePiTextField extends StatelessWidget {
     required this.validator,
     this.hintText,
     this.initial,
-    this.textInputType = TextInputType.none,
+    this.textInputType = TextInputType.text,
   });
 
   @override
@@ -49,7 +49,7 @@ class CustomTextWithTitle extends StatelessWidget {
     required this.validator,
     this.hintText,
     required this.label,
-    this.textInputType = TextInputType.none,
+    this.textInputType = TextInputType.text,
     this.initial,
   });
 
