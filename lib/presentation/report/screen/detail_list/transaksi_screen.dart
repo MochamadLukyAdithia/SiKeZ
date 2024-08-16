@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/presentation/report/component/date_filter.dart';
-import 'package:hmj_apps/presentation/report/component/item_card/jurnal_item_card.dart';
 
-class JurnalListScreen extends StatelessWidget {
-  const JurnalListScreen({super.key});
+class TransaksiListScreen extends StatelessWidget {
+  const TransaksiListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,7 @@ class JurnalListScreen extends StatelessWidget {
           ),
         ),
         foregroundColor: Colors.white,
-        title: const Text("Jurnal Umum"),
+        title: const Text("Transaksi"),
         actions: [
           IconButton(
             icon: const Icon(Icons.print),
@@ -26,7 +25,7 @@ class JurnalListScreen extends StatelessWidget {
       ),
       body: Container(
         child: const Column(
-          children: [DateFilter("jurnal"), JurnalItemCard()],
+          children: [DateFilter("bukuBesar")],
         ),
       ),
     );

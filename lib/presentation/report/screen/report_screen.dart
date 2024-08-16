@@ -18,12 +18,15 @@ class ReportScreen extends StatelessWidget {
           ),
         ),
         foregroundColor: Colors.white,
-
       ),
       body: Container(
         margin: const EdgeInsets.only(left: 15, top: 10, right: 15),
         child: const Column(
           children: [
+            ReportItem(title: "Transaksi", route: AppRoute.reportTransaksiList),
+            SizedBox(
+              height: 15,
+            ),
             ReportItem(title: "Jurnal Umum", route: AppRoute.reporJurnaltList),
             SizedBox(
               height: 15,

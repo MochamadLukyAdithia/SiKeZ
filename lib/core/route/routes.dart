@@ -10,6 +10,7 @@ import 'package:hmj_apps/presentation/report/screen/detail_list/laba_screen.dart
 import 'package:hmj_apps/presentation/report/screen/detail_list/modal_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/detail_list/neraca_saldo_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/detail_list/neraca_screen.dart';
+import 'package:hmj_apps/presentation/report/screen/detail_list/transaksi_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/report_detail_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/detail_list/jurnal_screen.dart';
 import 'package:hmj_apps/presentation/transaction/controller/add_transaction_binding.dart';
@@ -28,6 +29,8 @@ class AppRoute {
   static const reportModalList = "/report/list/modal";
   static const reportLabaRugiList = "/report/list/labaRugi";
   static const reportBukuBesarList = "/report/list/bukuBesar";
+  static const reportTransaksiList = "/report/list/transaksi";
+  static const reportTransaksiDetail = "/report/detail/transaksi";
   static const editProfile = "/profile/edit";
 
   static final List<GetPage> routes = [
@@ -81,6 +84,14 @@ class AppRoute {
     GetPage(
         name: AppRoute.editProfile,
         page: () => const ProfileEditPage(),
-        binding: ProfileBinding())
+        binding: ProfileBinding()),
+    GetPage(
+      name: AppRoute.reportTransaksiList,
+      page: () => const TransaksiListScreen(),
+    ),
+    GetPage(
+      name: AppRoute.reportTransaksiDetail,
+      page: () => const ReportDetailScreen(),
+    ),
   ];
 }
