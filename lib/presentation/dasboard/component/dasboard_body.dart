@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hmj_apps/core/helper/format_currency.dart';
+import 'package:hmj_apps/core/theme/app_colors.dart';
+import 'package:hmj_apps/presentation/dasboard/controller/dashboard_controller.dart';
+import 'package:hmj_apps/resources/assets.gen.dart';
+import 'package:intl/intl.dart';
 
-class DashboardBody extends StatelessWidget {
+class DashboardBody extends GetView<DashboardController> {
   const DashboardBody({super.key});
 
   @override
@@ -15,82 +21,110 @@ class DashboardBody extends StatelessWidget {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 6),
-          ListView.separated(
-            shrinkWrap: true,
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              return Row(
-                children: [
-                  Container(
-                    width: 72,
-                    height: 72,
-                    decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                            colors: [Color(0xffA1B57D), Color(0xff464F37)],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter),
-                        borderRadius: BorderRadius.circular(15)),
-                    child: const Icon(
-                      Icons.arrow_outward_outlined,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
+          Obx(() {
+            final dataList = controller.transactionList;
+            return ListView.separated(
+                shrinkWrap: true,
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return Dismissible(
+                    direction: DismissDirection.endToStart,
+                    background: Container(
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black26),
-                          borderRadius: BorderRadius.circular(15)),
-                      child: const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        borderRadius: BorderRadius.circular(12),
+                        color: Colors.red,
+                      ),
+                      padding: const EdgeInsets.only(right: 24),
+                      alignment: Alignment.centerRight,
+                      child: const Icon(
+                        Icons.delete_forever_rounded,
+                        color: Colors.white,
+                      ),
+                    ),
+                    key: ValueKey(dataList[index].date.toIso8601String()),
+                    onDismissed: (_) => controller.removeTransaction(index),
+                    child: IntrinsicHeight(
+                      child: Row(
                         children: [
-                          Row(
-                            children: [
-                              Text(
-                                "Pengeluaran",
-                                style: TextStyle(
-                                    fontSize: 12, fontWeight: FontWeight.w600),
+                          Container(
+                            height: double.infinity,
+                            width: 48,
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                                gradient: AppColors.primaryGradient,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Assets.icons.transaction.svg(
+                              fit: BoxFit.fitWidth,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 12,
+                          ),
+                          Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 12),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.black26),
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          dataList[index].transactionName,
+                                          style: const TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Text(
+                                        DateFormat('dd MMMM yyyy')
+                                            .format(dataList[index].date),
+                                        style: const TextStyle(
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w400),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                      "${dataList[index].debitName} -> ${dataList[index].creditName}",
+                                      style: const TextStyle(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w400)),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  Text(
+                                    formatCurrency(dataList[index].nominal),
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
                               ),
-                              Spacer(),
-                              Text(
-                                "19 juli 2024",
-                                style: TextStyle(
-                                    fontSize: 8, fontWeight: FontWeight.w400),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text("kas -> Beban Pokok Pendapatan",
-                              style: TextStyle(
-                                  fontSize: 8, fontWeight: FontWeight.w400)),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "Rp7.000.000",
-                            style: TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
                           )
                         ],
                       ),
                     ),
-                  )
-                ],
-              );
-            },
-            separatorBuilder: (context, index) {
-              return const SizedBox(
-                height: 10,
-              );
-            },
-            itemCount: 10,
-          ),
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const SizedBox(
+                    height: 12,
+                  );
+                },
+                itemCount: dataList.length);
+          }),
         ],
       ),
     );

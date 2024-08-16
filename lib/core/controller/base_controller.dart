@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/theme/app_text_theme.dart';
@@ -20,6 +21,14 @@ class BaseController extends GetxController {
 
   set setIsError(bool value) {
     _isError.value = value;
+  }
+
+  showErrorToast({required String? msg}) {
+    Fluttertoast.showToast(
+      msg: msg ?? "Terjadi kesalahan.",
+      gravity: ToastGravity.CENTER,
+      backgroundColor: AppColors.tertiaryColor,
+    );
   }
 
   showSuccessSnackbar({required String message}) {

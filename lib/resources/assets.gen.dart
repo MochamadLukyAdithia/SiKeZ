@@ -50,6 +50,10 @@ class $AssetsIconsGen {
   SvgGenImage get solarCalendarBold =>
       const SvgGenImage('assets/icons/solar_calendar-bold.svg');
 
+  /// File path: assets/icons/transaction.svg
+  SvgGenImage get transaction =>
+      const SvgGenImage('assets/icons/transaction.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
         dropdownIcon,
@@ -60,7 +64,8 @@ class $AssetsIconsGen {
         profileIconOn,
         reportIconOff,
         reportIconOn,
-        solarCalendarBold
+        solarCalendarBold,
+        transaction
       ];
 }
 
