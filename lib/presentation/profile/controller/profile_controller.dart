@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -16,9 +17,11 @@ class ProfileController extends BaseController {
   CollectionReference userData = FirebaseFirestore.instance.collection('users');
   final ImagePicker picker = ImagePicker();
   var selectedImage = Rxn<File>();
-  // var storage = Firebases.instance;
+  var storage = FirebaseStorage.instance;
 
   var userProfileData = Rxn<UserProfle>();
+
+  var isLoading = false;
 
   @override
   void onInit() {
@@ -57,40 +60,46 @@ class ProfileController extends BaseController {
     }
   }
 
-  Future<void> uploadUserImage(String imagePath) async {
-    String imageName = imagePath.substring(
-        imagePath.lastIndexOf("/") + 1, imagePath.lastIndexOf("."));
+  Future<String> uploadUserImage(File imagePath) async {
+    String imageName = imagePath.path.substring(
+        imagePath.path.lastIndexOf("/") + 1, imagePath.path.lastIndexOf("."));
+    log(imageName);
 
-    String path = imagePath.substring(
-        imagePath.indexOf("/") + 1, imagePath.lastIndexOf("/"));
+    String path = imagePath.path.substring(
+        imagePath.path.indexOf("/") + 1, imagePath.path.lastIndexOf("/"));
+    log(path);
 
-    final Directory systemTempDir = Directory.systemTemp;
-    final byteData = await rootBundle.load(imagePath);
-    final file = File('${systemTempDir.path}/$imageName.jpg');
+    var storageRef =
+        FirebaseStorage.instance.ref().child('driver_images/$imageName.jpg');
+    var uploadTask = storageRef.putFile(imagePath);
+    var downloadUrl = await (await uploadTask).ref.getDownloadURL();
 
-    await file.writeAsBytes(byteData.buffer
-        .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
-
-    //       Tasks taskSnapshot = await storage.ref('$path/$imageName').putFile(file);
-    // final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
-
-    // await FirebaseFirestore.instance.collection(path).add({"url": downloadUrl, "name": imageName});
+    return downloadUrl.toString();
   }
 
   Future<void> updateProfileData() async {
+    isLoading = true;
     if (formKey.currentState?.saveAndValidate() ?? false) {
       try {
         String name = formKey.currentState!.value['nama'];
         String address = formKey.currentState!.value['alamat'];
         String phone = formKey.currentState!.value['nomor'];
+        String downloadUrl = "";
         log(userid.id);
+        if (selectedImage.value != null) {
+          downloadUrl = await uploadUserImage(selectedImage.value!);
+          await userData.doc(userid.id).update({'imageUrl': downloadUrl});
+        }
         await userData.doc(userid.id).update({
           'name': name,
           'address': address,
           'phoneNumber': phone,
         });
+
         showSuccessSnackbar(message: "Berhasil Mengubah Data Profile");
+        isLoading = false;
       } catch (e) {
+        isLoading = false;
         showErrorSnackbar(
             errorMessage: "Terjadi Kesalahan Ketika Mengubah Data");
       }

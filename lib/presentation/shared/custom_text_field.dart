@@ -15,7 +15,7 @@ class SiKePiTextField extends StatelessWidget {
     required this.validator,
     this.hintText,
     this.initial,
-    this.textInputType = TextInputType.none,
+    this.textInputType = TextInputType.text,
   });
 
   @override
@@ -24,7 +24,7 @@ class SiKePiTextField extends StatelessWidget {
       initialValue: initial,
       name: name,
       validator: validator,
-      keyboardType: textInputType,
+      // keyboardType: textInputType,
       onTapOutside: (_) => FocusScope.of(context).unfocus(),
       style: const TextStyle(height: 1.0),
       decoration: InputDecoration(

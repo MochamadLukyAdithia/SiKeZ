@@ -32,7 +32,8 @@ class ProfileEditPage extends GetView<ProfileController> {
       ),
       body: SingleChildScrollView(
         child: Obx(() {
-          if (controller.userProfileData.value == null) {
+          if (controller.userProfileData.value == null ||
+              controller.isLoading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
@@ -47,11 +48,14 @@ class ProfileEditPage extends GetView<ProfileController> {
                       controller.getImageFromGallery();
                     },
                     child: CircleAvatar(
-                      backgroundImage: controller.selectedImage.value != null
-                          ? FileImage(controller.selectedImage.value!)
-                          : null,
+                      backgroundImage: profile.imageUrl != null &&
+                              profile.imageUrl!.isNotEmpty
+                          ? NetworkImage(profile.imageUrl!) as ImageProvider
+                          : controller.selectedImage.value != null
+                              ? FileImage(controller.selectedImage.value!)
+                              : null,
                       radius: 50,
-                      child: Icon(Icons.camera),
+                      child: const Icon(Icons.camera),
                     ),
                   ),
                   const SizedBox(
@@ -81,16 +85,16 @@ class ProfileEditPage extends GetView<ProfileController> {
                           const SizedBox(
                             height: 10,
                           ),
-                          CustomTextWithTitle(
-                            initial: profile.joined.toString(),
-                            name: "tanggalLahir",
-                            validator: FormValidation.isNotNullAndRequired,
-                            label: "Tanggal Lahir",
-                            hintText: "Masukkan tanggal lahir anda...",
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
+                          // CustomTextWithTitle(
+                          //   initial: profile.joined.toString(),
+                          //   name: "tanggalLahir",
+                          //   validator: FormValidation.isNotNullAndRequired,
+                          //   label: "Tanggal Lahir",
+                          //   hintText: "Masukkan tanggal lahir anda...",
+                          // ),
+                          // const SizedBox(
+                          //   height: 10,
+                          // ),
                           CustomTextWithTitle(
                             initial: profile.address,
                             name: "alamat",
@@ -106,20 +110,22 @@ class ProfileEditPage extends GetView<ProfileController> {
           }
         }),
       ),
-      bottomSheet: Container(
-          margin: const EdgeInsets.all(10),
-          height: MediaQuery.of(context).size.height / 6 - 100,
-          child: SiKePeLinearButton(
-            title: "Simpan",
-            onPressed: () {
-              controller.updateProfileData();
-            },
-            linearGradient: const LinearGradient(
-              colors: [AppColors.primaryColor, Color(0xff464F37)],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          )),
+      bottomSheet: AspectRatio(
+        aspectRatio: 16 / 2.5,
+        child: Container(
+            margin: const EdgeInsets.all(10),
+            child: SiKePeLinearButton(
+              title: "Simpan",
+              onPressed: () {
+                controller.updateProfileData();
+              },
+              linearGradient: const LinearGradient(
+                colors: [AppColors.primaryColor, Color(0xff464F37)],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            )),
+      ),
     );
   }
 }

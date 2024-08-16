@@ -11,7 +11,18 @@ class NeracaSaldoListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+              const Color.fromARGB(255, 129, 145, 100),
+              AppColors.primaryColor
+            ], stops: [
+              0.01,
+              // 0.5,
+              0.6
+            ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+          ),
+        ),
         title: const Text("Neraca Saldo"),
         actions: [
           IconButton(
@@ -25,46 +36,48 @@ class NeracaSaldoListScreen extends StatelessWidget {
           children: [DateFilter("neracaSaldo"), NecaraSaldoItemCard()],
         ),
       ),
-      bottomSheet: Container(
-        height: MediaQuery.of(context).size.height / 6 - 75,
-        padding: const EdgeInsets.all(10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "Total",
-              style: AppTextStyle.body2.copyWith(fontWeight: FontWeight.bold),
-            ),
-            // Container(
-            //   color: AppColors.primaryColor,
-            //   width: 2,
-            //   height: MediaQuery.of(context).size.height / 6 - 80,
-            // ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Debit',
-                ),
-                Text(
-                  "Rp.200000",
-                  style:
-                      AppTextStyle.body3.copyWith(fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('Kredit'),
-                Text(
-                  "Rp.200000",
-                  style:
-                      AppTextStyle.body3.copyWith(fontWeight: FontWeight.bold),
-                )
-              ],
-            )
-          ],
+      bottomSheet: AspectRatio(
+        aspectRatio: 16 / 2.5,
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Total",
+                style: AppTextStyle.body2.copyWith(fontWeight: FontWeight.bold),
+              ),
+              // Container(
+              //   color: AppColors.primaryColor,
+              //   width: 2,
+              //   height: MediaQuery.of(context).size.height / 6 - 80,
+              // ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Debit',
+                  ),
+                  Text(
+                    "Rp.200000",
+                    style: AppTextStyle.body3
+                        .copyWith(fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Kredit'),
+                  Text(
+                    "Rp.200000",
+                    style: AppTextStyle.body3
+                        .copyWith(fontWeight: FontWeight.bold),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
