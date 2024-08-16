@@ -26,7 +26,6 @@ class ReportDetailScreen extends StatelessWidget {
             onPressed: () {},
           )
         ],
-        
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -39,7 +38,7 @@ class ReportDetailScreen extends StatelessWidget {
                 children: [
                   const Text("Transaksi"),
                   Text(
-                    "pemasukan",
+                    transaction.transactionName,
                     style: AppTextStyle.body2
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
