@@ -8,12 +8,14 @@ class DropDownButtonWithSearch extends StatelessWidget {
   final String title;
   final String? value;
   final Function() onTap;
+  final bool enable;
 
   const DropDownButtonWithSearch({
     super.key,
     required this.onTap,
     required this.title,
     this.value,
+    required this.enable,
   });
 
   @override
@@ -34,7 +36,9 @@ class DropDownButtonWithSearch extends StatelessWidget {
                 color: AppColors.borderColor,
               ),
               borderRadius: BorderRadius.circular(12),
-              gradient: AppColors.secondaryGradient,
+              gradient: enable
+                  ? AppColors.secondaryGradient
+                  : AppColors.tertiaryGradient,
             ),
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
@@ -45,9 +49,10 @@ class DropDownButtonWithSearch extends StatelessWidget {
                     value ?? "",
                   ),
                 ),
-                Assets.icons.dropdownIcon.svg(
-                  width: 20,
-                ),
+                if (enable)
+                  Assets.icons.dropdownIcon.svg(
+                    width: 20,
+                  ),
               ],
             ),
           ),

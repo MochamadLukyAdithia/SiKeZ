@@ -25,4 +25,13 @@ class AppColors {
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   );
+
+  static const tertiaryGradient = LinearGradient(
+    colors: [
+      AppColors.primaryColor,
+      AppColors.secondaryColor,
+    ],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
 }
