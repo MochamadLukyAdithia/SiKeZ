@@ -11,9 +11,9 @@ class BukuBesarListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
        flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(colors: [
-              const Color.fromARGB(255, 129, 145, 100),
+              Color.fromARGB(255, 129, 145, 100),
               AppColors.primaryColor
             ], stops: [
               0.01,

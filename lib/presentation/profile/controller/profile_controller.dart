@@ -5,7 +5,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/controller/base_controller.dart';
@@ -21,6 +20,7 @@ class ProfileController extends BaseController {
 
   var userProfileData = Rxn<UserProfle>();
 
+  @override
   var isLoading = false;
 
   @override

@@ -13,9 +13,9 @@ class LabaRugiListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(colors: [
-              const Color.fromARGB(255, 129, 145, 100),
+              Color.fromARGB(255, 129, 145, 100),
               AppColors.primaryColor
             ], stops: [
               0.01,
@@ -41,11 +41,11 @@ class LabaRugiListScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomSheet: AspectRatio(
+      bottomSheet: const AspectRatio(
         aspectRatio: 16 / 9.5,
         child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: const Column(
+          padding: EdgeInsets.all(10),
+          child: Column(
             children: [
               RowText(
                   isBold: false,

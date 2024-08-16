@@ -7,7 +7,6 @@ import "package:hmj_apps/presentation/profile/controller/profile_controller.dart
 import "package:hmj_apps/presentation/profile/model/user_model.dart";
 import "package:hmj_apps/presentation/shared/custom_button.dart";
 import "package:hmj_apps/presentation/shared/custom_text_field.dart";
-import "package:image_picker/image_picker.dart";
 
 class ProfileEditPage extends GetView<ProfileController> {
   const ProfileEditPage({super.key});

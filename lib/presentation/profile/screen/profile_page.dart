@@ -28,9 +28,9 @@ class ProfilePage extends GetView<ProfileController> {
                       aspectRatio: 16 / 5,
                       child: Container(
                         decoration: BoxDecoration(
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                                 colors: [
-                                  const Color.fromARGB(255, 129, 145, 100),
+                                  Color.fromARGB(255, 129, 145, 100),
                                   AppColors.primaryColor
                                 ],
                                 stops: [
@@ -76,11 +76,11 @@ class ProfilePage extends GetView<ProfileController> {
                 child: Column(
                   children: [
                     TextIcon(icon: Icons.person, dataText: profile.name),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     TextIcon(icon: Icons.phone, dataText: profile.phone),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     // TextIcon(

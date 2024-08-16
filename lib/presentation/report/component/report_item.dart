@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hmj_apps/core/theme/app_colors.dart';
 
 class ReportItem extends StatelessWidget {
   final String title;
@@ -12,7 +11,7 @@ class ReportItem extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             colors: [
               Colors.white,
               Color.fromARGB(46, 239, 239, 239)

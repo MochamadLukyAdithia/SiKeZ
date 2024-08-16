@@ -13,9 +13,9 @@ class ReportScreen extends StatelessWidget {
         title: const Text("Laporan"),
         centerTitle: true,
         flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(colors: [
-              const Color.fromARGB(255, 129, 145, 100),
+              Color.fromARGB(255, 129, 145, 100),
               AppColors.primaryColor
             ], stops: [
               0.01,
