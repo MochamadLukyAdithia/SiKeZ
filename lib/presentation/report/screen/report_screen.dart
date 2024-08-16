@@ -18,6 +18,7 @@ class ReportScreen extends StatelessWidget {
           ),
         ),
         foregroundColor: Colors.white,
+
       ),
       body: Container(
         margin: const EdgeInsets.only(left: 15, top: 10, right: 15),

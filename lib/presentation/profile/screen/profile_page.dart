@@ -5,38 +5,57 @@ import 'package:hmj_apps/core/route/routes.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/utils/images.dart';
 import 'package:hmj_apps/presentation/profile/component/text_icon.dart';
+import 'package:hmj_apps/presentation/profile/controller/profile_controller.dart';
+import 'package:hmj_apps/presentation/profile/model/user_model.dart';
 import 'package:hmj_apps/presentation/shared/custom_button.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends GetView<ProfileController> {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
-          child: Column(
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Obx(() {
+          UserProfle profile = controller.userProfileData.value!;
+          return Column(
             children: [
               SizedBox(
                 height: MediaQuery.of(context).size.height / 4 + 20,
                 child: Stack(
                   children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height / 4 - 30,
-                      decoration: BoxDecoration(
-                          color: AppColors.primaryColor,
-                          image: DecorationImage(
-                              image: AssetImage(Images.coffeBg),
-                              fit: BoxFit.cover)),
+                    AspectRatio(
+                      aspectRatio: 16 / 5,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                                colors: [
+                                  Color.fromARGB(255, 129, 145, 100),
+                                  AppColors.primaryColor
+                                ],
+                                stops: [
+                                  0.01,
+                                  // 0.5,
+                                  0.6
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter),
+                            image: DecorationImage(
+                                image: AssetImage(Images.coffeBg),
+                                fit: BoxFit.cover)),
+                      ),
                     ),
                     Positioned(
                       left: 0,
                       right: 0,
-                      top: 120,
-                      child: SizedBox(
-                        height: 120,
-                        child: Container(
-                          child: Image.asset(Images.logoPpk),
+                      top: MediaQuery.of(context).size.height / 6 - 40,
+                      child: AspectRatio(
+                        aspectRatio: 16 / 4,
+                        child: CircleAvatar(
+                          backgroundImage: NetworkImage(profile.imageUrl ?? ""),
+                          // child: Container(
+                          //   child: Image.asset(Images.logoPpk),
+                          // ),
                         ),
                       ),
                     )
@@ -54,24 +73,23 @@ class ProfilePage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   gradient: AppColors.primaryGradient,
                 ),
-                child: const Column(
+                child: Column(
                   children: [
-                    TextIcon(icon: Icons.person, dataText: "Nama User"),
-                    SizedBox(
+                    TextIcon(icon: Icons.person, dataText: profile.name),
+                    const SizedBox(
                       height: 30,
                     ),
-                    TextIcon(icon: Icons.phone, dataText: "081234124893"),
-                    SizedBox(
+                    TextIcon(icon: Icons.phone, dataText: profile.phone),
+                    const SizedBox(
                       height: 30,
                     ),
+                    // TextIcon(
+                    //     icon: Icons.calendar_month, dataText: profile.joined),
+                    // SizedBox(
+                    //   height: 30,
+                    // ),
                     TextIcon(
-                        icon: Icons.calendar_month, dataText: "3 feb 2024"),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    TextIcon(
-                        icon: Icons.location_pin,
-                        dataText: "Jl. jalanisaja no 666,kota yang hilang"),
+                        icon: Icons.location_pin, dataText: profile.address),
                   ],
                 ),
               ),
@@ -95,8 +113,8 @@ class ProfilePage extends StatelessWidget {
                     onPressed: FirebaseAuth.instance.signOut,
                   ))
             ],
-          ),
-        ),
+          );
+        }),
       ),
     );
   }

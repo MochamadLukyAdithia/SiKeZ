@@ -48,7 +48,7 @@ class AppRoute {
     GetPage(
         name: AppRoute.navigation,
         // page: () => const NavigationPage(),
-        page: () => NavigationPage(),
+        page: () => const NavigationPage(),
         binding: NavigationBinding()),
     GetPage(
       name: AppRoute.detailReport,
