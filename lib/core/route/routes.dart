@@ -5,6 +5,7 @@ import 'package:hmj_apps/presentation/dasboard/screen/dashboard_page.dart';
 import 'package:hmj_apps/presentation/navigation/controller/navigation_binding.dart';
 import 'package:hmj_apps/presentation/profile/controller/profile_binding.dart';
 import 'package:hmj_apps/presentation/profile/screen/profile_edit_page.dart';
+import 'package:hmj_apps/presentation/report/controller/report_binding.dart';
 import 'package:hmj_apps/presentation/report/screen/detail_list/buku_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/detail_list/laba_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/detail_list/modal_screen.dart';
@@ -58,9 +59,9 @@ class AppRoute {
       page: () => const ReportDetailScreen(),
     ),
     GetPage(
-      name: AppRoute.reporJurnaltList,
-      page: () => const JurnalListScreen(),
-    ),
+        name: AppRoute.reporJurnaltList,
+        page: () => const JurnalListScreen(),
+        binding: ReportBinding()),
     GetPage(
       name: AppRoute.reportNeracaList,
       page: () => const NeracaListScreen(),

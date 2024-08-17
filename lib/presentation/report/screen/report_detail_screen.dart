@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hmj_apps/core/helper/format_currency.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/theme/app_text_theme.dart';
 import 'package:hmj_apps/model/transaction_model.dart';
@@ -74,7 +75,7 @@ class ReportDetailScreen extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    "Rp.${transaction.nominal.toString()}",
+                    formatCurrency(transaction.nominal),
                     style: AppTextStyle.body2
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
@@ -119,8 +120,8 @@ class ReportDetailScreen extends StatelessWidget {
                           child: Center(child: Text(transaction.debitName))),
                       TableCell(
                           child: Center(
-                              child: Text(
-                                  "Rp. ${transaction.nominal.toString()}"))),
+                              child:
+                                  Text(formatCurrency(transaction.nominal)))),
                       const TableCell(child: Center(child: Text("Rp. 0"))),
                     ],
                   ),
@@ -131,8 +132,8 @@ class ReportDetailScreen extends StatelessWidget {
                       const TableCell(child: Center(child: Text('Rp. 0'))),
                       TableCell(
                           child: Center(
-                              child: Text(
-                                  "Rp. ${transaction.nominal.toString()}"))),
+                              child:
+                                  Text(formatCurrency(transaction.nominal)))),
                     ],
                   ),
                 ],

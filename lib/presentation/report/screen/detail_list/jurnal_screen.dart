@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/presentation/report/component/date_filter.dart';
 import 'package:hmj_apps/presentation/report/component/item_card/jurnal_item_card.dart';
+import 'package:hmj_apps/presentation/report/controller/report_jurnal_controller.dart';
+import 'package:intl/intl.dart';
 
-class JurnalListScreen extends StatelessWidget {
+class JurnalListScreen extends GetView<ReportJurnalController> {
   const JurnalListScreen({super.key});
 
   @override
@@ -24,9 +27,34 @@ class JurnalListScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Container(
-        child: const Column(
-          children: [DateFilter("jurnal"), JurnalItemCard()],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            DateFilter("jurnal"),
+            ListView.separated(
+                shrinkWrap: true,
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  var transactionData = controller.transactionList[index];
+                  return JurnalItemCard(
+                    catatan: transactionData.notes,
+                    debitName:
+                        "${transactionData.debitCode} ${transactionData.debitName}",
+                    jenisTransaksi: transactionData.transactionName,
+                    kreditName:
+                        "${transactionData.creditCode} ${transactionData.creditName}",
+                    nominal: transactionData.nominal,
+                    tanggal: DateFormat.yMMMd().format(transactionData.date),
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const SizedBox(
+                    height: 10,
+                  );
+                },
+                itemCount: controller.transactionList.length)
+          ],
         ),
       ),
     );

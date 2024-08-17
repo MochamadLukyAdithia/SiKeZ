@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:hmj_apps/core/helper/format_currency.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 
 class JurnalItemCard extends StatelessWidget {
-  const JurnalItemCard({super.key});
+  final String jenisTransaksi;
+  final String catatan;
+  final String debitName;
+  final String kreditName;
+  final int nominal;
+  final String tanggal;
+  const JurnalItemCard(
+      {super.key,
+      required this.jenisTransaksi,
+      required this.catatan,
+      required this.debitName,
+      required this.kreditName,
+      required this.nominal,
+      required this.tanggal});
 
   @override
   Widget build(BuildContext context) {
@@ -19,20 +33,21 @@ class JurnalItemCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
               Text(
-                "Pemasukan",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                jenisTransaksi,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
               Spacer(),
-              Text("08 Agu 2024")
+              Text(tanggal)
             ],
           ),
           const SizedBox(
             height: 5,
           ),
-          const Text("title transaction"),
+          Text(catatan),
           const SizedBox(
             height: 5,
           ),
@@ -47,12 +62,12 @@ class JurnalItemCard extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              const Expanded(
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "5-50000 Beban Pokok Pendapatan (D)",
+                      "$debitName (D)",
                       style: TextStyle(color: AppColors.secondaryColor),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
@@ -66,14 +81,14 @@ class JurnalItemCard extends StatelessWidget {
                           Icons.subdirectory_arrow_right,
                           color: Colors.black26,
                         ),
-                        Text("Rp 25.000.000"),
+                        Text(formatCurrency(nominal)),
                       ],
                     ),
                     SizedBox(
                       height: 3,
                     ),
                     Text(
-                      "1-10000 Beban Pokok",
+                      "$kreditName(C)",
                       style: TextStyle(color: AppColors.secondaryColor),
                     ),
                     SizedBox(
@@ -85,7 +100,7 @@ class JurnalItemCard extends StatelessWidget {
                           Icons.subdirectory_arrow_right,
                           color: Colors.black26,
                         ),
-                        Text("Rp 25.000.000"),
+                        Text(formatCurrency(nominal)),
                       ],
                     ),
                   ],
