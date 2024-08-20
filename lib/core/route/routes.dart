@@ -79,9 +79,9 @@ class AppRoute {
       page: () => const LabaRugiListScreen(),
     ),
     GetPage(
-      name: AppRoute.reportBukuBesarList,
-      page: () => const BukuBesarListScreen(),
-    ),
+        name: AppRoute.reportBukuBesarList,
+        page: () => const BukuBesarListScreen(),
+        binding: ReportBinding()),
     GetPage(
         name: AppRoute.editProfile,
         page: () => const ProfileEditPage(),

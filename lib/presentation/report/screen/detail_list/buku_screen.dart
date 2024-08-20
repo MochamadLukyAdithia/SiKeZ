@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/presentation/report/component/date_filter.dart';
 import 'package:hmj_apps/presentation/report/component/item_card/buku_item_card.dart';
+import 'package:hmj_apps/presentation/report/controller/report_buku_controller.dart';
 
-class BukuBesarListScreen extends StatelessWidget {
+class BukuBesarListScreen extends GetView<BukuBesarController> {
   const BukuBesarListScreen({super.key});
 
   @override
@@ -25,8 +27,15 @@ class BukuBesarListScreen extends StatelessWidget {
         ],
       ),
       body: Container(
-        child: const Column(
-          children: [DateFilter("bukuBesar"), BukuItemCard()],
+        child: Column(
+          children: [
+            DateFilter("bukuBesar"),
+            InkWell(
+                onTap: () {
+                  controller.getTransactionData();
+                },
+                child: BukuItemCard())
+          ],
         ),
       ),
     );
