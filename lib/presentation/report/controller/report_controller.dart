@@ -1,8 +1,25 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/controller/base_controller.dart';
+import 'package:hmj_apps/model/transaction_model.dart';
 import 'package:intl/intl.dart';
 
 class ReportController extends BaseController {
+    final Rx<DateTime> _selectedDate = DateTime.now().obs;
+    DateTime get selectedDate => _selectedDate.value;
+
+  set setSelectedDate(DateTime dateTime) {
+    _selectedDate.value = dateTime;
+    getTransactions();
+  }
+
+  @override
+  void onInit() {
+    getTransactions(fromInit: true);
+    super.onInit();
+  }
+
+  RxList<TransactionModel> transactionList = <TransactionModel>[].obs;
   
   final filterDateFull = [
     "Kemarin",
@@ -33,6 +50,29 @@ class ReportController extends BaseController {
       return filterDateMonth;
     } else {
       return filterDateonly;
+    }
+  }
+
+
+   getTransactions({bool fromInit = false}) async {
+    try {
+      if (!fromInit) showLoading();
+      final result = await firestore
+          .collection('transactions')
+          .doc(FirebaseAuth.instance.currentUser?.uid)
+          .collection(DateFormat("dd-MM-yyyy").format(selectedDate))
+          .get();
+      List<TransactionModel> tempTransactionList = [];
+      for (var i in result.docs) {
+        tempTransactionList.add(TransactionModel.fromJson(i.id, i.data()));
+      }
+      transactionList.value = tempTransactionList;
+    } on FirebaseException catch (e) {
+      showErrorToast(msg: e.message);
+    } catch (e) {
+      showErrorToast(msg: "Terjadi kesalahan. $e");
+    } finally {
+      if (!fromInit) Get.back();
     }
   }
 }

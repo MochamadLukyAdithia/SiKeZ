@@ -17,16 +17,10 @@ class ProfileEditPage extends GetView<ProfileController> {
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                AppColors.primaryColor,
-                Color(0xff464F37)
-              ], // Add your colors here
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-            ),
+            gradient: AppColors.primaryGradient,
           ),
         ),
+        foregroundColor: Colors.white,
         title: const Text("Edit Profile"),
       ),
       body: SingleChildScrollView(

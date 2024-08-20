@@ -13,16 +13,10 @@ class NeracaListScreen extends StatelessWidget {
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: const BoxDecoration(
-            gradient: LinearGradient(colors: [
-              Color.fromARGB(255, 129, 145, 100),
-              AppColors.primaryColor
-            ], stops: [
-              0.01,
-              // 0.5,
-              0.6
-            ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+            gradient: AppColors.primaryGradient,
           ),
         ),
+        foregroundColor: Colors.white,
         title: const Text("Neraca"),
         actions: [
           IconButton(
