@@ -25,9 +25,9 @@ class TransactionModel {
     required this.transactionName,
   });
 
-  factory TransactionModel.fromJson(String id, Map<String, dynamic> json) {
+  factory TransactionModel.fromJson(Map<String, dynamic> json) {
     return TransactionModel(
-      id: id,
+      id: json['id'],
       creditCode: json['credit_code'],
       creditName: json['credit_name'],
       date: DateTime.fromMillisecondsSinceEpoch(json['date']),

@@ -17,7 +17,7 @@ class ProfilePage extends GetView<ProfileController> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Obx(() {
-          UserProfle profile = controller.userProfileData.value!;
+          UserProfle? profile = controller.userProfileData.value;
           return Column(
             children: [
               SizedBox(
@@ -52,7 +52,8 @@ class ProfilePage extends GetView<ProfileController> {
                       child: AspectRatio(
                         aspectRatio: 16 / 4,
                         child: CircleAvatar(
-                          backgroundImage: NetworkImage(profile.imageUrl ?? ""),
+                          backgroundImage:
+                              NetworkImage(profile?.imageUrl ?? ""),
                           // child: Container(
                           //   child: Image.asset(Images.logoPpk),
                           // ),
@@ -75,11 +76,11 @@ class ProfilePage extends GetView<ProfileController> {
                 ),
                 child: Column(
                   children: [
-                    TextIcon(icon: Icons.person, dataText: profile.name),
+                    TextIcon(icon: Icons.person, dataText: profile?.name ?? ""),
                     const SizedBox(
                       height: 30,
                     ),
-                    TextIcon(icon: Icons.phone, dataText: profile.phone),
+                    TextIcon(icon: Icons.phone, dataText: profile?.phone ?? ""),
                     const SizedBox(
                       height: 30,
                     ),
@@ -89,7 +90,8 @@ class ProfilePage extends GetView<ProfileController> {
                     //   height: 30,
                     // ),
                     TextIcon(
-                        icon: Icons.location_pin, dataText: profile.address),
+                        icon: Icons.location_pin,
+                        dataText: profile?.address ?? ""),
                   ],
                 ),
               ),

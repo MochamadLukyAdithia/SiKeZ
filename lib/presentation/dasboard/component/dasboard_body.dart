@@ -22,7 +22,7 @@ class DashboardBody extends GetView<DashboardController> {
           ),
           const SizedBox(height: 6),
           Obx(() {
-            final dataList = controller.transactionList;
+            final dataList = controller.getTransactionList;
             return ListView.separated(
                 shrinkWrap: true,
                 padding: const EdgeInsets.symmetric(vertical: 12),

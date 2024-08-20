@@ -1,6 +1,6 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -11,11 +11,13 @@ import 'package:hmj_apps/model/account_model.dart';
 import 'package:hmj_apps/model/transaction_type_model.dart';
 import 'package:hmj_apps/presentation/dasboard/controller/dashboard_controller.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
 
 class AddTransactionController extends BaseController {
   final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
   RxList<TransactionType> transactionTypeList = <TransactionType>[].obs;
+  final DashboardController dashboardController =
+      Get.find<DashboardController>();
 
   final Rxn<TransactionType> _selectedTransactionType = Rxn();
 
@@ -230,11 +232,8 @@ class AddTransactionController extends BaseController {
           imageUrl = await ref.getDownloadURL();
         }
 
-        await firestore
-            .collection('transactions')
-            .doc(FirebaseAuth.instance.currentUser?.uid ?? '')
-            .collection(DateFormat('dd-MM-yyyy').format(dateTime))
-            .add({
+        final data = {
+          "id": const Uuid().v4(),
           "nominal": nominal,
           "notes": notes,
           "date": dateTime.millisecondsSinceEpoch,
@@ -245,9 +244,20 @@ class AddTransactionController extends BaseController {
           "debit_name": selectedFirstAccounts!.name,
           "credit_code": selectedSecondAccounts!.code,
           "credit_name": selectedSecondAccounts!.name,
-        });
+        };
+        final ref = firestore
+            .collection('transactions')
+            .doc(FirebaseAuth.instance.currentUser?.uid ?? '');
+        if (dashboardController.transactionList.isEmpty) {
+          await ref.set({
+            "data": [data],
+          });
+        } else {
+          await ref.update({
+            "data": FieldValue.arrayUnion([data]),
+          });
+        }
 
-        final DashboardController dashboardController = Get.find();
         if (dashboardController.selectedDate.toddMMyyyy() ==
             selectedDate.toddMMyyyy()) {
           dashboardController.getTransactions(fromInit: true);
