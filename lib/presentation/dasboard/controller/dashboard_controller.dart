@@ -1,8 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/controller/base_controller.dart';
 import 'package:hmj_apps/model/transaction_model.dart';
-import 'package:intl/intl.dart';
 
 class DashboardController extends BaseController {
   final Rx<DateTime> _selectedDate = DateTime.now().obs;
@@ -11,10 +11,16 @@ class DashboardController extends BaseController {
 
   set setSelectedDate(DateTime dateTime) {
     _selectedDate.value = dateTime;
-    getTransactions();
+    update();
   }
 
   RxList<TransactionModel> transactionList = <TransactionModel>[].obs;
+
+  List<TransactionModel> get getTransactionList => transactionList.where((p) {
+        return p.date.year == selectedDate.year &&
+            p.date.month == selectedDate.month &&
+            p.date.day == selectedDate.day;
+      }).toList();
 
   @override
   void onInit() {
@@ -28,11 +34,10 @@ class DashboardController extends BaseController {
       final result = await firestore
           .collection('transactions')
           .doc(FirebaseAuth.instance.currentUser?.uid)
-          .collection(DateFormat("dd-MM-yyyy").format(selectedDate))
           .get();
       List<TransactionModel> tempTransactionList = [];
-      for (var i in result.docs) {
-        tempTransactionList.add(TransactionModel.fromJson(i.id, i.data()));
+      for (var i in result.data()?['data'] ?? []) {
+        tempTransactionList.add(TransactionModel.fromJson(i));
       }
       transactionList.value = tempTransactionList;
     } on FirebaseException catch (e) {
@@ -49,9 +54,11 @@ class DashboardController extends BaseController {
       await firestore
           .collection('transactions')
           .doc(FirebaseAuth.instance.currentUser?.uid)
-          .collection(DateFormat("dd-MM-yyyy").format(selectedDate))
-          .doc(transactionList[index].id)
-          .delete();
+          .update({
+        "data": FieldValue.arrayRemove(
+          [transactionList[index].toJson()],
+        ),
+      });
 
       transactionList.removeAt(index);
     } on FirebaseException catch (e) {
