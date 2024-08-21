@@ -32,7 +32,7 @@ class BukuBesarListScreen extends GetView<BukuBesarController> {
             DateFilter("bukuBesar"),
             InkWell(
                 onTap: () {
-                  controller.getTransactionData();
+                  controller.getTransactionAccountHistoryData();
                 },
                 child: BukuItemCard())
           ],

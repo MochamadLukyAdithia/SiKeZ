@@ -17,7 +17,7 @@ class ReportJurnalController extends BaseController {
   }
 
   void getTransactionData() {
-    transactionList.value = Get.find<ReportController>().transactionList;
+    transactionList.value = Get.find<ReportController>().reportTransactionList;
     log("get transaction data ${transactionList.length}");
   }
 }
