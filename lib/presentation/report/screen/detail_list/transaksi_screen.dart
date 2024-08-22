@@ -29,7 +29,7 @@ class TransaksiListScreen extends GetView<DashboardController> {
           )
         ],
       ),
-      body: Container(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             const DateFilter("bukuBesar"),

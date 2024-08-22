@@ -36,12 +36,14 @@ class BukuBesarListScreen extends GetView<BukuBesarController> {
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
-                    var bukuBesarData = controller.bukuBesarData[index];
-                    int dataSaldoAkhir =  controller.getSumHistoryNominalData(index);
+                    var allDataBukuBesar =
+                        controller.getTransactionAccountHistoryData();
+                    var bukuBesarData = allDataBukuBesar[index];
+
+                    int dataSaldoAkhir = controller
+                        .getSumHistoryNominalData(bukuBesarData["history"]);
                     return InkWell(
-                      onTap: () {
-                       
-                      },
+                      onTap: () {},
                       child: BukuItemCard(
                         saldo: dataSaldoAkhir,
                         accountName: bukuBesarData["account"] ?? "kosong",
@@ -57,7 +59,8 @@ class BukuBesarListScreen extends GetView<BukuBesarController> {
                       height: 10,
                     );
                   },
-                  itemCount: controller.bukuBesarData.length),
+                  itemCount:
+                      controller.getTransactionAccountHistoryData().length),
             )
             // InkWell(
             //     onTap: () {

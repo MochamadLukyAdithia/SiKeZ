@@ -10,28 +10,29 @@ class BukuBesarController extends BaseController {
   RxList<TransactionModel> transactionList =
       Get.find<ReportController>().reportTransactionList;
 
-  RxList bukuBesarData = [
-    // {
-    // "account": "Pendapata",
-    // "history": [
-    //   {
-    //     "date": "31 jul 2024",
-    //     "debit": [1000],
-    //     "kredit": [0],
-    //     "saldo": 10000
-    //   },
-    // ]
-    // },
-  ].obs;
+  // RxList bukuBesarData = [
+  //   // {
+  //   // "account": "Pendapata",
+  //   // "history": [
+  //   //   {
+  //   //     "date": "31 jul 2024",
+  //   //     "debit": [1000],
+  //   //     "kredit": [0],
+  //   //     "saldo": 10000
+  //   //   },
+  //   // ]
+  //   // },
+  // ].obs;
 
   @override
   void onInit() {
-    getTransactionAccountHistoryData();
+    // getTransactionAccountHistoryData();
     super.onInit();
   }
 
-  int getSumHistoryNominalData(idx) {
-    var historyList = bukuBesarData[idx]["history"];
+  int getSumHistoryNominalData(List<Map<String, dynamic>> dataHistory) {
+    // var historyList = bukuBesarData[idx]["history"];
+    var historyList = dataHistory;
     var saldoTotal = 0;
     for (var data in historyList) {
       log("debit ${data["debit"]} kredit ${data["kredit"]}");
@@ -46,7 +47,8 @@ class BukuBesarController extends BaseController {
     return saldoTotal;
   }
 
-  getTransactionAccountHistoryData() async {
+  RxList getTransactionAccountHistoryData()  {
+    RxList bukuBesarData = [].obs;
     for (var i = 0; i < transactionList.length; i++) {
       var existingAccount = bukuBesarData.firstWhere(
         (element) => element["account"] == transactionList[i].debitName,
@@ -117,5 +119,6 @@ class BukuBesarController extends BaseController {
       }
       // log(bukuBesarData.toString());
     }
+    return bukuBesarData;
   }
 }
