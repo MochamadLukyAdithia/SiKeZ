@@ -40,7 +40,7 @@ class JurnalItemCard extends StatelessWidget {
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
-              Spacer(),
+              const Spacer(),
               Text(tanggal)
             ],
           ),
@@ -68,35 +68,35 @@ class JurnalItemCard extends StatelessWidget {
                   children: [
                     Text(
                       "$debitName (D)",
-                      style: TextStyle(color: AppColors.secondaryColor),
+                      style: const TextStyle(color: AppColors.secondaryColor),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 3,
                     ),
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.subdirectory_arrow_right,
                           color: Colors.black26,
                         ),
                         Text(formatCurrency(nominal)),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 3,
                     ),
                     Text(
                       "$kreditName(C)",
-                      style: TextStyle(color: AppColors.secondaryColor),
+                      style: const TextStyle(color: AppColors.secondaryColor),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 3,
                     ),
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.subdirectory_arrow_right,
                           color: Colors.black26,
                         ),

@@ -30,7 +30,7 @@ class JurnalListScreen extends GetView<ReportJurnalController> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            DateFilter("jurnal"),
+            const DateFilter("jurnal"),
             ListView.separated(
                 shrinkWrap: true,
                 padding: const EdgeInsets.symmetric(vertical: 12),

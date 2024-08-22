@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:hmj_apps/core/helper/format_currency.dart';
 import 'package:hmj_apps/core/route/routes.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
@@ -33,7 +32,7 @@ class TransaksiListScreen extends GetView<DashboardController> {
       body: Container(
         child: Column(
           children: [
-            DateFilter("bukuBesar"),
+            const DateFilter("bukuBesar"),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Obx(() {

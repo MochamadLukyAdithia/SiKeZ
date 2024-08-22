@@ -26,15 +26,44 @@ class BukuBesarListScreen extends GetView<BukuBesarController> {
           )
         ],
       ),
-      body: Container(
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            DateFilter("bukuBesar"),
-            InkWell(
-                onTap: () {
-                  controller.getTransactionAccountHistoryData();
-                },
-                child: BukuItemCard())
+            const DateFilter("bukuBesar"),
+            Obx(
+              () => ListView.separated(
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    var bukuBesarData = controller.bukuBesarData[index];
+                    int dataSaldoAkhir =  controller.getSumHistoryNominalData(index);
+                    return InkWell(
+                      onTap: () {
+                       
+                      },
+                      child: BukuItemCard(
+                        saldo: dataSaldoAkhir,
+                        accountName: bukuBesarData["account"] ?? "kosong",
+                        accountCode:
+                            bukuBesarData["account_number"] ?? "kosong",
+                        date: "31 Jul 24",
+                        history: bukuBesarData["history"],
+                      ),
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(
+                      height: 10,
+                    );
+                  },
+                  itemCount: controller.bukuBesarData.length),
+            )
+            // InkWell(
+            //     onTap: () {
+            //       controller.getTransactionAccountHistoryData();
+            //     },
+            //     child: BukuItemCard())
           ],
         ),
       ),
