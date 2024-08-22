@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hmj_apps/core/extension/string_extension.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/theme/app_text_theme.dart';
 import 'package:hmj_apps/presentation/report/component/date_filter.dart';
 import 'package:hmj_apps/presentation/report/component/item_card/neraca_saldo_item_card.dart';
+import 'package:hmj_apps/presentation/report/controller/report_neraca_saldo_controller.dart';
 
-class NeracaSaldoListScreen extends StatelessWidget {
+class NeracaSaldoListScreen extends GetView<NeracaSaldoController> {
   const NeracaSaldoListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var total = controller.getTotalDebitKredit();
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
@@ -25,9 +29,24 @@ class NeracaSaldoListScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Container(
-        child: const Column(
-          children: [DateFilter("neracaSaldo"), NecaraSaldoItemCard()],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            DateFilter("neracaSaldo"),
+            Obx(
+              () => ListView.builder(
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  var dataNeracaSaldo =
+                      controller.getBukuBesarAllSaldoTotal()[index];
+                  return NecaraSaldoItemCard(
+                    data: dataNeracaSaldo,
+                  );
+                },
+                itemCount: controller.getBukuBesarAllSaldoTotal().length,
+              ),
+            )
+          ],
         ),
       ),
       bottomSheet: AspectRatio(
@@ -53,7 +72,7 @@ class NeracaSaldoListScreen extends StatelessWidget {
                     'Debit',
                   ),
                   Text(
-                    "Rp.200000",
+                    total["debit"].toString().currentcy,
                     style: AppTextStyle.body3
                         .copyWith(fontWeight: FontWeight.bold),
                   )
@@ -64,7 +83,9 @@ class NeracaSaldoListScreen extends StatelessWidget {
                 children: [
                   const Text('Kredit'),
                   Text(
-                    "Rp.200000",
+                    total["kredit"] != null
+                        ? total["kredit"]!.abs().toString().currentcy
+                        : "Rp0",
                     style: AppTextStyle.body3
                         .copyWith(fontWeight: FontWeight.bold),
                   )

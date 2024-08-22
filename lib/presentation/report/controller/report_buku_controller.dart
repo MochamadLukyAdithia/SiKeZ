@@ -35,19 +35,19 @@ class BukuBesarController extends BaseController {
     var historyList = dataHistory;
     var saldoTotal = 0;
     for (var data in historyList) {
-      log("debit ${data["debit"]} kredit ${data["kredit"]}");
+      // log("debit ${data["debit"]} kredit ${data["kredit"]}");
       if (data["debit"] == 0) {
         saldoTotal -= int.parse(data["kredit"].toString());
       } else {
         saldoTotal += int.parse(data["debit"].toString());
       }
     }
-    log(saldoTotal.toString());
+    // log(saldoTotal.toString());
 
     return saldoTotal;
   }
 
-  RxList getTransactionAccountHistoryData()  {
+  RxList getTransactionAccountHistoryData() {
     RxList bukuBesarData = [].obs;
     for (var i = 0; i < transactionList.length; i++) {
       var existingAccount = bukuBesarData.firstWhere(

@@ -68,7 +68,7 @@ class AppRoute {
     ),
     GetPage(
       name: AppRoute.reportNearacaSaldoList,
-      page: () => const NeracaSaldoListScreen(),
+      page: () => const NeracaSaldoListScreen(),binding: ReportBinding()
     ),
     GetPage(
       name: AppRoute.reportModalList,

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hmj_apps/core/extension/string_extension.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/theme/app_text_theme.dart';
+import 'package:hmj_apps/presentation/report/model/neraca_saldo_model.dart';
 
 class NecaraSaldoItemCard extends StatelessWidget {
-  const NecaraSaldoItemCard({super.key});
+  final NeracaSaldo data;
+  const NecaraSaldoItemCard({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +25,14 @@ class NecaraSaldoItemCard extends StatelessWidget {
           Row(
             children: [
               Text(
-                "nama akun",
+                data.nama,
                 style: AppTextStyle.body3.copyWith(
                     fontWeight: FontWeight.bold,
                     color: AppColors.secondaryColor),
               ),
               const Spacer(),
               Text(
-                "1-00002",
+                data.kode,
                 style: AppTextStyle.body3.copyWith(
                     fontWeight: FontWeight.bold,
                     color: AppColors.secondaryColor),
@@ -48,7 +51,7 @@ class NecaraSaldoItemCard extends StatelessWidget {
                 height: 50,
                 color: AppColors.primaryColor,
               ),
-              const Expanded(
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -60,13 +63,13 @@ class NecaraSaldoItemCard extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      "Rp0",
+                      data.debit.toString().currentcy,
                       style: AppTextStyle.body4,
                     ),
                   ],
                 ),
               ),
-              const Expanded(
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -78,7 +81,9 @@ class NecaraSaldoItemCard extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      "Rp500000",
+                      data.kredit == 0
+                          ? "0".currentcy
+                          : data.kredit.abs().toString().currentcy,
                       style: AppTextStyle.body4,
                     )
                   ],
