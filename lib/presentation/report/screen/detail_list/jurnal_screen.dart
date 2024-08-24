@@ -31,29 +31,31 @@ class JurnalListScreen extends GetView<ReportJurnalController> {
         child: Column(
           children: [
             const DateFilter("jurnal"),
-            ListView.separated(
-                shrinkWrap: true,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  var transactionData = controller.transactionList[index];
-                  return JurnalItemCard(
-                    catatan: transactionData.notes,
-                    debitName:
-                        "${transactionData.debitCode} ${transactionData.debitName}",
-                    jenisTransaksi: transactionData.transactionName,
-                    kreditName:
-                        "${transactionData.creditCode} ${transactionData.creditName}",
-                    nominal: transactionData.nominal,
-                    tanggal: DateFormat.yMMMd().format(transactionData.date),
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return const SizedBox(
-                    height: 10,
-                  );
-                },
-                itemCount: controller.transactionList.length)
+            Obx(
+              () => ListView.separated(
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    var transactionData = controller.transactionList[index];
+                    return JurnalItemCard(
+                      catatan: transactionData.notes,
+                      debitName:
+                          "${transactionData.debitCode} ${transactionData.debitName}",
+                      jenisTransaksi: transactionData.transactionName,
+                      kreditName:
+                          "${transactionData.creditCode} ${transactionData.creditName}",
+                      nominal: transactionData.nominal,
+                      tanggal: DateFormat.yMMMd().format(transactionData.date),
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(
+                      height: 10,
+                    );
+                  },
+                  itemCount: controller.transactionList.length),
+            )
           ],
         ),
       ),
