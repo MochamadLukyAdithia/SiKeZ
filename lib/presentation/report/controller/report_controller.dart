@@ -5,8 +5,8 @@ import 'package:hmj_apps/model/transaction_model.dart';
 import 'package:intl/intl.dart';
 
 class ReportController extends BaseController {
-    final Rx<DateTime> _selectedDate = DateTime.now().obs;
-    DateTime get selectedDate => _selectedDate.value;
+  final Rx<DateTime> _selectedDate = DateTime.now().obs;
+  DateTime get selectedDate => _selectedDate.value;
 
   set setSelectedDate(DateTime dateTime) {
     _selectedDate.value = dateTime;
@@ -19,8 +19,8 @@ class ReportController extends BaseController {
     super.onInit();
   }
 
-  RxList<TransactionModel> transactionList = <TransactionModel>[].obs;
-  
+  RxList<TransactionModel> reportTransactionList = <TransactionModel>[].obs;
+
   final filterDateFull = [
     "Kemarin",
     "7 Hari Terakhir",
@@ -39,8 +39,9 @@ class ReportController extends BaseController {
     choosedFilter.value = filterText;
   }
 
-  String displayChoosedDate(int numberOfDay){
-    return DateFormat.yMd().format(DateTime.now().subtract(Duration(days:numberOfDay)));
+  String displayChoosedDate(int numberOfDay) {
+    return DateFormat.yMd()
+        .format(DateTime.now().subtract(Duration(days: numberOfDay)));
   }
 
   List chosedFilterListForPage(String pageName) {
@@ -53,20 +54,19 @@ class ReportController extends BaseController {
     }
   }
 
-
-   getTransactions({bool fromInit = false}) async {
+  getTransactions({bool fromInit = false}) async {
     try {
       if (!fromInit) showLoading();
       final result = await firestore
           .collection('transactions')
           .doc(FirebaseAuth.instance.currentUser?.uid)
-          .collection(DateFormat("dd-MM-yyyy").format(selectedDate))
           .get();
-      List<TransactionModel> tempTransactionList = [];
-      for (var i in result.docs) {
-        tempTransactionList.add(TransactionModel.fromJson(i.id, i.data()));
+      List<TransactionModel> tempreportTransactionList = [];
+      for (var i in result.data()?['data'] ?? []) {
+        tempreportTransactionList.add(TransactionModel.fromJson(i));
       }
-      transactionList.value = tempTransactionList;
+
+      reportTransactionList.value = tempreportTransactionList;
     } on FirebaseException catch (e) {
       showErrorToast(msg: e.message);
     } catch (e) {

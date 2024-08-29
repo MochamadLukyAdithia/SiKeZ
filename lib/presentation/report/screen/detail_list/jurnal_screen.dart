@@ -30,30 +30,32 @@ class JurnalListScreen extends GetView<ReportJurnalController> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            DateFilter("jurnal"),
-            ListView.separated(
-                shrinkWrap: true,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  var transactionData = controller.transactionList[index];
-                  return JurnalItemCard(
-                    catatan: transactionData.notes,
-                    debitName:
-                        "${transactionData.debitCode} ${transactionData.debitName}",
-                    jenisTransaksi: transactionData.transactionName,
-                    kreditName:
-                        "${transactionData.creditCode} ${transactionData.creditName}",
-                    nominal: transactionData.nominal,
-                    tanggal: DateFormat.yMMMd().format(transactionData.date),
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return const SizedBox(
-                    height: 10,
-                  );
-                },
-                itemCount: controller.transactionList.length)
+            const DateFilter("jurnal"),
+            Obx(
+              () => ListView.separated(
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    var transactionData = controller.transactionList[index];
+                    return JurnalItemCard(
+                      catatan: transactionData.notes,
+                      debitName:
+                          "${transactionData.debitCode} ${transactionData.debitName}",
+                      jenisTransaksi: transactionData.transactionName,
+                      kreditName:
+                          "${transactionData.creditCode} ${transactionData.creditName}",
+                      nominal: transactionData.nominal,
+                      tanggal: DateFormat.yMMMd().format(transactionData.date),
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(
+                      height: 10,
+                    );
+                  },
+                  itemCount: controller.transactionList.length),
+            )
           ],
         ),
       ),

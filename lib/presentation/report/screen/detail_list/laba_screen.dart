@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hmj_apps/core/extension/string_extension.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/presentation/report/component/date_filter.dart';
 import 'package:hmj_apps/presentation/report/component/item_card/laba_item_card.dart';
-import 'package:hmj_apps/presentation/report/component/item_card/laba_total_item.dart';
 import 'package:hmj_apps/presentation/report/component/row_text.dart';
+import 'package:hmj_apps/presentation/report/controller/report_laba_controller.dart';
 
-class LabaRugiListScreen extends StatelessWidget {
+class LabaRugiListScreen extends GetView<ReportLabaRugiController> {
   const LabaRugiListScreen({super.key});
 
   @override
@@ -26,49 +28,95 @@ class LabaRugiListScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Container(
-        child: const Column(
-          children: [
-            DateFilter("labarRugi"),
-            LabaItemCard(),
-            LabaTotalItemCard()
-          ],
+      body: AspectRatio(
+        aspectRatio: 16 / 20,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const DateFilter("labarRugi"),
+              LabaItemCard(
+                title: "Pendapatan dari Penjualan",
+                datalist: controller.dataLabarugi?.pendapatanPenjualan ?? [],
+                total: controller.listTotal[0].total,
+              ),
+              LabaItemCard(
+                title: "Harga Pokok Penjualan",
+                datalist: controller.dataLabarugi?.hargaPokokPenjualan ?? [],
+                total: controller.listTotal[1].total,
+              ),
+              LabaItemCard(
+                title: "Beban Operasional",
+                datalist: controller.dataLabarugi?.bebanOperasional ?? [],
+                total: controller.listTotal[2].total,
+              ),
+              LabaItemCard(
+                title: "Pendapatan Lainnya",
+                datalist: controller.dataLabarugi?.pendapatanLainnya ?? [],
+                total: controller.listTotal[3].total,
+              ),
+              LabaItemCard(
+                title: "Beban Lainnya",
+                datalist: controller.dataLabarugi?.bebanLainnya ?? [],
+                total: controller.listTotal[4].total,
+              ),
+            ],
+          ),
         ),
       ),
-      bottomSheet: const AspectRatio(
+      bottomSheet: AspectRatio(
         aspectRatio: 16 / 9.5,
         child: Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Column(
             children: [
               RowText(
                   isBold: false,
                   title: "Pendapatan Dari Penjualan",
-                  nominal: "Rp20000"),
+                  nominal:
+                      controller.listTotal[0].total.abs().toString().currentcy),
               RowText(
                   isBold: false,
                   title: "Harga Pokok Penjualan",
-                  nominal: "Rp20000"),
-              Divider(),
-              RowText(isBold: true, title: "Laba Kotor", nominal: "Rp30000"),
-              SizedBox(
+                  nominal: controller.listTotal[1].total.toString()),
+              const Divider(),
+              RowText(
+                  isBold: true,
+                  title: "Laba Kotor",
+                  nominal:
+                      "${controller.listTotal[0].total.abs() - controller.listTotal[1].total.abs()}"
+                          .currentcy),
+              const SizedBox(
                 height: 5,
               ),
               RowText(
-                  isBold: false, title: "Beban Operasional", nominal: "Rp0"),
-              Divider(),
+                  isBold: false,
+                  title: "Beban Operasional",
+                  nominal: controller.listTotal[2].total.toString()),
+              const Divider(),
               RowText(
                   isBold: true,
                   title: "Laba Beban Operasional",
-                  nominal: "Rp30000"),
-              SizedBox(
+                  nominal:
+                      "${(controller.listTotal[0].total.abs() - controller.listTotal[1].total.abs()) - controller.listTotal[2].total.abs()}"
+                          .currentcy),
+              const SizedBox(
                 height: 5,
               ),
               RowText(
-                  isBold: false, title: "Pendapatan Lainnya", nominal: "Rp0"),
-              RowText(isBold: false, title: "Beban Lainnya", nominal: "Rp0"),
-              Divider(),
-              RowText(isBold: true, title: "Laba Bersih", nominal: "Rp30000"),
+                  isBold: false,
+                  title: "Pendapatan Lainnya",
+                  nominal: controller.listTotal[3].total.toString()),
+              RowText(
+                  isBold: false,
+                  title: "Beban Lainnya",
+                  nominal: controller.listTotal[4].total.toString()),
+              const Divider(),
+              RowText(
+                  isBold: true,
+                  title: "Laba Bersih",
+                  nominal:
+                      "${((controller.listTotal[0].total.abs() - controller.listTotal[1].total.abs()) - controller.listTotal[2].total.abs()) - controller.listTotal[3].total.abs() - controller.listTotal[4].total.abs()}"
+                          .currentcy),
             ],
           ),
         ),

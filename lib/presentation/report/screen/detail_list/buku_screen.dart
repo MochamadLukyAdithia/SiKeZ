@@ -26,15 +26,47 @@ class BukuBesarListScreen extends GetView<BukuBesarController> {
           )
         ],
       ),
-      body: Container(
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            DateFilter("bukuBesar"),
-            InkWell(
-                onTap: () {
-                  controller.getTransactionData();
-                },
-                child: BukuItemCard())
+            const DateFilter("bukuBesar"),
+            Obx(
+              () => ListView.separated(
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    var allDataBukuBesar =
+                        controller.getTransactionAccountHistoryData();
+                    var bukuBesarData = allDataBukuBesar[index];
+
+                    int dataSaldoAkhir = controller
+                        .getSumHistoryNominalData(bukuBesarData["history"]);
+                    return InkWell(
+                      onTap: () {},
+                      child: BukuItemCard(
+                        saldo: dataSaldoAkhir,
+                        accountName: bukuBesarData["account"] ?? "kosong",
+                        accountCode:
+                            bukuBesarData["account_number"] ?? "kosong",
+                        date: "31 Jul 24",
+                        history: bukuBesarData["history"],
+                      ),
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(
+                      height: 10,
+                    );
+                  },
+                  itemCount:
+                      controller.getTransactionAccountHistoryData().length),
+            )
+            // InkWell(
+            //     onTap: () {
+            //       controller.getTransactionAccountHistoryData();
+            //     },
+            //     child: BukuItemCard())
           ],
         ),
       ),

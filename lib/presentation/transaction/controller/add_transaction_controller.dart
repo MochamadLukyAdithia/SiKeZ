@@ -10,6 +10,7 @@ import 'package:hmj_apps/core/extension/date_extension.dart';
 import 'package:hmj_apps/model/account_model.dart';
 import 'package:hmj_apps/model/transaction_type_model.dart';
 import 'package:hmj_apps/presentation/dasboard/controller/dashboard_controller.dart';
+import 'package:hmj_apps/presentation/report/controller/report_controller.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
@@ -261,6 +262,7 @@ class AddTransactionController extends BaseController {
         if (dashboardController.selectedDate.toddMMyyyy() ==
             selectedDate.toddMMyyyy()) {
           dashboardController.getTransactions(fromInit: true);
+          Get.find<ReportController>().getTransactions();
         }
         Get.until((route) => route.isFirst);
 
