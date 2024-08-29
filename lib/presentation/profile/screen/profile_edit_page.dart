@@ -1,10 +1,12 @@
+import "package:cached_network_image/cached_network_image.dart";
+import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:flutter_form_builder/flutter_form_builder.dart";
 import "package:get/get.dart";
 import "package:hmj_apps/core/helper/form_validation.dart";
 import "package:hmj_apps/core/theme/app_colors.dart";
+import "package:hmj_apps/presentation/auth/controller/auth_controller.dart";
 import "package:hmj_apps/presentation/profile/controller/profile_controller.dart";
-import "package:hmj_apps/presentation/profile/model/user_model.dart";
 import "package:hmj_apps/presentation/shared/custom_button.dart";
 import "package:hmj_apps/presentation/shared/custom_text_field.dart";
 
@@ -13,6 +15,8 @@ class ProfileEditPage extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
+    final AuthController authController = AuthController.find;
+    final userModel = authController.currentUser;
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
@@ -25,99 +29,93 @@ class ProfileEditPage extends GetView<ProfileController> {
       ),
       body: SingleChildScrollView(
         child: Obx(() {
-          if (controller.userProfileData.value == null ||
-              controller.isLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
-            UserProfle profile = controller.userProfileData.value!;
-            return Container(
-              margin: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      controller.getImageFromGallery();
-                    },
-                    child: CircleAvatar(
-                      backgroundImage: profile.imageUrl != null &&
-                              profile.imageUrl!.isNotEmpty
-                          ? NetworkImage(profile.imageUrl!) as ImageProvider
-                          : controller.selectedImage.value != null
-                              ? FileImage(controller.selectedImage.value!)
-                              : null,
-                      radius: 50,
-                      child: const Icon(Icons.camera),
+          return Container(
+            margin: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 16),
+                GestureDetector(
+                  onTap: () {
+                    controller.getImageFromGallery();
+                  },
+                  child: Container(
+                    height: 100,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: controller.selectedImage.value == null
+                            ? CachedNetworkImageProvider(
+                                userModel?.imageUrl != null &&
+                                        userModel!.imageUrl!.isNotEmpty
+                                    ? userModel.imageUrl!
+                                    : "https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450.jpg",
+                              )
+                            : FileImage(controller.selectedImage.value!)
+                                as ImageProvider,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                FormBuilder(
+                  key: controller.formKey,
+                  child: Column(
+                    children: [
+                      CustomTextWithTitle(
+                        initial: userModel?.name,
+                        name: "nama",
+                        validator: FormValidation.isNotNullAndRequired,
+                        label: "Nama",
+                        hintText: "Masukkan nama anda...",
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      CustomTextWithTitle(
+                        initial: FirebaseAuth.instance.currentUser?.email,
+                        name: "email",
+                        validator: FormValidation.isNotNullAndRequired,
+                        label: "Email",
+                        enable: false,
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      CustomTextWithTitle(
+                        initial: userModel?.phoneNumber,
+                        name: "nomor",
+                        validator: FormValidation.isNotNullAndRequired,
+                        label: "Nomor HP",
+                        hintText: "Masukkan Nomor Ponsel anda...",
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      CustomTextWithTitle(
+                        initial: userModel?.address,
+                        name: "alamat",
+                        validator: FormValidation.isNotNullAndRequired,
+                        label: "Alamat",
+                        hintText: "Masukkan Alamat anda...",
+                      ),
+                      const SizedBox(height: 48),
+                      SiKePeLinearButton(
+                        title: "Simpan",
+                        onPressed: () => controller.updateProfileData(),
+                        linearGradient: AppColors.quaternaryGradient,
+                      )
+                    ],
                   ),
-                  FormBuilder(
-                      key: controller.formKey,
-                      child: Column(
-                        children: [
-                          CustomTextWithTitle(
-                            initial: profile.name,
-                            name: "nama",
-                            validator: FormValidation.isNotNullAndRequired,
-                            label: "Nama",
-                            hintText: "Masukkan nama anda...",
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          CustomTextWithTitle(
-                            initial: profile.phone,
-                            name: "nomor",
-                            validator: FormValidation.isNotNullAndRequired,
-                            label: "Nomor HP",
-                            hintText: "Masukkan Nomor Ponsel anda...",
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          // CustomTextWithTitle(
-                          //   initial: profile.joined.toString(),
-                          //   name: "tanggalLahir",
-                          //   validator: FormValidation.isNotNullAndRequired,
-                          //   label: "Tanggal Lahir",
-                          //   hintText: "Masukkan tanggal lahir anda...",
-                          // ),
-                          // const SizedBox(
-                          //   height: 10,
-                          // ),
-                          CustomTextWithTitle(
-                            initial: profile.address,
-                            name: "alamat",
-                            validator: FormValidation.isNotNullAndRequired,
-                            label: "Alamat",
-                            hintText: "Masukkan Alamat anda...",
-                          ),
-                        ],
-                      ))
-                ],
-              ),
-            );
-          }
+                )
+              ],
+            ),
+          );
         }),
-      ),
-      bottomSheet: AspectRatio(
-        aspectRatio: 16 / 2.5,
-        child: Container(
-            margin: const EdgeInsets.all(10),
-            child: SiKePeLinearButton(
-              title: "Simpan",
-              onPressed: () {
-                controller.updateProfileData();
-              },
-              linearGradient: const LinearGradient(
-                colors: [AppColors.primaryColor, Color(0xff464F37)],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-            )),
       ),
     );
   }

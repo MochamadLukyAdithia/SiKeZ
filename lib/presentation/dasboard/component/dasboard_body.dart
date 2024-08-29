@@ -24,6 +24,30 @@ class DashboardBody extends GetView<DashboardController> {
           const SizedBox(height: 6),
           Obx(() {
             final dataList = controller.getTransactionList;
+            if (dataList.isEmpty) {
+              return Center(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 32),
+                    Assets.icons.transactionMinusSvgrepoCom.svg(
+                      width: Get.width * 0.3,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      "Tidak ada transaksi.",
+                      textAlign: TextAlign.center,
+                      style: Get.textTheme.headlineSmall
+                          ?.copyWith(fontWeight: FontWeight.w700),
+                    ),
+                    const SizedBox(height: 12),
+                    const Text(
+                      "Silahkan tambahkan transaksi baru atau pilih tanggal lain.",
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              );
+            }
             return ListView.separated(
                 shrinkWrap: true,
                 padding: const EdgeInsets.symmetric(vertical: 12),
@@ -47,7 +71,8 @@ class DashboardBody extends GetView<DashboardController> {
                     onDismissed: (_) => controller.removeTransaction(index),
                     child: InkWell(
                       onTap: () {
-                        Get.toNamed(AppRoute.reportTransaksiDetail,arguments: dataList[index]);
+                        Get.toNamed(AppRoute.reportTransaksiDetail,
+                            arguments: dataList[index]);
                       },
                       child: IntrinsicHeight(
                         child: Row(

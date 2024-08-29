@@ -8,6 +8,16 @@ class ReportScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Map<String, String>> reportItems = [
+      {"title": "Transaksi", "route": AppRoute.reportTransaksiList},
+      {"title": "Jurnal Umum", "route": AppRoute.reporJurnaltList},
+      {"title": "Buku Besar", "route": AppRoute.reportBukuBesarList},
+      {"title": "Neraca Saldo", "route": AppRoute.reportNearacaSaldoList},
+      {"title": "Laba Rugi", "route": AppRoute.reportLabaRugiList},
+      {"title": "Perubahan Modal", "route": AppRoute.reportModalList},
+      {"title": "Neraca", "route": AppRoute.reportNeracaList},
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Laporan"),
@@ -19,46 +29,14 @@ class ReportScreen extends StatelessWidget {
         ),
         foregroundColor: Colors.white,
       ),
-      body: Container(
-        margin: const EdgeInsets.only(left: 15, top: 10, right: 15),
-        child: const Column(
-          children: [
-            ReportItem(title: "Transaksi", route: AppRoute.reportTransaksiList),
-            SizedBox(
-              height: 15,
-            ),
-            ReportItem(title: "Jurnal Umum", route: AppRoute.reporJurnaltList),
-            SizedBox(
-              height: 15,
-            ),
-            ReportItem(
-                title: "Buku Besar", route: AppRoute.reportBukuBesarList),
-            SizedBox(
-              height: 15,
-            ),
-            ReportItem(
-                title: "Neraca Saldo", route: AppRoute.reportNearacaSaldoList),
-            SizedBox(
-              height: 15,
-            ),
-            ReportItem(
-              title: "Laba Rugi",
-              route: AppRoute.reportLabaRugiList,
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            ReportItem(
-                title: "Perubahan Modal", route: AppRoute.reportModalList),
-            SizedBox(
-              height: 15,
-            ),
-            ReportItem(
-              title: "Neraca",
-              route: AppRoute.reportNeracaList,
-            )
-          ],
+      body: ListView.separated(
+        separatorBuilder: (context, index) => const SizedBox(height: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        itemBuilder: (context, index) => ReportItem(
+          title: reportItems[index]['title'] ?? '',
+          route: reportItems[index]['route'] ?? '',
         ),
+        itemCount: reportItems.length,
       ),
     );
   }

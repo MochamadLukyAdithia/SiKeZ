@@ -1,15 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/route/routes.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/utils/images.dart';
+import 'package:hmj_apps/presentation/auth/controller/auth_controller.dart';
 import 'package:hmj_apps/presentation/profile/component/text_icon.dart';
-import 'package:hmj_apps/presentation/profile/controller/profile_controller.dart';
-import 'package:hmj_apps/presentation/profile/model/user_model.dart';
 import 'package:hmj_apps/presentation/shared/custom_button.dart';
 
-class ProfilePage extends GetView<ProfileController> {
+class ProfilePage extends GetView<AuthController> {
   const ProfilePage({super.key});
 
   @override
@@ -17,54 +17,56 @@ class ProfilePage extends GetView<ProfileController> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Obx(() {
-          UserProfle? profile = controller.userProfileData.value;
           return Column(
             children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 4 + 20,
-                child: Stack(
-                  children: [
-                    AspectRatio(
-                      aspectRatio: 16 / 5,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                                colors: [
-                                  Color.fromARGB(255, 129, 145, 100),
-                                  AppColors.primaryColor
-                                ],
-                                stops: [
-                                  0.01,
-                                  // 0.5,
-                                  0.6
-                                ],
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter),
-                            image: DecorationImage(
-                                image: AssetImage(Images.coffeBg),
-                                fit: BoxFit.cover)),
+              Stack(
+                children: [
+                  Container(
+                    height: MediaQuery.sizeOf(context).height * 0.2,
+                    margin: const EdgeInsets.only(bottom: 50),
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [
+                          Color.fromARGB(255, 129, 145, 100),
+                          AppColors.primaryColor
+                        ],
+                        stops: [0.1, 1],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
                       ),
+                      image: DecorationImage(
+                          image: AssetImage(Images.coffeBg), fit: BoxFit.cover),
                     ),
-                    Positioned(
-                      left: 0,
-                      right: 0,
-                      top: MediaQuery.of(context).size.height / 6 - 40,
-                      child: AspectRatio(
-                        aspectRatio: 16 / 4,
-                        child: CircleAvatar(
-                          backgroundImage:
-                              NetworkImage(profile?.imageUrl ?? ""),
-                          // child: Container(
-                          //   child: Image.asset(Images.logoPpk),
-                          // ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Container(
+                        height: 100,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: CachedNetworkImageProvider(
+                              controller.currentUser?.imageUrl != null &&
+                                      controller
+                                          .currentUser!.imageUrl!.isNotEmpty
+                                  ? controller.currentUser!.imageUrl!
+                                  : "https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450.jpg",
+                            ),
+                          ),
                         ),
                       ),
-                    )
-                  ],
-                ),
+                    ),
+                  )
+                ],
               ),
               const SizedBox(
-                height: 30,
+                height: 32,
               ),
               Container(
                 width: double.infinity,
@@ -76,22 +78,21 @@ class ProfilePage extends GetView<ProfileController> {
                 ),
                 child: Column(
                   children: [
-                    TextIcon(icon: Icons.person, dataText: profile?.name ?? ""),
+                    TextIcon(
+                        icon: Icons.person,
+                        dataText: controller.currentUser?.name ?? "-"),
                     const SizedBox(
-                      height: 30,
+                      height: 24,
                     ),
-                    TextIcon(icon: Icons.phone, dataText: profile?.phone ?? ""),
+                    TextIcon(
+                        icon: Icons.phone,
+                        dataText: controller.currentUser?.phoneNumber ?? "-"),
                     const SizedBox(
-                      height: 30,
+                      height: 24,
                     ),
-                    // TextIcon(
-                    //     icon: Icons.calendar_month, dataText: profile.joined),
-                    // SizedBox(
-                    //   height: 30,
-                    // ),
                     TextIcon(
                         icon: Icons.location_pin,
-                        dataText: profile?.address ?? ""),
+                        dataText: controller.currentUser?.address ?? "-"),
                   ],
                 ),
               ),
@@ -102,10 +103,7 @@ class ProfilePage extends GetView<ProfileController> {
                     onPressed: () {
                       Get.toNamed(AppRoute.editProfile);
                     },
-                    linearGradient: const LinearGradient(
-                        colors: [Color(0xffA1B57D), Color(0xff464F37)],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter),
+                    linearGradient: AppColors.quaternaryGradient,
                   )),
               Container(
                   margin:

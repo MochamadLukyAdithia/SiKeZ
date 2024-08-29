@@ -65,7 +65,6 @@ class ReportController extends BaseController {
       for (var i in result.data()?['data'] ?? []) {
         tempreportTransactionList.add(TransactionModel.fromJson(i));
       }
-
       reportTransactionList.value = tempreportTransactionList;
     } on FirebaseException catch (e) {
       showErrorToast(msg: e.message);

@@ -26,6 +26,7 @@ class DashboardCenter extends GetView<DashboardController> {
                   context: context,
                   firstDate: DateTime.now().subtract(const Duration(days: 365)),
                   lastDate: DateTime.now(),
+                  currentDate: controller.selectedDate,
                 );
 
                 if (date != null) {
