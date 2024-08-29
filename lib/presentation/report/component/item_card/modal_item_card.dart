@@ -42,18 +42,50 @@ class ModalItemCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Modal",
+                      "Modal awal",
                       style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      "Penambahan Modal",
+                      style: TextStyle(color: Colors.black54),
+                    ),
+                    SizedBox(
+                      height: 15,
                     ),
                     Text(
                       "Laba Bersih",
                       style: TextStyle(color: Colors.black54),
                     ),
                     SizedBox(
-                      height: 5,
+                      height: 15,
                     ),
                     Text(
-                      "Total Modal",
+                      "Total Tambahan",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black54),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      "Penambahan Modal",
+                      style: TextStyle(color: Colors.black54),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      "Laba Bersih",
+                      style: TextStyle(color: Colors.black54),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      "Total Tambahan",
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.black54),
                     ),
@@ -66,10 +98,47 @@ class ModalItemCard extends StatelessWidget {
                   children: [
                     Text(
                       "Rp 20.000.000",
+                      style: TextStyle(
+                          color: Colors.black54, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      "Rp 20.000.000",
                       style: TextStyle(color: Colors.black54),
                     ),
                     SizedBox(
-                      height: 5,
+                      height: 15,
+                    ),
+                    Text(
+                      "Rp 20.000.000",
+                      style: TextStyle(color: Colors.black54),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      "Rp 20.000.000",
+                      style: TextStyle(
+                          color: Colors.black54, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      "Rp 20.000.000",
+                      style: TextStyle(color: Colors.black54),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      "Rp 20.000.000",
+                      style: TextStyle(color: Colors.black54),
+                    ),
+                    SizedBox(
+                      height: 15,
                     ),
                     Text(
                       "Rp 21.000.000",
