@@ -34,4 +34,13 @@ class AppColors {
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   );
+
+  static const quaternaryGradient = LinearGradient(
+    colors: [
+      AppColors.secondaryColor,
+      Color(0xff464F37),
+    ],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
 }

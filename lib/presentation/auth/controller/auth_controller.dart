@@ -35,34 +35,39 @@ class AuthController extends BaseController {
   User? get firebaseCrrentUser => FirebaseAuth.instance.currentUser;
 
   void getUser() async {
-    if (firebaseCrrentUser != null) {
-      final snapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(firebaseCrrentUser!.uid)
-          .get();
-
-      if (snapshot.data() == null) {
-        await FirebaseFirestore.instance
+    try {
+      if (firebaseCrrentUser != null) {
+        final snapshot = await FirebaseFirestore.instance
             .collection('users')
-            .doc(firebaseCrrentUser?.uid)
-            .set({
-          'name': FirebaseAuth.instance.currentUser?.displayName,
-          'address': '',
-          'phoneNumber': firebaseCrrentUser?.phoneNumber,
-          'joinedAt': DateTime.now().millisecondsSinceEpoch,
-        });
-        _currentUser.value = UserModel(
-          id: firebaseCrrentUser?.uid ?? '',
-          name: firebaseCrrentUser?.displayName,
-          joinedAt: DateTime.now(),
-          address: "",
-          phoneNumber: firebaseCrrentUser?.phoneNumber,
-        );
+            .doc(firebaseCrrentUser!.uid)
+            .get();
+
+        if (snapshot.data() == null) {
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(firebaseCrrentUser?.uid)
+              .set({
+            'name': FirebaseAuth.instance.currentUser?.displayName,
+            'address': '',
+            'phoneNumber': firebaseCrrentUser?.phoneNumber,
+            'joinedAt': DateTime.now().millisecondsSinceEpoch,
+          });
+          _currentUser.value = UserModel(
+            imageUrl: '',
+            id: firebaseCrrentUser?.uid ?? '',
+            name: firebaseCrrentUser?.displayName,
+            joinedAt: DateTime.now(),
+            address: "",
+            phoneNumber: firebaseCrrentUser?.phoneNumber,
+          );
+        } else {
+          _currentUser.value = UserModel.fromSnapshot(snapshot);
+        }
       } else {
-        _currentUser.value = UserModel.fromSnapshot(snapshot);
+        FirebaseAuth.instance.signOut();
       }
-    } else {
-      FirebaseAuth.instance.signOut();
+    } on FirebaseException catch (e) {
+      showErrorSnackbar(errorMessage: e.message);
     }
   }
 

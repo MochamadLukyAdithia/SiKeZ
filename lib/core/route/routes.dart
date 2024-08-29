@@ -83,9 +83,10 @@ class AppRoute {
         page: () => const BukuBesarListScreen(),
         binding: ReportBinding()),
     GetPage(
-        name: AppRoute.editProfile,
-        page: () => const ProfileEditPage(),
-        binding: ProfileBinding()),
+      name: AppRoute.editProfile,
+      page: () => const ProfileEditPage(),
+      binding: ProfileBinding(),
+    ),
     GetPage(
       name: AppRoute.reportTransaksiList,
       page: () => const TransaksiListScreen(),

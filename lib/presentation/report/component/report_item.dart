@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hmj_apps/core/theme/app_colors.dart';
 
 class ReportItem extends StatelessWidget {
   final String title;
@@ -8,31 +9,32 @@ class ReportItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          gradient: const LinearGradient(
-            colors: [
-              Colors.white,
-              Color.fromARGB(46, 239, 239, 239)
-            ], // Add your colors here
-            stops: [0.4, 0.9],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+    return GestureDetector(
+      onTap: () => Get.toNamed(route),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          gradient: AppColors.secondaryGradient,
+          border: Border.all(
+            width: 1,
+            color: AppColors.borderColor,
           ),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black12,
-              spreadRadius: 2,
-              blurRadius: 2,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              title,
+              style: Get.textTheme.titleMedium,
+            ),
+            const Icon(
+              Icons.arrow_forward_ios_rounded,
+              color: AppColors.tertiaryColor,
+              size: 16,
             )
-          ]),
-      child: ListTile(
-        onTap: () {
-          Get.toNamed(route);
-        },
-        title: Text(title),
-        trailing: const Icon(Icons.arrow_right_outlined),
+          ],
+        ),
       ),
     );
   }

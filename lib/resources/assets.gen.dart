@@ -50,6 +50,10 @@ class $AssetsIconsGen {
   SvgGenImage get solarCalendarBold =>
       const SvgGenImage('assets/icons/solar_calendar-bold.svg');
 
+  /// File path: assets/icons/transaction-minus-svgrepo-com.svg
+  SvgGenImage get transactionMinusSvgrepoCom =>
+      const SvgGenImage('assets/icons/transaction-minus-svgrepo-com.svg');
+
   /// File path: assets/icons/transaction.svg
   SvgGenImage get transaction =>
       const SvgGenImage('assets/icons/transaction.svg');
@@ -65,6 +69,7 @@ class $AssetsIconsGen {
         reportIconOff,
         reportIconOn,
         solarCalendarBold,
+        transactionMinusSvgrepoCom,
         transaction
       ];
 }
@@ -113,6 +118,9 @@ class $AssetsImagesGen {
   AssetGenImage get simbelmawa =>
       const AssetGenImage('assets/images/simbelmawa.png');
 
+  /// File path: assets/images/splash.png
+  AssetGenImage get splash => const AssetGenImage('assets/images/splash.png');
+
   /// File path: assets/images/unej.png
   AssetGenImage get unej => const AssetGenImage('assets/images/unej.png');
 
@@ -129,6 +137,7 @@ class $AssetsImagesGen {
         ppkcompo,
         ppkormawa,
         simbelmawa,
+        splash,
         unej
       ];
 }

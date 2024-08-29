@@ -6,6 +6,7 @@ class UserModel {
   final DateTime? joinedAt;
   final String? address;
   final String? phoneNumber;
+  final String? imageUrl;
 
   UserModel({
     required this.id,
@@ -13,6 +14,7 @@ class UserModel {
     required this.joinedAt,
     required this.address,
     required this.phoneNumber,
+    required this.imageUrl,
   });
 
   Map<String, dynamic> toJson() {
@@ -21,6 +23,7 @@ class UserModel {
       'joinedAt': joinedAt?.millisecondsSinceEpoch,
       'address': address,
       'phoneNumber': phoneNumber,
+      'imageUrl': imageUrl,
     };
   }
 
@@ -37,6 +40,7 @@ class UserModel {
       address: map['address'] != null ? map['address'] as String : null,
       phoneNumber:
           map['phoneNumber'] != null ? map['phoneNumber'] as String : null,
+      imageUrl: map['imageUrl'] != null ? map['imageUrl'] as String : null,
     );
   }
 }
