@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/controller/base_controller.dart';
@@ -9,25 +8,42 @@ import 'package:intl/intl.dart';
 class BukuBesarController extends BaseController {
   RxList<TransactionModel> transactionList =
       Get.find<ReportController>().reportTransactionList;
-
-  // RxList bukuBesarData = [
-  //   // {
-  //   // "account": "Pendapata",
-  //   // "history": [
-  //   //   {
-  //   //     "date": "31 jul 2024",
-  //   //     "debit": [1000],
-  //   //     "kredit": [0],
-  //   //     "saldo": 10000
-  //   //   },
-  //   // ]
-  //   // },
-  // ].obs;
+  RxList transactionListFilter = [].obs;
 
   @override
   void onInit() {
-    // getTransactionAccountHistoryData();
+    var bukubesarData = getTransactionAccountHistoryData();
+    for (var data in bukubesarData) {
+      transactionListFilter.add(data["history"]);
+    }
+    // transactionListFilter.value = getTransactionAccountHistoryData();
+
     super.onInit();
+  }
+
+  void getBukuTransactionInAMonth() {
+    // log(transactionListFilter[0][0]["date"].toString());
+    transactionListFilter.value = transactionListFilter.where((p0) {
+      return DateFormat("dd MMMM yyyy").parse(p0[0]["date"]).isAfter(
+              DateTime.now().subtract(Duration(days: DateTime.now().month))) &&
+          DateFormat("dd MMMM yyyy")
+              .parse(p0[0]["date"])
+              .isBefore(DateTime.now());
+    }).toList();
+  }
+
+  void getBukuTransactionInAPreivousMonth() {
+    transactionListFilter.value = transactionListFilter
+        .where(
+          (p0) =>
+              DateFormat("dd MMMM yyyy")
+                  .parse(p0[0]["date"])
+                  .isAfter(DateTime(DateTime.now().year - 1, 12, 1)) &&
+              DateFormat("dd MMMM yyyy").parse(p0[0]["date"]).isBefore(
+                  DateTime(DateTime.now().year, DateTime.now().month, 1)
+                      .subtract(const Duration(seconds: 1))),
+        )
+        .toList();
   }
 
   int getSumHistoryNominalData(List<Map<String, dynamic>> dataHistory) {
@@ -49,6 +65,7 @@ class BukuBesarController extends BaseController {
 
   RxList getTransactionAccountHistoryData() {
     RxList bukuBesarData = [].obs;
+
     for (var i = 0; i < transactionList.length; i++) {
       var existingAccount = bukuBesarData.firstWhere(
         (element) => element["account"] == transactionList[i].debitName,
@@ -119,6 +136,7 @@ class BukuBesarController extends BaseController {
       }
       // log(bukuBesarData.toString());
     }
+    // transactionList.value = bukuBesarData;
     return bukuBesarData;
   }
 }

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:hmj_apps/core/extension/string_extension.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/theme/app_text_theme.dart';
-import 'package:hmj_apps/presentation/report/component/date_filter.dart';
 import 'package:hmj_apps/presentation/report/component/item_card/neraca_saldo_item_card.dart';
 import 'package:hmj_apps/presentation/report/controller/report_neraca_saldo_controller.dart';
 
@@ -32,7 +31,7 @@ class NeracaSaldoListScreen extends GetView<NeracaSaldoController> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            DateFilter("neracaSaldo"),
+            // DateFilter("neracaSaldo"),
             Obx(
               () => ListView.builder(
                 shrinkWrap: true,

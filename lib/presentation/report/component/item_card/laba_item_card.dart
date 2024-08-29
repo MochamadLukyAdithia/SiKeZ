@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:hmj_apps/core/extension/string_extension.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/theme/app_text_theme.dart';
+import 'package:hmj_apps/presentation/report/model/laba_rugi_model.dart';
 
 class LabaItemCard extends StatelessWidget {
-  const LabaItemCard({super.key});
+  final String title;
+  final List<AkunItem> datalist;
+  final int total;
+  const LabaItemCard(
+      {super.key,
+      required this.title,
+      required this.datalist,
+      required this.total});
 
   @override
   Widget build(BuildContext context) {
@@ -18,58 +27,58 @@ class LabaItemCard extends StatelessWidget {
             offset: Offset(2, 2))
       ]),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Text(
-                "nama akun",
-                style: AppTextStyle.body3.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.secondaryColor),
-              ),
-              const Spacer(),
-              Text(
-                "1-00002",
-                style: AppTextStyle.body3.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.secondaryColor),
-              )
-            ],
+          Text(
+            title,
+            style: AppTextStyle.body3.copyWith(
+                fontWeight: FontWeight.bold, color: AppColors.secondaryColor),
           ),
           const SizedBox(
             height: 10,
           ),
+          ListView.separated(
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                AkunItem data = datalist[index];
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(right: 5),
+                      width: 3,
+                      height: 30,
+                      color: AppColors.primaryColor,
+                    ),
+                    Expanded(
+                      child: Text(
+                        "${data.code} ${data.nama}",
+                        style: AppTextStyle.body4,
+                      ),
+                    ),
+                    Text(
+                      data.total.abs().toString().currentcy,
+                      style: AppTextStyle.body4,
+                    ),
+                  ],
+                );
+              },
+              separatorBuilder: (context, index) {
+                return const SizedBox(
+                  height: 10,
+                );
+              },
+              itemCount: datalist.length),
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                margin: const EdgeInsets.only(right: 5),
-                width: 3,
-                height: 30,
-                color: AppColors.primaryColor,
-              ),
-              const Expanded(
-                child: Text(
-                  "4-40000 Pendapatan",
-                  style: AppTextStyle.body4,
-                ),
-              ),
               const Text(
-                "Rp500000",
-                style: AppTextStyle.body4,
-              ),
-            ],
-          ),
-          const Row(
-            children: [
-              Text(
                 "Total",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              Spacer(),
+              const Spacer(),
               Text(
-                "Rp800000",
-                style: TextStyle(fontWeight: FontWeight.bold),
+                total.abs().toString().currentcy,
+                style: const TextStyle(fontWeight: FontWeight.bold),
               )
             ],
           )
