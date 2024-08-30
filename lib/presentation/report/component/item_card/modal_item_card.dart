@@ -101,7 +101,7 @@ class ModalItemCard extends GetView<ReportModalController> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        "Rp 20.000.000",
+                        "Rp 0",
                         style: TextStyle(
                             color: Colors.black54, fontWeight: FontWeight.bold),
                       ),
@@ -117,14 +117,15 @@ class ModalItemCard extends GetView<ReportModalController> {
                         height: 15,
                       ),
                       Text(
-                        "${controller.totalLabaBersih}".currentcy,
+                        "${controller.totalLabaBersih < 0 ? 0 : controller.totalLabaBersih}"
+                            .currentcy,
                         style: TextStyle(color: Colors.black54),
                       ),
                       SizedBox(
                         height: 15,
                       ),
                       Text(
-                        "${(controller.itemDisplayData?["modal"] ?? 0) + controller.totalLabaBersih}"
+                        "${(controller.itemDisplayData?["modal"] ?? 0) + (controller.totalLabaBersih < 0 ? 0 : controller.totalLabaBersih)}"
                             .currentcy,
                         style: TextStyle(
                             color: Colors.black54, fontWeight: FontWeight.bold),
@@ -141,14 +142,16 @@ class ModalItemCard extends GetView<ReportModalController> {
                         height: 15,
                       ),
                       Text(
-                        "Rp 20.000.000",
+                        "${controller.totalLabaBersih > 0 ? 0 : controller.totalLabaBersih}"
+                            .currentcy,
                         style: TextStyle(color: Colors.black54),
                       ),
                       SizedBox(
                         height: 15,
                       ),
                       Text(
-                        "Rp 21.000.000",
+                        "${((controller.itemDisplayData?["modal"] ?? 0) + (controller.totalLabaBersih > 0 ? 0 : controller.totalLabaBersih)).abs()}"
+                            .currentcy,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.black54),
                       )
@@ -158,7 +161,7 @@ class ModalItemCard extends GetView<ReportModalController> {
               ],
             ),
             const SizedBox(
-              height: 10,
+              height: 30,
             ),
             Row(
               children: [
@@ -173,8 +176,8 @@ class ModalItemCard extends GetView<ReportModalController> {
                     height: 2,
                   ),
                 ),
-                const Text(
-                  "Rp800000",
+                Text(
+                  "(${controller.coutnSaldoTotal() < 0 ? "C" : "D"}) ${controller.coutnSaldoTotal().abs().toString().currentcy}",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 )
               ],
