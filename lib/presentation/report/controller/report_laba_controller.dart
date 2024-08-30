@@ -21,10 +21,14 @@ class ReportLabaRugiController extends BaseController {
   }
 
   countLaba() {
-    
+    int total = 0;
     if (listTotal.isNotEmpty) {
-
+      total = ((listTotal[0].total.abs() - listTotal[1].total.abs()) -
+              listTotal[2].total.abs()) -
+          listTotal[3].total.abs() -
+          listTotal[4].total.abs();
     }
+    return total;
   }
 
   totalEveryCategories() {

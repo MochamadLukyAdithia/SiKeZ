@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/presentation/report/component/date_filter.dart';
 import 'package:hmj_apps/presentation/report/component/item_card/neraca_double_item_card.dart';
 import 'package:hmj_apps/presentation/report/component/item_card/neraca_item_card.dart';
+import 'package:hmj_apps/presentation/report/controller/report_neraca_controller.dart';
 
-class NeracaListScreen extends StatelessWidget {
+class NeracaListScreen extends GetView<ReportNeracaController> {
   const NeracaListScreen({super.key});
 
   @override
