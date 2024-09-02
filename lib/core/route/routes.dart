@@ -63,17 +63,17 @@ class AppRoute {
         page: () => const JurnalListScreen(),
         binding: ReportBinding()),
     GetPage(
-      name: AppRoute.reportNeracaList,
-      page: () => const NeracaListScreen(),
-    ),
+        name: AppRoute.reportNeracaList,
+        page: () => const NeracaListScreen(),
+        binding: ReportBinding()),
     GetPage(
         name: AppRoute.reportNearacaSaldoList,
         page: () => const NeracaSaldoListScreen(),
         binding: ReportBinding()),
     GetPage(
-      name: AppRoute.reportModalList,
-      page: () => const ModalListScreen(),
-    ),
+        name: AppRoute.reportModalList,
+        page: () => const ModalListScreen(),
+        binding: ReportBinding()),
     GetPage(
         name: AppRoute.reportLabaRugiList,
         page: () => const LabaRugiListScreen(),

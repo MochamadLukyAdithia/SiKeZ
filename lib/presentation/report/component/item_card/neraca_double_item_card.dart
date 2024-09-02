@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:hmj_apps/core/extension/string_extension.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/theme/app_text_theme.dart';
+import 'package:hmj_apps/presentation/report/model/neraca_model.dart';
 
 class NeracaDoubleItemCard extends StatelessWidget {
-  const NeracaDoubleItemCard({super.key});
+  final List<Neraca> hutang;
+  final List<Neraca> modal;
+  final int totalHutang;
+  final int totalModal;
+  final int totalAll;
+  const NeracaDoubleItemCard(
+      {super.key,
+      required this.hutang,
+      required this.modal,
+      required this.totalHutang,
+      required this.totalModal,
+      required this.totalAll});
 
   @override
   Widget build(BuildContext context) {
@@ -25,53 +38,54 @@ class NeracaDoubleItemCard extends StatelessWidget {
             style: AppTextStyle.body2.copyWith(
                 fontWeight: FontWeight.bold, color: AppColors.secondaryColor),
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Container(
-                margin: const EdgeInsets.only(right: 5),
-                width: 3,
-                height: 40,
-                color: AppColors.primaryColor,
-              ),
-              const Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "2-2100 Hutang Bank",
-                      style: TextStyle(color: Colors.black54),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      "Total Hutang",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.black54),
-                    ),
-                  ],
-                ),
-              ),
-              const Expanded(
-                child: Column(
+          ListView.separated(
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                Neraca dataHutang = hutang[index];
+                return Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(
-                      "Rp 20.000.000",
-                      style: TextStyle(color: Colors.black54),
+                    Container(
+                      margin: const EdgeInsets.only(right: 5),
+                      width: 3,
+                      height: 20,
+                      color: AppColors.primaryColor,
                     ),
-                    SizedBox(
-                      height: 5,
+                    Expanded(
+                      child: Text(
+                        "${dataHutang.kode} ${dataHutang.nama}",
+                        style: const TextStyle(color: Colors.black54),
+                      ),
                     ),
-                    Text(
-                      "Rp 21.000.000",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.black54),
-                    )
+                    Expanded(
+                      child: Text(
+                        dataHutang.nominal.toString().currentcy,
+                        style: const TextStyle(color: Colors.black54),
+                        textAlign: TextAlign.right,
+                      ),
+                    ),
                   ],
-                ),
+                );
+              },
+              separatorBuilder: (context, index) {
+                return const SizedBox(
+                  height: 10,
+                );
+              },
+              itemCount: hutang.length),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                "Total Hutang",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.black54),
               ),
+              Text(
+                totalHutang.toString().currentcy,
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.black54),
+              )
             ],
           ),
           const SizedBox(
@@ -82,53 +96,54 @@ class NeracaDoubleItemCard extends StatelessWidget {
             style: AppTextStyle.body2.copyWith(
                 fontWeight: FontWeight.bold, color: AppColors.secondaryColor),
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Container(
-                margin: const EdgeInsets.only(right: 5),
-                width: 3,
-                height: 40,
-                color: AppColors.primaryColor,
-              ),
-              const Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "3-1100 Modal Pemilik",
-                      style: TextStyle(color: Colors.black54),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      "Total Modal",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.black54),
-                    ),
-                  ],
-                ),
-              ),
-              const Expanded(
-                child: Column(
+          ListView.separated(
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                Neraca dataModal = modal[index];
+                return Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(
-                      "Rp 20.000.000",
-                      style: TextStyle(color: Colors.black54),
+                    Container(
+                      margin: const EdgeInsets.only(right: 5),
+                      width: 3,
+                      height: 40,
+                      color: AppColors.primaryColor,
                     ),
-                    SizedBox(
-                      height: 5,
+                    Expanded(
+                      child: Text(
+                        "${dataModal.kode} ${dataModal.nama}",
+                        style: const TextStyle(color: Colors.black54),
+                      ),
                     ),
-                    Text(
-                      "Rp 21.000.000",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.black54),
-                    )
+                    Expanded(
+                      child: Text(
+                        "${dataModal.nominal}".currentcy,
+                        style: const TextStyle(color: Colors.black54),
+                        textAlign: TextAlign.right,
+                      ),
+                    ),
                   ],
-                ),
+                );
+              },
+              separatorBuilder: (context, index) {
+                return const SizedBox(
+                  height: 10,
+                );
+              },
+              itemCount: modal.length),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                "Total Modal",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.black54),
               ),
+              Text(
+                totalModal.toString().currentcy,
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.black54),
+              )
             ],
           ),
           const SizedBox(
@@ -147,9 +162,9 @@ class NeracaDoubleItemCard extends StatelessWidget {
                   height: 2,
                 ),
               ),
-              const Text(
-                "Rp800000",
-                style: TextStyle(fontWeight: FontWeight.bold),
+              Text(
+                totalAll.toString().currentcy,
+                style: const TextStyle(fontWeight: FontWeight.bold),
               )
             ],
           )
