@@ -41,7 +41,7 @@ class ModalItemCard extends GetView<ReportModalController> {
                   height: 70,
                   color: AppColors.primaryColor,
                 ),
-                Expanded(
+                const Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -100,59 +100,59 @@ class ModalItemCard extends GetView<ReportModalController> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(
+                      const Text(
                         "Rp 0",
                         style: TextStyle(
                             color: Colors.black54, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Text(
                         "${controller.itemDisplayData?["modal"] ?? 0}"
                             .currentcy,
-                        style: TextStyle(color: Colors.black54),
+                        style: const TextStyle(color: Colors.black54),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Text(
                         "${controller.totalLabaBersih < 0 ? 0 : controller.totalLabaBersih}"
                             .currentcy,
-                        style: TextStyle(color: Colors.black54),
+                        style: const TextStyle(color: Colors.black54),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Text(
                         "${(controller.itemDisplayData?["modal"] ?? 0) + (controller.totalLabaBersih < 0 ? 0 : controller.totalLabaBersih)}"
                             .currentcy,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.black54, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Text(
                         "${controller.itemDisplayData?["prive"] ?? 0}"
                             .currentcy,
-                        style: TextStyle(color: Colors.black54),
+                        style: const TextStyle(color: Colors.black54),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Text(
                         "${controller.totalLabaBersih > 0 ? 0 : controller.totalLabaBersih}"
                             .currentcy,
-                        style: TextStyle(color: Colors.black54),
+                        style: const TextStyle(color: Colors.black54),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Text(
                         "${((controller.itemDisplayData?["modal"] ?? 0) + (controller.totalLabaBersih > 0 ? 0 : controller.totalLabaBersih)).abs()}"
                             .currentcy,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.black54),
                       )
                     ],
@@ -178,7 +178,7 @@ class ModalItemCard extends GetView<ReportModalController> {
                 ),
                 Text(
                   "(${controller.coutnSaldoTotal() < 0 ? "C" : "D"}) ${controller.coutnSaldoTotal().abs().toString().currentcy}",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 )
               ],
             )

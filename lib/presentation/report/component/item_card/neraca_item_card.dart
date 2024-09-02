@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hmj_apps/core/extension/string_extension.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/theme/app_text_theme.dart';
+import 'package:hmj_apps/presentation/report/model/neraca_model.dart';
 
 class NeracaItemCard extends StatelessWidget {
-  const NeracaItemCard({super.key});
+  final List<Neraca> dataItem;
+  final int totalAset;
+  const NeracaItemCard(
+      {super.key, required this.dataItem, required this.totalAset});
 
   @override
   Widget build(BuildContext context) {
@@ -25,57 +30,52 @@ class NeracaItemCard extends StatelessWidget {
             style: AppTextStyle.body2.copyWith(
                 fontWeight: FontWeight.bold, color: AppColors.secondaryColor),
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Container(
-                margin: const EdgeInsets.only(right: 5),
-                width: 3,
-                height: 20,
-                color: AppColors.primaryColor,
-              ),
-              const Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "1-1100 Kas",
-                      style: TextStyle(color: Colors.black54),
-                    ),
-                    // const SizedBox(
-                    //   height: 5,
-                    // ),
-                    // Text(
-                    //   "Total Modal",
-                    //   style: TextStyle(
-                    //       fontWeight: FontWeight.bold, color: Colors.black54),
-                    // ),
-                  ],
-                ),
-              ),
-              const Expanded(
-                child: Column(
+          ListView.separated(
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                Neraca dataIdxItem = dataItem[index];
+                return Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(
-                      "Rp 20.000.000",
-                      style: TextStyle(color: Colors.black54),
+                    Container(
+                      margin: const EdgeInsets.only(right: 5),
+                      width: 3,
+                      height: 20,
+                      color: AppColors.primaryColor,
                     ),
-                    // const SizedBox(
-                    //   height: 5,
-                    // ),
-                    // Text(
-                    //   "Rp 21.000.000",
-                    //   style: TextStyle(
-                    //       fontWeight: FontWeight.bold, color: Colors.black54),
-                    // )
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "${dataIdxItem.kode} ${dataIdxItem.nama}",
+                            style: const TextStyle(color: Colors.black54),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            "${dataIdxItem.nominal}".currentcy,
+                            style: const TextStyle(color: Colors.black54),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
-                ),
-              ),
-            ],
-          ),
+                );
+              },
+              separatorBuilder: (context, index) {
+                return const SizedBox(
+                  height: 10,
+                );
+              },
+              itemCount: dataItem.length),
           const SizedBox(
-            height: 10,
+            height: 20,
           ),
           Row(
             children: [
@@ -90,9 +90,9 @@ class NeracaItemCard extends StatelessWidget {
                   height: 2,
                 ),
               ),
-              const Text(
-                "Rp800000",
-                style: TextStyle(fontWeight: FontWeight.bold),
+              Text(
+                totalAset.toString().currentcy,
+                style: const TextStyle(fontWeight: FontWeight.bold),
               )
             ],
           )
