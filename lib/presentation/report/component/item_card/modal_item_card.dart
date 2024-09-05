@@ -134,7 +134,7 @@ class ModalItemCard extends GetView<ReportModalController> {
                         height: 15,
                       ),
                       Text(
-                        "${controller.itemDisplayData?["prive"] ?? 0}"
+                        "${controller.itemDisplayData?["prive"]  ?? 0}"
                             .currentcy,
                         style: const TextStyle(color: Colors.black54),
                       ),
@@ -142,7 +142,7 @@ class ModalItemCard extends GetView<ReportModalController> {
                         height: 15,
                       ),
                       Text(
-                        "${controller.totalLabaBersih > 0 ? 0 : controller.totalLabaBersih}"
+                        "${controller.totalLabaBersih > 0 ? 0 : controller.totalLabaBersih.abs()}"
                             .currentcy,
                         style: const TextStyle(color: Colors.black54),
                       ),
