@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
@@ -81,7 +80,6 @@ class DateFilter extends GetView<ReportController> {
                     } else if (value == "Bulan lalu") {
                       Get.find<ReportJurnalController>()
                           .getTransactionInAPreivousMonth();
-
                       Get.find<BukuBesarController>()
                           .getBukuTransactionInAPreivousMonth();
                     } else if (value == "01") {

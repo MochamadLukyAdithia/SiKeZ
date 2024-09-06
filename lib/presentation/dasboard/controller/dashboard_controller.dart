@@ -39,6 +39,7 @@ class DashboardController extends BaseController {
       for (var i in result.data()?['data'] ?? []) {
         tempTransactionList.add(TransactionModel.fromJson(i));
       }
+      tempTransactionList.sort((a, b) => a.date.compareTo(b.date));
       transactionList.value = tempTransactionList;
     } on FirebaseException catch (e) {
       showErrorToast(msg: e.message);

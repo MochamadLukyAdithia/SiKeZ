@@ -11,7 +11,6 @@ class ReportJurnalController extends BaseController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     getTransactionData();
     super.onInit();
   }
@@ -33,8 +32,10 @@ class ReportJurnalController extends BaseController {
         .reportTransactionList
         .where(
           (p0) =>
-              p0.date.isAfter(DateTime.now().subtract(const Duration(days: 30))) &&
-              p0.date.isBefore(DateTime.now().subtract(const Duration(days: 1))),
+              p0.date
+                  .isAfter(DateTime.now().subtract(const Duration(days: 30))) &&
+              p0.date
+                  .isBefore(DateTime.now().subtract(const Duration(days: 1))),
         )
         .toList();
   }

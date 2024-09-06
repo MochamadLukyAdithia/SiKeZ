@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/route/routes.dart';
-import 'package:hmj_apps/presentation/dasboard/component/dasboard_body.dart';
+import 'package:hmj_apps/presentation/dasboard/component/dashboard_body.dart';
 import 'package:hmj_apps/presentation/dasboard/component/dasboard_header.dart';
 import 'package:hmj_apps/presentation/dasboard/component/dashboard_center.dart';
 import 'package:hmj_apps/presentation/dasboard/controller/dashboard_controller.dart';

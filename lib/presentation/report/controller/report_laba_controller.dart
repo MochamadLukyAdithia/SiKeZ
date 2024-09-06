@@ -14,7 +14,6 @@ class ReportLabaRugiController extends BaseController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     dataLabarugi = clasficationAccount();
     listTotal = totalEveryCategories();
     super.onInit();

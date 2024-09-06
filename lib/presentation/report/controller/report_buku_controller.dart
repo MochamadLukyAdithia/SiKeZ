@@ -1,9 +1,13 @@
-
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/controller/base_controller.dart';
 import 'package:hmj_apps/model/transaction_model.dart';
 import 'package:hmj_apps/presentation/report/controller/report_controller.dart';
 import 'package:intl/intl.dart';
+
+// class BukuBesarControllerNew extends ReportBaseController {
+//   @override
+//   List<FilterMode> get filters => [];
+// }
 
 class BukuBesarController extends BaseController {
   RxList<TransactionModel> transactionList =

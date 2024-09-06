@@ -70,6 +70,7 @@ class DashboardBody extends GetView<DashboardController> {
                     key: ValueKey(dataList[index].date.toIso8601String()),
                     onDismissed: (_) => controller.removeTransaction(index),
                     child: InkWell(
+                      borderRadius: BorderRadius.circular(16),
                       onTap: () {
                         Get.toNamed(AppRoute.reportTransaksiDetail,
                             arguments: dataList[index]);
