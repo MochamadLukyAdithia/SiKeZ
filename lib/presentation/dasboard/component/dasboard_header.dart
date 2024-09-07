@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 // import 'package:get/get.dart';
 // import 'package:hmj_apps/core/theme/app_text_theme.dart';
 import 'package:hmj_apps/core/utils/images.dart';
+import 'package:hmj_apps/presentation/dasboard/controller/dashboard_controller.dart';
 // import 'package:hmj_apps/presentation/auth/controller/auth_controller.dart';
 
-class DasboardHeader extends StatelessWidget {
+class DasboardHeader extends GetView<DashboardController> {
   const DasboardHeader({super.key});
 
   @override
@@ -35,8 +37,9 @@ class DasboardHeader extends StatelessWidget {
             const SizedBox(
               height: 4,
             ),
-            const Text(
-              "Rp20.000.000",
+            Text(
+              // controller.totalAset.abs().toString(),
+              "nice",
               style: TextStyle(
                   fontSize: 18,
                   color: Colors.white,

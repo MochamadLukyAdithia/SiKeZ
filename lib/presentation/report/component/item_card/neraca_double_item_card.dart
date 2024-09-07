@@ -59,7 +59,7 @@ class NeracaDoubleItemCard extends StatelessWidget {
                     ),
                     Expanded(
                       child: Text(
-                        dataHutang.nominal.toString().currentcy,
+                        dataHutang.nominal.abs().toString().currentcy,
                         style: const TextStyle(color: Colors.black54),
                         textAlign: TextAlign.right,
                       ),
@@ -82,7 +82,7 @@ class NeracaDoubleItemCard extends StatelessWidget {
                     fontWeight: FontWeight.bold, color: Colors.black54),
               ),
               Text(
-                totalHutang.toString().currentcy,
+                totalHutang.abs().toString().currentcy,
                 style: const TextStyle(
                     fontWeight: FontWeight.bold, color: Colors.black54),
               )
@@ -140,7 +140,7 @@ class NeracaDoubleItemCard extends StatelessWidget {
                     fontWeight: FontWeight.bold, color: Colors.black54),
               ),
               Text(
-                totalModal.toString().currentcy,
+                totalModal.abs().toString().currentcy,
                 style: const TextStyle(
                     fontWeight: FontWeight.bold, color: Colors.black54),
               )
@@ -163,7 +163,7 @@ class NeracaDoubleItemCard extends StatelessWidget {
                 ),
               ),
               Text(
-                totalAll.toString().currentcy,
+                totalAll.abs().toString().currentcy,
                 style: const TextStyle(fontWeight: FontWeight.bold),
               )
             ],
