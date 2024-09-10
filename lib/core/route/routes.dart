@@ -12,6 +12,8 @@ import 'package:hmj_apps/presentation/report/screen/detail_list/modal_screen.dar
 import 'package:hmj_apps/presentation/report/screen/detail_list/neraca_saldo_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/detail_list/neraca_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/detail_list/transaksi_screen.dart';
+import 'package:hmj_apps/presentation/report/screen/pdf/pdf_modal_screen.dart';
+import 'package:hmj_apps/presentation/report/screen/pdf/pdf_neraca_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/report_detail_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/detail_list/jurnal_screen.dart';
 import 'package:hmj_apps/presentation/transaction/controller/add_transaction_binding.dart';
@@ -33,6 +35,8 @@ class AppRoute {
   static const reportTransaksiList = "/report/list/transaksi";
   static const reportTransaksiDetail = "/report/detail/transaksi";
   static const editProfile = "/profile/edit";
+  static const pdfPreview = "/pdfPreview";
+  static const pdfModalPreview = "/pdfPreview/modal";
 
   static final List<GetPage> routes = [
     GetPage(
@@ -95,5 +99,8 @@ class AppRoute {
       name: AppRoute.reportTransaksiDetail,
       page: () => const ReportDetailScreen(),
     ),
+    GetPage(name: AppRoute.pdfPreview, page: () => const PdfPreveiw()),
+    GetPage(
+        name: AppRoute.pdfModalPreview, page: () => const PdfModalPreviewname())
   ];
 }

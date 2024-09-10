@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hmj_apps/core/route/routes.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/presentation/report/component/date_filter.dart';
 import 'package:hmj_apps/presentation/report/component/item_card/neraca_double_item_card.dart';
@@ -24,7 +25,9 @@ class NeracaListScreen extends GetView<ReportNeracaController> {
         actions: [
           IconButton(
             icon: const Icon(Icons.print),
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(AppRoute.pdfPreview);
+            },
           )
         ],
       ),
