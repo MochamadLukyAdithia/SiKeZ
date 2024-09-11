@@ -32,9 +32,11 @@ class ReportTransactionListController
   }
 
   @override
-  List<TransactionModel> getSelectMonthReport() {
+  List<TransactionModel> getSelectMonthReport({
+    int? month,
+  }) {
     return allDatas
-        .where((p0) => p0.date.month == selectedMonth.value)
+        .where((p0) => p0.date.month == (month ?? selectedMonth.value))
         .toList();
   }
 
@@ -44,7 +46,7 @@ class ReportTransactionListController
   }
 
   @override
-  List<TransactionModel> getSelectRangeMonthReport() {
+  List<TransactionModel> getSelectRangeMonthReport({int? month}) {
     throw UnimplementedError();
   }
 

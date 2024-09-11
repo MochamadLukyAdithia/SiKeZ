@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/controller/base_controller.dart';
 import 'package:hmj_apps/core/extension/date_extension.dart';
+import 'package:hmj_apps/model/transaction_model.dart';
 import 'package:hmj_apps/presentation/dasboard/controller/dashboard_controller.dart';
 
 enum FilterMode {
@@ -18,8 +19,9 @@ enum FilterMode {
 }
 
 abstract class ReportBaseController<T> extends BaseController {
-  final allDatas = Get.find<DashboardController>().transactionList;
+  final dashboardController = Get.find<DashboardController>();
 
+  List<TransactionModel> get allDatas => dashboardController.transactionList;
   final now = DateTime.now();
   final Rx<FilterMode> currentFilter = FilterMode.today.obs;
   final Rx<DateTime> selectedDate = DateTime.now().obs;
@@ -107,11 +109,15 @@ abstract class ReportBaseController<T> extends BaseController {
 
   T getLastMonthReport();
 
-  T getSelectMonthReport();
+  T getSelectMonthReport({
+    int? month,
+  });
 
   T getSelectRangeDayReport();
 
-  T getSelectRangeMonthReport();
+  T getSelectRangeMonthReport({
+    int? month,
+  });
 
   T getReport() {
     switch (currentFilter.value) {

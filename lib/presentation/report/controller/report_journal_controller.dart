@@ -38,7 +38,9 @@ class ReportJournalController
   }
 
   @override
-  List<TransactionModel> getSelectMonthReport() {
+  List<TransactionModel> getSelectMonthReport({
+    int? month,
+  }) {
     return allDatas
         .where((p0) => p0.date.month == selectedMonth.value)
         .toList();
@@ -55,7 +57,7 @@ class ReportJournalController
   }
 
   @override
-  List<TransactionModel> getSelectRangeMonthReport() {
+  List<TransactionModel> getSelectRangeMonthReport({int? month}) {
     return allDatas
         .where((p0) =>
             p0.date.month >= firstRangedMonth.value &&

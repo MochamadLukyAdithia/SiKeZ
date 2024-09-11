@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/extension/string_extension.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
-import 'package:hmj_apps/presentation/report/component/date_filter.dart';
 import 'package:hmj_apps/presentation/report/component/item_card/laba_item_card.dart';
 import 'package:hmj_apps/presentation/report/component/row_text.dart';
 import 'package:hmj_apps/presentation/report/controller/report_laba_controller.dart';
@@ -33,7 +32,7 @@ class LabaRugiListScreen extends GetView<ReportLabaRugiController> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const DateFilter("labarRugi"),
+              // const DateFilter("labarRugi"),
               LabaItemCard(
                 title: "Pendapatan dari Penjualan",
                 datalist: controller.dataLabarugi?.pendapatanPenjualan ?? [],

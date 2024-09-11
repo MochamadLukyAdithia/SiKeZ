@@ -34,7 +34,7 @@ class NeracaListScreen extends GetView<ReportNeracaController> {
         return Container(
           child: Column(
             children: [
-              const DateFilter("neraca"),
+              // const DateFilter("neraca"),
               NeracaItemCard(
                 dataItem:
                     allDataNeraca.where((item) => item.kode[0] == "1").toList(),

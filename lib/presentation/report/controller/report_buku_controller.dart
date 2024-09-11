@@ -4,11 +4,6 @@ import 'package:hmj_apps/model/transaction_model.dart';
 import 'package:hmj_apps/presentation/report/controller/report_controller.dart';
 import 'package:intl/intl.dart';
 
-// class BukuBesarControllerNew extends ReportBaseController {
-//   @override
-//   List<FilterMode> get filters => [];
-// }
-
 class BukuBesarController extends BaseController {
   RxList<TransactionModel> transactionList =
       Get.find<ReportController>().reportTransactionList;
@@ -68,15 +63,14 @@ class BukuBesarController extends BaseController {
   }
 
   RxList getTransactionAccountHistoryData() {
-    RxList bukuBesarData = [].obs;
+    RxList<Map<String, dynamic>> bukuBesarData = <Map<String, dynamic>>[].obs;
 
     for (var i = 0; i < transactionList.length; i++) {
-      var existingAccount = bukuBesarData.firstWhere(
+      var existingAccountIndex = bukuBesarData.indexWhere(
         (element) => element["account"] == transactionList[i].debitName,
-        orElse: () => {"account": "kosong", "history": []},
       );
-      if (existingAccount["account"] == "kosong") {
-        // log("data Kosong");
+
+      if (existingAccountIndex < 0) {
         bukuBesarData.add({
           "account": transactionList[i].debitName,
           "account_number": transactionList[i].debitCode,
@@ -86,21 +80,15 @@ class BukuBesarController extends BaseController {
                   DateFormat('dd MMMM yyyy').format(transactionList[i].date),
               "debit": transactionList[i].nominal,
               "kredit": 0,
-              "saldo": 10000
             },
           ]
         });
       } else {
-        // log("debit ada = ${existingAccount["account"]}");
-        var idx = bukuBesarData.indexWhere(
-            (element) => element["account"] == existingAccount["account"]);
-
-        bukuBesarData[idx]["history"].add(
+        bukuBesarData[existingAccountIndex]["history"].add(
           {
             "date": DateFormat('dd MMMM yyyy').format(transactionList[i].date),
             "debit": transactionList[i].nominal,
             "kredit": 0,
-            "saldo": 10000
           },
         );
       }
@@ -109,8 +97,8 @@ class BukuBesarController extends BaseController {
         (element) => element["account"] == transactionList[i].creditName,
         orElse: () => {"account": "kosong", "history": []},
       );
+
       if (existingKreditAccount["account"] == "kosong") {
-        // log("data Kosong");
         bukuBesarData.add({
           "account": transactionList[i].creditName,
           "account_number": transactionList[i].creditCode,
@@ -120,12 +108,10 @@ class BukuBesarController extends BaseController {
                   DateFormat('dd MMMM yyyy').format(transactionList[i].date),
               "debit": 0,
               "kredit": transactionList[i].nominal,
-              "saldo": 10000
             },
           ]
         });
       } else {
-        // log("kredit ada = ${existingKreditAccount["account"]}");
         var idx = bukuBesarData.indexWhere((element) =>
             element["account"] == existingKreditAccount["account"]);
 
@@ -134,13 +120,11 @@ class BukuBesarController extends BaseController {
             "date": DateFormat('dd MMMM yyyy').format(transactionList[i].date),
             "debit": 0,
             "kredit": transactionList[i].nominal,
-            "saldo": 10000
+            // "saldo": 10000
           },
         );
       }
-      // log(bukuBesarData.toString());
     }
-    // transactionList.value = bukuBesarData;
     return bukuBesarData;
   }
 }
