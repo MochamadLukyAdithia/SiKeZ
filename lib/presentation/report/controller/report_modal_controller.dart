@@ -44,6 +44,6 @@ class ReportModalController extends BaseController {
       }
     }
 
-    return {"modal": penambahanModal, "prive": prive}.obs;
+    return {"modal": penambahanModal, "prive": prive.abs()}.obs;
   }
 }

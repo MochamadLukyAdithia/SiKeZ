@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/controller/base_controller.dart';
+import 'package:hmj_apps/presentation/report/controller/report_modal_controller.dart';
 import 'package:hmj_apps/presentation/report/controller/report_neraca_saldo_controller.dart';
 import 'package:hmj_apps/presentation/report/model/neraca_model.dart';
 import 'package:hmj_apps/presentation/report/model/neraca_saldo_model.dart';
@@ -36,7 +37,7 @@ class ReportNeracaController extends BaseController {
         allDataNeraca.where((item) => item.kode[0] == "3").toList();
     int totalKas = 0;
     int totalHutang = 0;
-    int totalModal = 0;
+    int totalModal = Get.find<ReportModalController>().coutnSaldoTotal();
 
     for (var itemKas in kas) {
       if (itemKas.kode == "1-2210" || itemKas.kode == "1-2310") {
@@ -55,7 +56,7 @@ class ReportNeracaController extends BaseController {
     allTotal["kas"] = totalKas;
     allTotal["hutang"] = totalHutang;
     allTotal["modal"] = totalModal;
-    allTotal["all"] = totalKas + totalHutang + totalModal;
+    allTotal["all"] = totalHutang + totalModal;
 
     return allTotal;
   }

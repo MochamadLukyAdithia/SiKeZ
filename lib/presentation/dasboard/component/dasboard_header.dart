@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/extension/string_extension.dart';
 import 'package:hmj_apps/core/utils/images.dart';
+import 'package:hmj_apps/presentation/dasboard/controller/dashboard_controller.dart';
 import 'package:hmj_apps/presentation/report/controller/updated_controller/report_laba_controller.dart';
 
-class DasboardHeader extends StatelessWidget {
+class DasboardHeader extends GetView<DashboardController> {
   const DasboardHeader({super.key});
 
   @override
