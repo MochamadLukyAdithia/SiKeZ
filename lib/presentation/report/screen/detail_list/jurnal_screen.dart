@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
-import 'package:hmj_apps/presentation/report/component/date_filter.dart';
+import 'package:hmj_apps/presentation/report/component/date_filter_from_controller.dart';
 import 'package:hmj_apps/presentation/report/component/item_card/jurnal_item_card.dart';
-import 'package:hmj_apps/presentation/report/controller/report_jurnal_controller.dart';
+import 'package:hmj_apps/presentation/report/controller/updated_controller/report_journal_controller.dart';
+import 'package:hmj_apps/presentation/shared/custom_empty_warning.dart';
 import 'package:intl/intl.dart';
 
-class JurnalListScreen extends GetView<ReportJurnalController> {
+class JurnalListScreen extends GetView<ReportJournalController> {
   const JurnalListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.lightGrey,
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -27,17 +29,20 @@ class JurnalListScreen extends GetView<ReportJurnalController> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const DateFilter("jurnal"),
-            Obx(
-              () => ListView.separated(
+      body: Column(
+        children: [
+          DateFilterFromController(
+            controller: controller,
+          ),
+          Expanded(
+            child: Obx(() {
+              final transactionList = controller.getReport();
+              if (transactionList.isEmpty) return const EmptyWarning();
+              return ListView.separated(
                   shrinkWrap: true,
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  physics: const NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   itemBuilder: (context, index) {
-                    var transactionData = controller.transactionList[index];
+                    var transactionData = transactionList[index];
                     return JurnalItemCard(
                       catatan: transactionData.notes,
                       debitName:
@@ -51,13 +56,13 @@ class JurnalListScreen extends GetView<ReportJurnalController> {
                   },
                   separatorBuilder: (context, index) {
                     return const SizedBox(
-                      height: 10,
+                      height: 12,
                     );
                   },
-                  itemCount: controller.transactionList.length),
-            )
-          ],
-        ),
+                  itemCount: transactionList.length);
+            }),
+          )
+        ],
       ),
     );
   }

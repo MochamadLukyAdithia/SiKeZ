@@ -90,6 +90,12 @@ extension DateTimeExt on DateTime {
     return day == now.day && month == now.month && year == now.year;
   }
 
+  bool isThisMonth() {
+    final now = DateTime.now();
+
+    return month == now.month && year == now.year;
+  }
+
   bool validateRangeDate(DateTime tanggalEnd) {
     // ignore: unnecessary_null_comparison
     if (this == null || tanggalEnd == null) {
@@ -111,5 +117,9 @@ extension DateTimeExt on DateTime {
     } else {
       return sum ~/ 7 + 1;
     }
+  }
+
+  DateTime get simplified {
+    return DateTime(year, month, day);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hmj_apps/core/theme/app_text_theme.dart';
 import 'package:hmj_apps/presentation/dasboard/controller/dashboard_controller.dart';
 import 'package:intl/intl.dart';
 
@@ -18,8 +19,12 @@ class DashboardCenter extends GetView<DashboardController> {
             const SizedBox(
               width: 10,
             ),
-            Text(DateFormat("dd MMMM yyyy").format(controller.selectedDate)),
-            const Spacer(),
+            Expanded(
+              child: Text(
+                DateFormat("dd MMMM yyyy").format(controller.selectedDate),
+                textAlign: TextAlign.start,
+              ),
+            ),
             GestureDetector(
               onTap: () async {
                 final date = await showDatePicker(
@@ -45,11 +50,11 @@ class DashboardCenter extends GetView<DashboardController> {
                         ],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter)),
-                child: const Text(
-                  "Ganti Tanggal",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
-                ),
+                child: Text("Ganti Tanggal",
+                    style: AppTextStyle.body3.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    )),
               ),
             ),
           ],

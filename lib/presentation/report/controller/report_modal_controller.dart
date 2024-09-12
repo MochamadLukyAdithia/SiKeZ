@@ -13,7 +13,6 @@ class ReportModalController extends BaseController {
 
   @override
   void onInit() {
-    // TODO: implement onInit\
     dataNeracaSaldo =
         Get.find<NeracaSaldoController>().getBukuBesarAllSaldoTotal();
     itemDisplayData = getCountPerubahanModal();

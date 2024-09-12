@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/controller/base_controller.dart';
-import 'package:hmj_apps/core/extension/date_extension.dart';
+// import 'package:hmj_apps/core/extension/date_extension.dart';
 import 'package:hmj_apps/model/account_model.dart';
 import 'package:hmj_apps/model/transaction_type_model.dart';
 import 'package:hmj_apps/presentation/dasboard/controller/dashboard_controller.dart';
-import 'package:hmj_apps/presentation/report/controller/report_controller.dart';
+// import 'package:hmj_apps/presentation/report/controller/report_controller.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
@@ -259,11 +259,11 @@ class AddTransactionController extends BaseController {
           });
         }
 
-        if (dashboardController.selectedDate.toddMMyyyy() ==
-            selectedDate.toddMMyyyy()) {
-          dashboardController.getTransactions(fromInit: true);
-          Get.find<ReportController>().getTransactions();
-        }
+        // if (dashboardController.selectedDate.toddMMyyyy() ==
+        // selectedDate.toddMMyyyy()) {
+        dashboardController.getTransactions(fromInit: true);
+        //   Get.find<ReportController>().getTransactions();
+        // }
         Get.until((route) => route.isFirst);
 
         showSuccessSnackbar(message: "Transaksi berhasil dibuat!");

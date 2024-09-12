@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
-import 'package:hmj_apps/presentation/report/component/date_filter.dart';
+import 'package:hmj_apps/presentation/report/component/date_filter_from_controller.dart';
 import 'package:hmj_apps/presentation/report/component/item_card/buku_item_card.dart';
-import 'package:hmj_apps/presentation/report/controller/report_buku_controller.dart';
+import 'package:hmj_apps/presentation/report/controller/updated_controller/report_book_controller.dart';
+import 'package:hmj_apps/presentation/shared/custom_empty_warning.dart';
 
-class BukuBesarListScreen extends GetView<BukuBesarController> {
+class BukuBesarListScreen extends GetView<ReportBookController> {
   const BukuBesarListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.lightGrey,
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -26,49 +28,48 @@ class BukuBesarListScreen extends GetView<BukuBesarController> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const DateFilter("bukuBesar"),
-            Obx(
-              () => ListView.separated(
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  physics: const NeverScrollableScrollPhysics(),
+      body: Column(
+        children: [
+          DateFilterFromController(controller: controller),
+          Expanded(
+            child: Obx(
+              () {
+                final data = controller.getReport();
+                if (data.isEmpty) {
+                  return const EmptyWarning();
+                }
+                return ListView.separated(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 16,
+                  ),
                   itemBuilder: (context, index) {
-                    var allDataBukuBesar =
-                        controller.getTransactionAccountHistoryData();
-                    var bukuBesarData = allDataBukuBesar[index];
-
-                    int dataSaldoAkhir = controller
-                        .getSumHistoryNominalData(bukuBesarData["history"]);
+                    var book = data[index];
+                    int finalAmount = 0;
+                    for (var element in book.history) {
+                      finalAmount += element.debit;
+                      finalAmount -= element.kredit;
+                    }
                     return InkWell(
                       onTap: () {},
                       child: BukuItemCard(
-                        saldo: dataSaldoAkhir,
-                        accountName: bukuBesarData["account"] ?? "kosong",
-                        accountCode:
-                            bukuBesarData["account_number"] ?? "kosong",
-                        date: "31 Jul 24",
-                        history: bukuBesarData["history"],
+                        saldo: finalAmount,
+                        accountName: book.account,
+                        accountCode: book.code,
+                        history: book.history,
                       ),
                     );
                   },
                   separatorBuilder: (context, index) {
                     return const SizedBox(
-                      height: 10,
+                      height: 12,
                     );
                   },
-                  itemCount:
-                      controller.getTransactionAccountHistoryData().length),
-            )
-            // InkWell(
-            //     onTap: () {
-            //       controller.getTransactionAccountHistoryData();
-            //     },
-            //     child: BukuItemCard())
-          ],
-        ),
+                  itemCount: data.length,
+                );
+              },
+            ),
+          )
+        ],
       ),
     );
   }

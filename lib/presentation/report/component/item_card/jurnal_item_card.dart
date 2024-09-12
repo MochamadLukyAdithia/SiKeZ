@@ -21,15 +21,18 @@ class JurnalItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      padding: const EdgeInsets.all(10),
-      decoration: const BoxDecoration(color: Colors.white, boxShadow: [
-        BoxShadow(
-            color: Colors.black12,
-            spreadRadius: 2,
-            blurRadius: 2,
-            offset: Offset(2, 2))
-      ]),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black12,
+              spreadRadius: 2,
+              blurRadius: 2,
+              offset: Offset(2, 2),
+            )
+          ],
+          border: Border.all(color: AppColors.borderColor)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

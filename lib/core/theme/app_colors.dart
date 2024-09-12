@@ -6,7 +6,7 @@ class AppColors {
   static const tertiaryColor = Color(0xFFB33030);
   static const quaternaryColor = Color(0xFF4D1515);
   static const borderColor = Color(0xFFAEAEAE);
-  static const lightGrey = Color(0xFFB8B8B8);
+  static const lightGrey = Color(0xFFd3d3d3);
 
   static const primaryGradient = LinearGradient(
     colors: [
