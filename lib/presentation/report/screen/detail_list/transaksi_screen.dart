@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/helper/format_currency.dart';
 import 'package:hmj_apps/core/route/routes.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/presentation/report/component/date_filter_from_controller.dart';
-import 'package:hmj_apps/presentation/report/controller/report_transaction_list_controller.dart';
+import 'package:hmj_apps/presentation/report/controller/updated_controller/report_transaction_list_controller.dart';
 import 'package:hmj_apps/presentation/shared/custom_empty_warning.dart';
 import 'package:hmj_apps/resources/assets.gen.dart';
 import 'package:intl/intl.dart';
@@ -16,6 +15,7 @@ class TransaksiListScreen extends GetView<ReportTransactionListController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.lightGrey,
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -38,7 +38,7 @@ class TransaksiListScreen extends GetView<ReportTransactionListController> {
           ),
           Expanded(
             child: Obx(() {
-              final dataList = controller.getData();
+              final dataList = controller.getReport();
               if (dataList.isEmpty) {
                 return const EmptyWarning();
               }
@@ -73,12 +73,19 @@ class TransaksiListScreen extends GetView<ReportTransactionListController> {
                                 width: 48,
                                 padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.black12,
+                                        blurRadius: 2,
+                                        offset: Offset(0, 2),
+                                      )
+                                    ],
                                     gradient: AppColors.primaryGradient,
                                     borderRadius: BorderRadius.circular(15)),
                                 child: Assets.icons.transaction.svg(
-                                  fit: BoxFit.fitWidth,
-                                  color: Colors.white,
-                                ),
+                                    fit: BoxFit.fitWidth,
+                                    colorFilter: const ColorFilter.mode(
+                                        Colors.white, BlendMode.srcIn)),
                               ),
                               const SizedBox(
                                 width: 12,
@@ -88,8 +95,19 @@ class TransaksiListScreen extends GetView<ReportTransactionListController> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 16, vertical: 12),
                                   decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.black26),
-                                      borderRadius: BorderRadius.circular(15)),
+                                    border: Border.all(
+                                      color: AppColors.borderColor,
+                                    ),
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: Colors.white,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.black12,
+                                        blurRadius: 2,
+                                        offset: Offset(0, 2),
+                                      )
+                                    ],
+                                  ),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,

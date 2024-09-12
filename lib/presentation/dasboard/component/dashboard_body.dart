@@ -67,8 +67,9 @@ class DashboardBody extends GetView<DashboardController> {
                         color: Colors.white,
                       ),
                     ),
-                    key: ValueKey(dataList[index].date.toIso8601String()),
-                    onDismissed: (_) => controller.removeTransaction(index),
+                    key: UniqueKey(),
+                    onDismissed: (_) =>
+                        controller.removeTransaction(dataList[index].index),
                     child: InkWell(
                       borderRadius: BorderRadius.circular(16),
                       onTap: () {
@@ -87,7 +88,8 @@ class DashboardBody extends GetView<DashboardController> {
                                   borderRadius: BorderRadius.circular(15)),
                               child: Assets.icons.transaction.svg(
                                 fit: BoxFit.fitWidth,
-                                color: Colors.white,
+                                colorFilter: const ColorFilter.mode(
+                                    Colors.white, BlendMode.srcIn),
                               ),
                             ),
                             const SizedBox(

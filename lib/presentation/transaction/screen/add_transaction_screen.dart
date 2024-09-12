@@ -60,29 +60,31 @@ class AddTransactionScreen extends GetView<AddTransactionController> {
                   ),
                 ),
                 const SizedBox(height: 12),
-                Obx(() {
-                  final list = controller.getProperDebits();
-                  return DropDownButtonWithSearch(
-                    onTap: () {
-                      if (list.length > 1) {
-                        _showModalBottomSheetOption(
-                            context: context,
-                            itemList: list
-                                .map((element) =>
-                                    "${element.code} ${element.name}")
-                                .toList(),
-                            onItemSelected: (index) {
-                              controller.setSelectedFirstAccounts =
-                                  controller.accountList[index];
-                            },
-                            title: "Debit");
-                      }
-                    },
-                    enable: list.length > 1,
-                    title: "Debit*",
-                    value: controller.selectedFirstAccounts?.name,
-                  );
-                }),
+                Obx(
+                  () {
+                    final list = controller.getProperDebits();
+                    return DropDownButtonWithSearch(
+                      onTap: () {
+                        if (list.length > 1) {
+                          _showModalBottomSheetOption(
+                              context: context,
+                              itemList: list
+                                  .map((element) =>
+                                      "${element.code} ${element.name}")
+                                  .toList(),
+                              onItemSelected: (index) {
+                                controller.setSelectedFirstAccounts =
+                                    list[index];
+                              },
+                              title: "Debit");
+                        }
+                      },
+                      enable: list.length > 1,
+                      title: "Debit*",
+                      value: controller.selectedFirstAccounts?.name,
+                    );
+                  },
+                ),
                 const SizedBox(height: 12),
                 Obx(() {
                   final list = controller.getProperCredits();
@@ -94,7 +96,7 @@ class AddTransactionScreen extends GetView<AddTransactionController> {
                             context: context,
                             onItemSelected: (index) {
                               controller.setSelectedSecondAccounts =
-                                  controller.accountList[index];
+                                  list[index];
                             },
                             itemList: list
                                 .map((element) =>

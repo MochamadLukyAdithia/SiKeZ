@@ -63,10 +63,13 @@ class ReportLabaRugiController extends BaseController {
     RxList<AkunItem> akunItems = <AkunItem>[].obs;
 
     for (var data in dataTotal) {
-      akunItems.add(AkunItem(
+      akunItems.add(
+        AkunItem(
           nama: data.nama,
           code: data.kode,
-          total: data.debit != 0 ? data.debit : data.kredit));
+          total: data.debit != 0 ? data.debit : data.kredit,
+        ),
+      );
     }
     LabaRugi labaRugi = LabaRugi.classifyData(akunItems);
     return labaRugi;

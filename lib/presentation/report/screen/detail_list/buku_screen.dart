@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/presentation/report/component/date_filter_from_controller.dart';
 import 'package:hmj_apps/presentation/report/component/item_card/buku_item_card.dart';
-import 'package:hmj_apps/presentation/report/controller/report_book_controller.dart';
+import 'package:hmj_apps/presentation/report/controller/updated_controller/report_book_controller.dart';
 import 'package:hmj_apps/presentation/shared/custom_empty_warning.dart';
 
 class BukuBesarListScreen extends GetView<ReportBookController> {
@@ -13,6 +12,7 @@ class BukuBesarListScreen extends GetView<ReportBookController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.lightGrey,
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -34,7 +34,7 @@ class BukuBesarListScreen extends GetView<ReportBookController> {
           Expanded(
             child: Obx(
               () {
-                final data = controller.getData();
+                final data = controller.getReport();
                 if (data.isEmpty) {
                   return const EmptyWarning();
                 }

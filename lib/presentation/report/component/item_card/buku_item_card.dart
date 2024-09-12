@@ -4,7 +4,7 @@ import 'package:hmj_apps/core/extension/date_extension.dart';
 import 'package:hmj_apps/core/extension/string_extension.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/theme/app_text_theme.dart';
-import 'package:hmj_apps/presentation/report/controller/report_book_controller.dart';
+import 'package:hmj_apps/presentation/report/controller/updated_controller/report_book_controller.dart';
 
 class BukuItemCard extends StatelessWidget {
   final String accountName;
@@ -24,14 +24,19 @@ class BukuItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: const BoxDecoration(color: Colors.white, boxShadow: [
-        BoxShadow(
-          color: Colors.black12,
-          spreadRadius: 2,
-          blurRadius: 2,
-          offset: Offset(2, 2),
-        )
-      ]),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black12,
+              spreadRadius: 2,
+              blurRadius: 2,
+              offset: Offset(0, 2),
+            )
+          ],
+          border: Border.all(
+            color: AppColors.borderColor,
+          )),
       child: Column(
         children: [
           Row(

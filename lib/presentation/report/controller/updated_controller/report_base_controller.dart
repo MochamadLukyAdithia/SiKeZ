@@ -74,28 +74,28 @@ abstract class ReportBaseController<T> extends BaseController {
     return dropDownMenuItems;
   }
 
-  T getData() {
-    switch (currentFilter.value) {
-      case FilterMode.today:
-        return getTodayReport();
-      case FilterMode.yesterday:
-        return getYesterdayReport();
-      case FilterMode.last30Days:
-        return getLasy30DaysReport();
-      case FilterMode.last7Days:
-        return getLast7DaysReport();
-      case FilterMode.thisMonth:
-        return getThisMonthReport();
-      case FilterMode.selectMonth:
-        return getSelectMonthReport();
-      case FilterMode.selectRangeDate:
-        return getSelectRangeDayReport();
-      case FilterMode.selectRangeMonth:
-        return getSelectRangeMonthReport();
-      case FilterMode.lastMonth:
-        return getLastMonthReport();
-    }
-  }
+  // T getData() {
+  //   switch (currentFilter.value) {
+  //     case FilterMode.today:
+  //       return getTodayReport();
+  //     case FilterMode.yesterday:
+  //       return getYesterdayReport();
+  //     case FilterMode.last30Days:
+  //       return getLasy30DaysReport();
+  //     case FilterMode.last7Days:
+  //       return getLast7DaysReport();
+  //     case FilterMode.thisMonth:
+  //       return getThisMonthReport();
+  //     case FilterMode.selectMonth:
+  //       return getSelectMonthReport();
+  //     case FilterMode.selectRangeDate:
+  //       return getSelectRangeDayReport();
+  //     case FilterMode.selectRangeMonth:
+  //       return getSelectRangeMonthReport();
+  //     case FilterMode.lastMonth:
+  //       return getLastMonthReport();
+  //   }
+  // }
 
   T getTodayReport();
 
@@ -113,10 +113,14 @@ abstract class ReportBaseController<T> extends BaseController {
     int? month,
   });
 
-  T getSelectRangeDayReport();
+  T getSelectRangeDayReport({
+    DateTime? firstDate,
+    DateTime? secondDate,
+  });
 
   T getSelectRangeMonthReport({
-    int? month,
+    int? firstMonth,
+    int? secondMonth,
   });
 
   T getReport() {

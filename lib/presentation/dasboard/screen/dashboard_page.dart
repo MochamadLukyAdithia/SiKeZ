@@ -12,13 +12,20 @@ class DashboardPage extends GetView<DashboardController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const SingleChildScrollView(
-        child: Column(
-          children: [
-            DasboardHeader(),
-            DashboardCenter(),
-            DashboardBody(),
-          ],
+      backgroundColor: const Color(0xff19282F),
+      body: RefreshIndicator.adaptive(
+        onRefresh: () => controller.getTransactions(),
+        child: SingleChildScrollView(
+          child: Container(
+            color: Colors.white,
+            child: const Column(
+              children: [
+                DasboardHeader(),
+                DashboardCenter(),
+                DashboardBody(),
+              ],
+            ),
+          ),
         ),
       ),
       floatingActionButton: Container(

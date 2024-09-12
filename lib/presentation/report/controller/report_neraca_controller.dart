@@ -15,7 +15,6 @@ class ReportNeracaController extends BaseController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     allDataNeraca = getAllNeracaDataItem();
     allTotal = countAllTotal();
     super.onInit();

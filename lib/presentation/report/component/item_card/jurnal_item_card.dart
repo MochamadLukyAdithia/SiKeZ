@@ -22,13 +22,17 @@ class JurnalItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: const BoxDecoration(color: Colors.white, boxShadow: [
-        BoxShadow(
-            color: Colors.black12,
-            spreadRadius: 2,
-            blurRadius: 2,
-            offset: Offset(2, 2))
-      ]),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black12,
+              spreadRadius: 2,
+              blurRadius: 2,
+              offset: Offset(2, 2),
+            )
+          ],
+          border: Border.all(color: AppColors.borderColor)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

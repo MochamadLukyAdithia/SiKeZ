@@ -1,6 +1,6 @@
 import 'package:hmj_apps/core/extension/date_extension.dart';
 import 'package:hmj_apps/model/transaction_model.dart';
-import 'package:hmj_apps/presentation/report/controller/report_base_controller.dart';
+import 'package:hmj_apps/presentation/report/controller/updated_controller/report_base_controller.dart';
 
 class ReportJournalController
     extends ReportBaseController<List<TransactionModel>> {
@@ -47,7 +47,10 @@ class ReportJournalController
   }
 
   @override
-  List<TransactionModel> getSelectRangeDayReport() {
+  List<TransactionModel> getSelectRangeDayReport({
+    DateTime? firstDate,
+    DateTime? secondDate,
+  }) {
     return allDatas
         .where((p0) =>
             p0.date.isAfter(firstRangedDate.value) &&
@@ -57,7 +60,10 @@ class ReportJournalController
   }
 
   @override
-  List<TransactionModel> getSelectRangeMonthReport({int? month}) {
+  List<TransactionModel> getSelectRangeMonthReport({
+    int? firstMonth,
+    int? secondMonth,
+  }) {
     return allDatas
         .where((p0) =>
             p0.date.month >= firstRangedMonth.value &&

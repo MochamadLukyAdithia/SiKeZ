@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/extension/date_extension.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
-import 'package:hmj_apps/presentation/report/controller/report_base_controller.dart';
+import 'package:hmj_apps/presentation/report/controller/updated_controller/report_base_controller.dart';
 import 'package:intl/intl.dart';
 
 class DateFilterFromController extends StatelessWidget {

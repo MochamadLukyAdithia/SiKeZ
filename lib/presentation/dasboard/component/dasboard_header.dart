@@ -1,15 +1,35 @@
 import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import 'package:hmj_apps/core/theme/app_text_theme.dart';
+import 'package:get/get.dart';
+import 'package:hmj_apps/core/extension/string_extension.dart';
 import 'package:hmj_apps/core/utils/images.dart';
-// import 'package:hmj_apps/presentation/auth/controller/auth_controller.dart';
+import 'package:hmj_apps/presentation/report/controller/updated_controller/report_laba_controller.dart';
 
 class DasboardHeader extends StatelessWidget {
   const DasboardHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // final AuthController authController = AuthController.find;
+    final ReportLabaController reportLabaController =
+        Get.find<ReportLabaController>();
+
+    Map<String, dynamic> getResult() {
+      final lastMonthResult =
+          reportLabaController.getLastMonthReport().cleanResult;
+      final thisMonthResult =
+          reportLabaController.getThisMonthReport().cleanResult;
+
+      final result = (thisMonthResult - lastMonthResult) / lastMonthResult;
+      final text =
+          "${result == 0 ? 'Sama dengan' : result > 0 ? '${(result * 100).toStringAsFixed(0)}% lebih banyak dari' : '${(result * 100).toStringAsFixed(0)}% lebih sedikit dari'} bulan sebelumnya";
+
+      final color = result >= 0 ? Colors.amber : Colors.grey;
+
+      return {
+        "text": text,
+        "color": color,
+      };
+    }
+
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: const BoxDecoration(
@@ -24,69 +44,78 @@ class DasboardHeader extends StatelessWidget {
         ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
       ),
       child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              "Total aset anda:",
-              style: TextStyle(fontSize: 14, color: Colors.white),
-            ),
-            const SizedBox(
-              height: 4,
-            ),
-            const Text(
-              "Rp20.000.000",
-              style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Container(
-              width: double.infinity,
-              height: 2,
-              color: Colors.white,
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            const SizedBox(height: 8),
-            Row(
-              children: [
-                const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Laba Rugi bulan ini:",
-                      style: TextStyle(fontSize: 14, color: Colors.white),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      "Rp52.000.000,00",
-                      style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 2,
-                    ),
-                    Text(
-                      "20% lebih banyak dari bulan sebelumnya",
-                      style: TextStyle(fontSize: 12, color: Colors.amber),
-                    ),
-                  ],
-                ),
-                const Spacer(),
-                Image.asset(Images.iconBullish)
-              ],
-            ),
-          ],
+        child: Obx(
+          () => Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // const Text(
+              //   "Total aset anda:",
+              //   style: TextStyle(fontSize: 14, color: Colors.white),
+              // ),
+              // const SizedBox(
+              //   height: 4,
+              // ),
+              // const Text(
+              //   "Rp20.000.000",
+              //   style: TextStyle(
+              //       fontSize: 18,
+              //       color: Colors.white,
+              //       fontWeight: FontWeight.bold),
+              // ),
+              // const SizedBox(
+              //   height: 8,
+              // ),
+              // Container(
+              //   width: double.infinity,
+              //   height: 2,
+              //   color: Colors.white,
+              // ),
+              // const SizedBox(
+              //   height: 8,
+              // ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Laba Rugi bulan ini:",
+                        style: TextStyle(fontSize: 14, color: Colors.white),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        reportLabaController
+                            .getThisMonthReport()
+                            .cleanResult
+                            .toString()
+                            .currentcy,
+                        style: const TextStyle(
+                            fontSize: 24,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 2,
+                      ),
+                      Text(
+                        getResult()['text'],
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: getResult()['color'],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  Image.asset(Images.iconBullish)
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

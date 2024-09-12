@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:get/get.dart';
 import 'package:hmj_apps/model/transaction_model.dart';
-import 'package:hmj_apps/presentation/report/controller/report_base_controller.dart';
-import 'package:hmj_apps/presentation/report/controller/report_transaction_list_controller.dart';
+import 'package:hmj_apps/presentation/report/controller/updated_controller/report_base_controller.dart';
+import 'package:hmj_apps/presentation/report/controller/updated_controller/report_transaction_list_controller.dart';
 
 class BookModel {
   final String account;
@@ -65,12 +65,18 @@ class ReportBookController extends ReportBaseController<List<BookModel>> {
   }
 
   @override
-  List<BookModel> getSelectRangeDayReport() {
+  List<BookModel> getSelectRangeDayReport({
+    DateTime? firstDate,
+    DateTime? secondDate,
+  }) {
     throw UnimplementedError();
   }
 
   @override
-  List<BookModel> getSelectRangeMonthReport({int? month}) {
+  List<BookModel> getSelectRangeMonthReport({
+    int? firstMonth,
+    int? secondMonth,
+  }) {
     throw UnimplementedError();
   }
 
@@ -129,5 +135,10 @@ class ReportBookController extends ReportBaseController<List<BookModel>> {
   @override
   List<BookModel> getYesterdayReport() {
     throw UnimplementedError();
+  }
+
+  List<BookModel> getAllReport() {
+    final rawData = transactionList.getTodayReport();
+    return getProccessedData(rawData);
   }
 }
