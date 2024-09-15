@@ -6,21 +6,21 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
-class PdfNeracaSaldoPreview extends StatelessWidget {
-  const PdfNeracaSaldoPreview({super.key});
+class PdfJurnalUmumPreview extends StatelessWidget {
+  const PdfJurnalUmumPreview({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("PDF Neraca Saldo Preview"),
+        title: const Text("PDF Jurnal Umum Preview"),
       ),
-      body: PdfPreview(build: (context) => makeNeracaSaldoPdf()),
+      body: PdfPreview(build: (context) => makeJurnalUmumPdf()),
     );
   }
 }
 
-Future<Uint8List> makeNeracaSaldoPdf() async {
+Future<Uint8List> makeJurnalUmumPdf() async {
   final pdf = pw.Document();
   pw.Widget paddedCell(pw.Widget child) {
     return pw.Padding(
@@ -43,7 +43,7 @@ Future<Uint8List> makeNeracaSaldoPdf() async {
                   pw.Row(
                       mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                       children: [
-                        pw.Header(text: "Laporan Neraca Saldo", level: 1),
+                        pw.Header(text: "Laporan Jurnal Umum", level: 1),
                         pw.Spacer(),
                         pw.Text("Rentan Waktu",
                             style:
@@ -64,26 +64,51 @@ Future<Uint8List> makeNeracaSaldoPdf() async {
                       children: [
                         pw.TableRow(children: [
                           paddedCell(
-                            pw.Text("Nama",
+                            pw.Text("Tanggal",
                                 style: pw.TextStyle(
                                     fontWeight: pw.FontWeight.bold)),
                           ),
+                          paddedCell(
+                            pw.Text("Catatan",
+                                style: pw.TextStyle(
+                                    fontWeight: pw.FontWeight.bold)),
+                          ),
+                          paddedCell(pw.Text("Nominal",
+                              style: pw.TextStyle(
+                                  fontWeight: pw.FontWeight.bold))),
                           paddedCell(pw.Text("Debit",
                               style: pw.TextStyle(
                                   fontWeight: pw.FontWeight.bold))),
                           paddedCell(pw.Text("Kredit",
                               style: pw.TextStyle(
                                   fontWeight: pw.FontWeight.bold))),
+                          paddedCell(pw.Text("Saldo",
+                              style: pw.TextStyle(
+                                  fontWeight: pw.FontWeight.bold))),
                         ]),
                         pw.TableRow(children: [
-                          paddedCell(pw.Text("Kas")),
-                          paddedCell(pw.Text("Rp. 3000")),
+                          paddedCell(pw.Text("Kas (1-10001)",
+                              style: pw.TextStyle(
+                                  fontWeight: pw.FontWeight.bold))),
+                        ]),
+                        pw.TableRow(children: [
+                          paddedCell(pw.Text("21 agustus 2024")),
+                          paddedCell(pw.Text("Penambahan Modal")),
                           paddedCell(pw.Text("Rp.2000"))
                         ]),
                         pw.TableRow(children: [
-                          paddedCell(pw.Text("Pendapatan")),
-                          paddedCell(pw.Text("Rp. 3000")),
+                          paddedCell(pw.Text("22 agustus 2024")),
+                          paddedCell(pw.Text("Laba Bersih")),
                           paddedCell(pw.Text("Rp.2000"))
+                        ]),
+                        pw.TableRow(children: [
+                          pw.SizedBox(),
+                          paddedCell(pw.Text("Total Tambahan",
+                              style: pw.TextStyle(
+                                  fontWeight: pw.FontWeight.bold))),
+                          paddedCell(pw.Text("Rp.2000",
+                              style:
+                                  pw.TextStyle(fontWeight: pw.FontWeight.bold)))
                         ]),
                       ]),
                 ]));

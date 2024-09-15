@@ -12,8 +12,11 @@ import 'package:hmj_apps/presentation/report/screen/detail_list/modal_screen.dar
 import 'package:hmj_apps/presentation/report/screen/detail_list/neraca_saldo_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/detail_list/neraca_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/detail_list/transaksi_screen.dart';
+import 'package:hmj_apps/presentation/report/screen/pdf/pdf_buku_screen.dart';
+import 'package:hmj_apps/presentation/report/screen/pdf/pdf_jurnal_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/pdf/pdf_laba_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/pdf/pdf_modal_screen.dart';
+import 'package:hmj_apps/presentation/report/screen/pdf/pdf_neraca_saldo_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/pdf/pdf_neraca_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/report_detail_screen.dart';
 import 'package:hmj_apps/presentation/report/screen/detail_list/jurnal_screen.dart';
@@ -39,6 +42,9 @@ class AppRoute {
   static const pdfPreview = "/pdfPreview";
   static const pdfModalPreview = "/pdfPreview/modal";
   static const pdfLabaPreview = "/pdfPreview/laba";
+  static const pdfBukuBesarPreview = "/pdfPreview/bukuBesar";
+  static const pdfNeracaSaldoPreview = "/pdfPreview/neracaSaldo";
+  static const pdfJurnalUmumPreview = "/pdffPreview/JurnalUmum";
 
   static final List<GetPage> routes = [
     GetPage(
@@ -106,6 +112,15 @@ class AppRoute {
         name: AppRoute.pdfModalPreview,
         page: () => const PdfModalPreviewname()),
     GetPage(
-        name: AppRoute.pdfLabaPreview, page: () => const PdfLabaPreviewname())
+        name: AppRoute.pdfLabaPreview, page: () => const PdfLabaPreviewname()),
+    GetPage(
+        name: AppRoute.pdfBukuBesarPreview,
+        page: () => const PdfBukuBesarPreview()),
+    GetPage(
+        name: AppRoute.pdfNeracaSaldoPreview,
+        page: () => const PdfNeracaSaldoPreview()),
+    GetPage(
+        name: AppRoute.pdfJurnalUmumPreview,
+        page: () => const PdfJurnalUmumPreview()),
   ];
 }

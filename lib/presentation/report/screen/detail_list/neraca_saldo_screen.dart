@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/extension/string_extension.dart';
+import 'package:hmj_apps/core/route/routes.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/theme/app_text_theme.dart';
 import 'package:hmj_apps/presentation/report/component/item_card/neraca_saldo_item_card.dart';
@@ -24,7 +25,9 @@ class NeracaSaldoListScreen extends GetView<NeracaSaldoController> {
         actions: [
           IconButton(
             icon: const Icon(Icons.print),
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(AppRoute.pdfNeracaSaldoPreview);
+            },
           )
         ],
       ),
