@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/route/routes.dart';
-import 'package:hmj_apps/presentation/dasboard/component/dasboard_body.dart';
+import 'package:hmj_apps/presentation/dasboard/component/dashboard_body.dart';
 import 'package:hmj_apps/presentation/dasboard/component/dasboard_header.dart';
 import 'package:hmj_apps/presentation/dasboard/component/dashboard_center.dart';
 import 'package:hmj_apps/presentation/dasboard/controller/dashboard_controller.dart';
@@ -12,13 +12,20 @@ class DashboardPage extends GetView<DashboardController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const SingleChildScrollView(
-        child: Column(
-          children: [
-            DasboardHeader(),
-            DashboardCenter(),
-            DashboardBody(),
-          ],
+      backgroundColor: const Color(0xff19282F),
+      body: RefreshIndicator.adaptive(
+        onRefresh: () => controller.getTransactions(),
+        child: SingleChildScrollView(
+          child: Container(
+            color: Colors.white,
+            child: const Column(
+              children: [
+                DasboardHeader(),
+                DashboardCenter(),
+                DashboardBody(),
+              ],
+            ),
+          ),
         ),
       ),
       floatingActionButton: Container(

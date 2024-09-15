@@ -10,6 +10,7 @@ class TransactionModel {
   final String notes;
   final int transactionId;
   final String transactionName;
+  int index;
 
   TransactionModel({
     required this.id,
@@ -23,6 +24,7 @@ class TransactionModel {
     required this.notes,
     required this.transactionId,
     required this.transactionName,
+    this.index = -1,
   });
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) {

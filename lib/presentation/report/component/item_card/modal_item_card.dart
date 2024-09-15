@@ -1,27 +1,30 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/extension/string_extension.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/theme/app_text_theme.dart';
-import 'package:hmj_apps/presentation/report/controller/report_modal_controller.dart';
+import 'package:hmj_apps/presentation/report/controller/updated_controller/report_modal_controller.dart';
 
 class ModalItemCard extends GetView<ReportModalController> {
   const ModalItemCard({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      padding: const EdgeInsets.all(10),
-      decoration: const BoxDecoration(color: Colors.white, boxShadow: [
-        BoxShadow(
-            color: Colors.black12,
-            spreadRadius: 2,
-            blurRadius: 2,
-            offset: Offset(2, 2))
-      ]),
-      child: Obx(
-        () => Column(
+    return Obx(() {
+      final modalData = controller.getReport();
+      return Container(
+        margin: const EdgeInsets.symmetric(vertical: 16),
+        padding: const EdgeInsets.all(16),
+        decoration: const BoxDecoration(color: Colors.white, boxShadow: [
+          BoxShadow(
+              color: Colors.black12,
+              spreadRadius: 2,
+              blurRadius: 2,
+              offset: Offset(2, 2))
+        ]),
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -33,158 +36,171 @@ class ModalItemCard extends GetView<ReportModalController> {
               height: 10,
             ),
             Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  margin: const EdgeInsets.only(right: 5),
+                  margin: const EdgeInsets.only(right: 12),
                   width: 3,
                   height: 70,
                   color: AppColors.primaryColor,
                 ),
-                const Expanded(
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Modal awal",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      Row(
+                        children: [
+                          const Expanded(
+                            child: Text(
+                              "Modal Awal",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Text(
+                            modalData.modalAwal.toString().currentcy,
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        height: 15,
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
+                          const Expanded(
+                            child: Text(
+                              "Penambahan Modal",
+                              style: TextStyle(color: Colors.black54),
+                            ),
+                          ),
+                          Text(
+                            modalData.addedModalAmount.toString().currentcy,
+                          )
+                        ],
                       ),
-                      Text(
-                        "Penambahan Modal",
-                        style: TextStyle(color: Colors.black54),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        "Laba Bersih",
-                        style: TextStyle(color: Colors.black54),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        "Total Tambahan",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black54),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        "Prive",
-                        style: TextStyle(color: Colors.black54),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        "Rugi Bersih",
-                        style: TextStyle(color: Colors.black54),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        "Total Pengurang",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black54),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      const Text(
-                        "Rp 0",
-                        style: TextStyle(
-                            color: Colors.black54, fontWeight: FontWeight.bold),
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
+                          const Expanded(
+                            child: Text(
+                              "Laba Bersih",
+                              style: TextStyle(color: Colors.black54),
+                            ),
+                          ),
+                          Text(
+                            (modalData.cleanLaba > 0 ? modalData.cleanLaba : 0)
+                                .toString()
+                                .currentcy,
+                          ),
+                        ],
                       ),
                       const SizedBox(
-                        height: 15,
+                        height: 16,
                       ),
-                      Text(
-                        "${controller.itemDisplayData?["modal"] ?? 0}"
-                            .currentcy,
-                        style: const TextStyle(color: Colors.black54),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        "${controller.totalLabaBersih < 0 ? 0 : controller.totalLabaBersih}"
-                            .currentcy,
-                        style: const TextStyle(color: Colors.black54),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        "${(controller.itemDisplayData?["modal"] ?? 0) + (controller.totalLabaBersih < 0 ? 0 : controller.totalLabaBersih)}"
-                            .currentcy,
-                        style: const TextStyle(
-                            color: Colors.black54, fontWeight: FontWeight.bold),
+                      Row(
+                        children: [
+                          const Expanded(
+                            child: Text(
+                              "Total Penambahan",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black54),
+                            ),
+                          ),
+                          Text(
+                            (max(modalData.cleanLaba, 0) +
+                                    modalData.addedModalAmount)
+                                .toString()
+                                .currentcy,
+                          ),
+                        ],
                       ),
                       const SizedBox(
-                        height: 15,
+                        height: 24,
                       ),
-                      Text(
-                        "${controller.itemDisplayData?["prive"]  ?? 0}"
-                            .currentcy,
-                        style: const TextStyle(color: Colors.black54),
+                      Row(
+                        children: [
+                          const Expanded(
+                            child: Text(
+                              "Pengambilan Modal",
+                              style: TextStyle(color: Colors.black54),
+                            ),
+                          ),
+                          Text(
+                            modalData.takedModalAmount.toString().currentcy,
+                          ),
+                        ],
                       ),
                       const SizedBox(
-                        height: 15,
+                        height: 8,
                       ),
-                      Text(
-                        "${controller.totalLabaBersih > 0 ? 0 : controller.totalLabaBersih.abs()}"
-                            .currentcy,
-                        style: const TextStyle(color: Colors.black54),
+                      Row(
+                        children: [
+                          const Expanded(
+                            child: Text(
+                              "Rugi Bersih",
+                              style: TextStyle(color: Colors.black54),
+                            ),
+                          ),
+                          Text(
+                            min(modalData.cleanLaba, 0).toString().currentcy,
+                          ),
+                        ],
                       ),
-                      const SizedBox(
-                        height: 15,
+                      const SizedBox(height: 16),
+                      Row(
+                        children: [
+                          const Expanded(
+                            child: Text(
+                              "Total Pengambilan",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black54),
+                            ),
+                          ),
+                          Text(((modalData.cleanLaba < 0
+                                      ? modalData.cleanLaba
+                                      : 0) +
+                                  modalData.takedModalAmount)
+                              .toString()
+                              .currentcy),
+                        ],
                       ),
-                      Text(
-                        "${((controller.itemDisplayData?["modal"] ?? 0) + (controller.totalLabaBersih > 0 ? 0 : controller.totalLabaBersih)).abs()}"
-                            .currentcy,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black54),
-                      )
+                      const SizedBox(height: 24),
+                      Row(
+                        children: [
+                          const Expanded(
+                            child: Text(
+                              "Perubahan Modal",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Text(
+                            (modalData.getModalAkhir - modalData.modalAwal)
+                                .toString()
+                                .currentcy,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Row(
+                        children: [
+                          const Expanded(
+                            child: Text(
+                              "Modal Akhit",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Text(
+                            modalData.getModalAkhir.toString().currentcy,
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
               ],
             ),
-            const SizedBox(
-              height: 30,
-            ),
-            Row(
-              children: [
-                const Text(
-                  "Saldo Akhir",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 10),
-                    color: AppColors.primaryColor,
-                    height: 2,
-                  ),
-                ),
-                Text(
-                  "(${controller.coutnSaldoTotal() < 0 ? "C" : "D"}) ${controller.coutnSaldoTotal().abs().toString().currentcy}",
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                )
-              ],
-            )
           ],
         ),
-      ),
-    );
+      );
+    });
   }
 }

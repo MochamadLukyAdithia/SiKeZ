@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/injector/injector.dart';
@@ -14,7 +15,9 @@ void main() async {
   );
 
   configureDependencies();
-  runApp(const MyApp());
+  runApp(
+    DevicePreview(builder: (_) => const MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {

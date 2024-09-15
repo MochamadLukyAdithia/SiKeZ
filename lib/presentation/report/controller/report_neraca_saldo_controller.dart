@@ -11,7 +11,6 @@ class NeracaSaldoController extends BaseController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     getBukuBesarAllSaldoTotal();
     super.onInit();
   }
