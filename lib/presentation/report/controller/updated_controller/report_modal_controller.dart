@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:get/get.dart';
+import 'package:hmj_apps/core/extension/date_extension.dart';
 import 'package:hmj_apps/model/transaction_model.dart';
 import 'package:hmj_apps/presentation/report/controller/updated_controller/report_base_controller.dart';
 import 'package:hmj_apps/presentation/report/controller/updated_controller/report_laba_controller.dart';
@@ -33,7 +34,7 @@ class ReportModalController extends ReportBaseController<ModalModel> {
   @override
   List<FilterMode> get filters => [
         FilterMode.today,
-        FilterMode.selectMonth,
+        FilterMode.selectDay,
       ];
 
   @override
@@ -61,16 +62,18 @@ class ReportModalController extends ReportBaseController<ModalModel> {
   ModalModel getThisMonthReport() => throw UnimplementedError();
 
   @override
-  ModalModel getTodayReport() {
-    late final LabaCompilationModel labaCompilationModel;
-    if (currentFilter.value == FilterMode.today) {
-      labaCompilationModel = reportLabaController.getLabaBeforeMonth(
-        month: selectedDate.value.month,
-      );
+  ModalModel getTodayReport({DateTime? dateTime}) {
+    late final DateTime selectedDateF;
+    if (dateTime != null) {
+      selectedDateF = dateTime;
+    } else if (currentFilter.value == FilterMode.today) {
+      selectedDateF = DateTime.now();
     } else {
-      labaCompilationModel =
-          reportLabaController.getLabaBeforeMonth(month: selectedMonth.value);
+      selectedDateF = selectedDate.value;
     }
+
+    late final LabaCompilationModel labaCompilationModel =
+        reportLabaController.getLabaBeforeDay(day: selectedDateF);
 
     List<TransactionModel> addModalTransaction = [];
     List<TransactionModel> takeModalTransaction = [];
@@ -78,41 +81,17 @@ class ReportModalController extends ReportBaseController<ModalModel> {
     List<TransactionModel> takeModalTransactionOld = [];
 
     for (var data in allDatas) {
-      if (data.transactionId == 6) {
-        if (currentFilter.value == FilterMode.today) {
-          if (data.date.month == selectedDate.value.month &&
-              data.date.year == selectedDate.value.year) {
-            addModalTransaction.add(data);
-          } else if (data.date
-              .isBefore(DateTime(now.year, selectedDate.value.month, 1))) {
-            addModalTransactionOld.add(data);
-          }
-        } else {
-          if (data.date.month == selectedMonth.value &&
-              data.date.year == now.year) {
-            addModalTransaction.add(data);
-          } else if (data.date
-              .isBefore(DateTime(now.year, selectedMonth.value, 1))) {
-            addModalTransactionOld.add(data);
-          }
+      if (data.creditCode.startsWith("3")) {
+        if (data.date.isSameDate(selectedDateF)) {
+          addModalTransaction.add(data);
+        } else if (data.date.isBefore(selectedDateF.simplified)) {
+          addModalTransactionOld.add(data);
         }
-      } else if (data.transactionId == 7) {
-        if (currentFilter.value == FilterMode.today) {
-          if (data.date.month == selectedDate.value.month &&
-              data.date.year == selectedDate.value.year) {
-            takeModalTransaction.add(data);
-          } else if (data.date
-              .isBefore(DateTime(now.year, selectedDate.value.month, 1))) {
-            takeModalTransactionOld.add(data);
-          }
-        } else {
-          if (data.date.month == selectedMonth.value &&
-              data.date.year == now.year) {
-            takeModalTransaction.add(data);
-          } else if (data.date
-              .isBefore(DateTime(now.year, selectedMonth.value, 1))) {
-            takeModalTransactionOld.add(data);
-          }
+      } else if (data.debitCode.startsWith("3")) {
+        if (data.date.isSameDate(selectedDateF)) {
+          takeModalTransaction.add(data);
+        } else if (data.date.isBefore(selectedDateF.simplified)) {
+          takeModalTransactionOld.add(data);
         }
       }
     }
@@ -130,7 +109,7 @@ class ReportModalController extends ReportBaseController<ModalModel> {
       cleanLaba: reportLabaController
           .getSelectMonthReport(
             month: currentFilter.value == FilterMode.today
-                ? selectedDate.value.month
+                ? selectedDateF.month
                 : selectedMonth.value,
           )
           .cleanResult,

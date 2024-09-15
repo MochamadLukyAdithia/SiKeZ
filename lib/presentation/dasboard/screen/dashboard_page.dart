@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/route/routes.dart';
 import 'package:hmj_apps/presentation/dasboard/component/dashboard_body.dart';
@@ -15,17 +17,28 @@ class DashboardPage extends GetView<DashboardController> {
       backgroundColor: const Color(0xff19282F),
       body: RefreshIndicator.adaptive(
         onRefresh: () => controller.getTransactions(),
-        child: SingleChildScrollView(
-          child: Container(
-            color: Colors.white,
-            child: const Column(
-              children: [
-                DasboardHeader(),
-                DashboardCenter(),
-                DashboardBody(),
-              ],
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Container(
+                color: Colors.white,
+                child: const Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    DasboardHeader(),
+                    DashboardCenter(),
+                    DashboardBody(),
+                  ],
+                ),
+              ),
             ),
-          ),
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Container(
+                color: Colors.white,
+              ),
+            ),
+          ],
         ),
       ),
       floatingActionButton: Container(

@@ -100,6 +100,40 @@ class DateFilterFromController extends StatelessWidget {
                         ),
                       ],
                     ),
+                  if (controller.currentFilter.value == FilterMode.selectDay)
+                    InkWell(
+                      onTap: () {
+                        showDatePicker(
+                          context: context,
+                          firstDate: DateTime.now()
+                              .subtract(const Duration(days: 365)),
+                          lastDate: DateTime.now(),
+                          initialDate: controller.selectedDate.value,
+                        ).then((value) {
+                          if (value != null) {
+                            controller.selectedDate.value = value;
+                          }
+                        });
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 1,
+                            color: AppColors.borderColor,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Text(
+                          controller.selectedDate.value.toddMMMyyyy(),
+                          style: Get.textTheme.bodyLarge
+                              ?.copyWith(fontWeight: FontWeight.w500),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
                   if (controller.currentFilter.value ==
                       FilterMode.selectRangeDate)
                     Row(
