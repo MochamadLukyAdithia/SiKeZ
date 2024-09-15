@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/extension/string_extension.dart';
+import 'package:hmj_apps/core/route/routes.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/theme/app_text_theme.dart';
 import 'package:hmj_apps/presentation/report/component/date_filter_from_controller.dart';
@@ -28,9 +29,23 @@ class LabaRugiListScreen extends GetView<ReportLabaController> {
             )
           ],
         ),
-        body: Obx(() {
-          final data = controller.getReport();
-          return Column(
+
+        foregroundColor: Colors.white,
+        title: const Text("Laba Rugi"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.print),
+            onPressed: () {
+              Get.toNamed(AppRoute.pdfLabaPreview);
+            },
+          )
+        ],
+      ),
+      body: AspectRatio(
+        aspectRatio: 16 / 20,
+        child: SingleChildScrollView(
+          child: Column(
+
             children: [
               DateFilterFromController(controller: controller),
               Expanded(
