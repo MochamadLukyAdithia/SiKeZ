@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/extension/string_extension.dart';
+import 'package:hmj_apps/core/route/routes.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:hmj_apps/core/theme/app_text_theme.dart';
 import 'package:hmj_apps/presentation/report/component/date_filter_from_controller.dart';
@@ -24,7 +25,9 @@ class LabaRugiListScreen extends GetView<ReportLabaController> {
           actions: [
             IconButton(
               icon: const Icon(Icons.print),
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(AppRoute.pdfLabaPreview);
+              },
             )
           ],
         ),
