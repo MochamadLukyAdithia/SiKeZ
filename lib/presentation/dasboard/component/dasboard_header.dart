@@ -4,6 +4,7 @@ import 'package:hmj_apps/core/extension/string_extension.dart';
 import 'package:hmj_apps/core/utils/images.dart';
 import 'package:hmj_apps/presentation/dasboard/controller/dashboard_controller.dart';
 import 'package:hmj_apps/presentation/report/controller/updated_controller/report_laba_controller.dart';
+import 'package:hmj_apps/presentation/report/controller/updated_controller/report_neraca_controller.dart';
 
 class DasboardHeader extends GetView<DashboardController> {
   const DasboardHeader({super.key});
@@ -50,31 +51,35 @@ class DasboardHeader extends GetView<DashboardController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // const Text(
-              //   "Total aset anda:",
-              //   style: TextStyle(fontSize: 14, color: Colors.white),
-              // ),
-              // const SizedBox(
-              //   height: 4,
-              // ),
-              // const Text(
-              //   "Rp20.000.000",
-              //   style: TextStyle(
-              //       fontSize: 18,
-              //       color: Colors.white,
-              //       fontWeight: FontWeight.bold),
-              // ),
-              // const SizedBox(
-              //   height: 8,
-              // ),
-              // Container(
-              //   width: double.infinity,
-              //   height: 2,
-              //   color: Colors.white,
-              // ),
-              // const SizedBox(
-              //   height: 8,
-              // ),
+              const Text(
+                "Total aset anda:",
+                style: TextStyle(fontSize: 14, color: Colors.white),
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+              Text(
+                Get.find<ReportNeracaController>()
+                    .getAssetTotal()
+                    .toString()
+                    .currentcy,
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Container(
+                width: double.infinity,
+                height: 2,
+                color: Colors.white,
+              ),
+              const SizedBox(
+                height: 8,
+              ),
               const SizedBox(height: 8),
               Row(
                 children: [

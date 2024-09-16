@@ -118,6 +118,17 @@ class ReportLabaController extends ReportBaseController<LabaCompilationModel> {
           (element) => element.date.isBefore(day.simplified),
         )
         .toList();
+
+    return getProcessedData(rawData);
+  }
+
+  LabaCompilationModel getLabaSpecificDay({required DateTime day}) {
+    final rawData = allDatas
+        .where(
+          (element) => element.date.isSameDate(day),
+        )
+        .toList();
+
     return getProcessedData(rawData);
   }
 

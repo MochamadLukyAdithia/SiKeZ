@@ -14,48 +14,91 @@ class ReportTransactionListController
 
   @override
   List<TransactionModel> getLast7DaysReport() {
-    return allDatas
-        .where((element) => element.date.isAfter(
-              now
-                  .subtract(
-                    const Duration(days: 6),
-                  )
-                  .simplified,
-            ))
-        .toList();
+    List<TransactionModel> tempList = [];
+    for (int i = 0; i < allDatas.length; i++) {
+      if (allDatas[i].date.isAfter(
+            now
+                .subtract(
+                  const Duration(days: 6),
+                )
+                .simplified,
+          )) {
+        tempList.add(allDatas[i].newWithIndex(i));
+      }
+    }
+    return tempList;
+    // return allDatas
+    //     .where(
+    //       (element) => element.date.isAfter(
+    //         now
+    //             .subtract(
+    //               const Duration(days: 6),
+    //             )
+    //             .simplified,
+    //       ),
+    //     )
+    //     .toList();
   }
 
   @override
   List<TransactionModel> getLastMonthReport() {
-    return allDatas
-        .where(
-          (p0) => p0.date.month == (now.month - 1),
-        )
-        .toList();
+    List<TransactionModel> tempList = [];
+    for (int i = 0; i < allDatas.length; i++) {
+      if (allDatas[i].date.month == (now.month - 1)) {
+        tempList.add(allDatas[i].newWithIndex(i));
+      }
+    }
+    return tempList;
+    // return allDatas
+    //     .where(
+    //       (p0) => p0.date.month == (now.month - 1),
+    //     )
+    //     .toList();
   }
 
   @override
   List<TransactionModel> getLasy30DaysReport() {
-    return allDatas
-        .where((element) => element.date.isAfter(
-              now
-                  .subtract(
-                    const Duration(days: 29),
-                  )
-                  .simplified,
-            ))
-        .toList();
+    List<TransactionModel> tempList = [];
+    for (int i = 0; i < allDatas.length; i++) {
+      if (allDatas[i].date.isAfter(
+            now
+                .subtract(
+                  const Duration(days: 29),
+                )
+                .simplified,
+          )) {
+        tempList.add(allDatas[i].newWithIndex(i));
+      }
+    }
+    return tempList;
+    // return allDatas
+    //     .where((element) => element.date.isAfter(
+    //           now
+    //               .subtract(
+    //                 const Duration(days: 29),
+    //               )
+    //               .simplified,
+    //         ))
+    //     .toList();
   }
 
   @override
   List<TransactionModel> getSelectMonthReport({
     int? month,
   }) {
-    return allDatas
-        .where((p0) =>
-            p0.date.month == (month ?? selectedMonth.value) &&
-            p0.date.year == now.year)
-        .toList();
+    List<TransactionModel> tempList = [];
+    for (int i = 0; i < allDatas.length; i++) {
+      if (allDatas[i].date.month == (month ?? selectedMonth.value) &&
+          allDatas[i].date.year == now.year) {
+        tempList.add(allDatas[i].newWithIndex(i));
+      }
+    }
+    return tempList;
+    // return allDatas
+    //     .where((p0) =>
+    //         p0.date.month == (month ?? selectedMonth.value) &&
+    //         p0.date.year == now.year)
+    //     .toList();
   }
 
   @override
@@ -63,18 +106,32 @@ class ReportTransactionListController
     DateTime? firstDate,
     DateTime? secondDate,
   }) {
-    return allDatas
-        .where(
-          (element) =>
-              element.date
-                  .isAfter((firstDate ?? firstRangedDate.value).simplified) &&
-              element.date.isBefore(
+    List<TransactionModel> tempList = [];
+    for (int i = 0; i < allDatas.length; i++) {
+      if (allDatas[i]
+              .date
+              .isAfter((firstDate ?? firstRangedDate.value).simplified) &&
+          allDatas[i].date.isBefore(
                 (secondDate ?? secondRangedDate.value)
                     .subtract(const Duration(days: -1))
                     .simplified,
-              ),
-        )
-        .toList();
+              )) {
+        tempList.add(allDatas[i].newWithIndex(i));
+      }
+    }
+    return tempList;
+    // return allDatas
+    //     .where(
+    //       (element) =>
+    //           element.date
+    //               .isAfter((firstDate ?? firstRangedDate.value).simplified) &&
+    //           element.date.isBefore(
+    //             (secondDate ?? secondRangedDate.value)
+    //                 .subtract(const Duration(days: -1))
+    //                 .simplified,
+    //           ),
+    //     )
+    //     .toList();
   }
 
   @override
@@ -82,39 +139,68 @@ class ReportTransactionListController
     int? firstMonth,
     int? secondMonth,
   }) {
-    return allDatas
-        .where(
-          (element) =>
-              element.date.month >= (firstMonth ?? firstRangedMonth.value) &&
-              element.date.month <= (secondMonth ?? secondRangedMonth.value),
-        )
-        .toList();
+    List<TransactionModel> tempList = [];
+    for (int i = 0; i < allDatas.length; i++) {
+      if (allDatas[i].date.month >= (firstMonth ?? firstRangedMonth.value) &&
+          allDatas[i].date.month <= (secondMonth ?? secondRangedMonth.value)) {
+        tempList.add(allDatas[i].newWithIndex(i));
+      }
+    }
+    return tempList;
+    // return allDatas
+    //     .where(
+    //       (element) =>
+    //           element.date.month >= (firstMonth ?? firstRangedMonth.value) &&
+    //           element.date.month <= (secondMonth ?? secondRangedMonth.value),
+    //     )
+    //     .toList();
   }
 
   @override
   List<TransactionModel> getThisMonthReport() {
-    return allDatas
-        .where(
-          (p0) => p0.date.isThisMonth(),
-        )
-        .toList();
+    List<TransactionModel> tempList = [];
+    for (int i = 0; i < allDatas.length; i++) {
+      if (allDatas[i].date.isThisMonth()) {
+        tempList.add(allDatas[i].newWithIndex(i));
+      }
+    }
+    return tempList;
+    // return allDatas
+    //     .where(
+    //       (p0) => p0.date.isThisMonth(),
+    //     )
+    //     .toList();
   }
 
   @override
   List<TransactionModel> getTodayReport() {
-    return allDatas
-        .where(
-          (p0) => p0.date.isToday(),
-        )
-        .toList();
+    List<TransactionModel> tempList = [];
+    for (int i = 0; i < allDatas.length; i++) {
+      if (allDatas[i].date.isToday()) {
+        tempList.add(allDatas[i].newWithIndex(i));
+      }
+    }
+    return tempList;
+    // return allDatas
+    //     .where(
+    //       (p0) => p0.date.isToday(),
+    //     )
+    //     .toList();
   }
 
   @override
   List<TransactionModel> getYesterdayReport() {
-    return allDatas
-        .where(
-          (p0) => p0.date.day == now.subtract(const Duration(days: 1)).day,
-        )
-        .toList();
+    List<TransactionModel> tempList = [];
+    for (int i = 0; i < allDatas.length; i++) {
+      if (allDatas[i].date.day == now.subtract(const Duration(days: 1)).day) {
+        tempList.add(allDatas[i].newWithIndex(i));
+      }
+    }
+    return tempList;
+    // return allDatas
+    //     .where(
+    //       (p0) => p0.date.day == now.subtract(const Duration(days: 1)).day,
+    //     )
+    //     .toList();
   }
 }

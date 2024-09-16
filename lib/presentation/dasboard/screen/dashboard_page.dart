@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
+// import 'package:dartz/dartz_unsafe.dart';
+// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+// import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/route/routes.dart';
 import 'package:hmj_apps/presentation/dasboard/component/dashboard_body.dart';
@@ -52,6 +53,15 @@ class DashboardPage extends GetView<DashboardController> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           onPressed: () async {
+            // final l = (controller.transactionList
+            //         .where((p0) => p0.debitCode.startsWith(p0.creditCode[0])))
+            //     .toList();
+
+            // l.forEach((element) {
+            //   print(element.transactionName);
+            // print(element.debitName);
+            // print(element.creditName);
+            // });
             Get.toNamed(AppRoute.addTransaction);
           },
           child: const Icon(

@@ -58,4 +58,21 @@ class TransactionModel {
       'transaction_name': transactionName,
     };
   }
+
+  TransactionModel newWithIndex(int index) {
+    return TransactionModel(
+      id: id,
+      creditCode: creditCode,
+      creditName: creditName,
+      date: date,
+      debitCode: debitCode,
+      debitName: debitName,
+      imageUrl: imageUrl,
+      nominal: nominal,
+      notes: notes,
+      transactionId: transactionId,
+      transactionName: transactionName,
+      index: index,
+    );
+  }
 }

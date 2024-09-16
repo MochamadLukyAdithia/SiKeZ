@@ -107,11 +107,7 @@ class ReportModalController extends ReportBaseController<ModalModel> {
     return ModalModel(
       modalAwal: modalAwal,
       cleanLaba: reportLabaController
-          .getSelectMonthReport(
-            month: currentFilter.value == FilterMode.today
-                ? selectedDateF.month
-                : selectedMonth.value,
-          )
+          .getLabaSpecificDay(day: selectedDateF)
           .cleanResult,
       addedModal: addModalTransaction,
       takedModal: takeModalTransaction,
