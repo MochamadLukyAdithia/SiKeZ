@@ -25,27 +25,15 @@ class LabaRugiListScreen extends GetView<ReportLabaController> {
           actions: [
             IconButton(
               icon: const Icon(Icons.print),
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(AppRoute.pdfLabaPreview);
+              },
             )
           ],
         ),
-
-        foregroundColor: Colors.white,
-        title: const Text("Laba Rugi"),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.print),
-            onPressed: () {
-              Get.toNamed(AppRoute.pdfLabaPreview);
-            },
-          )
-        ],
-      ),
-      body: AspectRatio(
-        aspectRatio: 16 / 20,
-        child: SingleChildScrollView(
-          child: Column(
-
+        body: Obx(() {
+          final data = controller.getReport();
+          return Column(
             children: [
               DateFilterFromController(controller: controller),
               Expanded(

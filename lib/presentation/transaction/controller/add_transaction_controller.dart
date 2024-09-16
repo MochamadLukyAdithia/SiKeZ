@@ -71,7 +71,7 @@ class AddTransactionController extends BaseController {
       return accountList.where((p0) => p0.code == "1-1100").toList();
     } else if (selectedTransactionType!.id == 2) {
       return accountList
-          .where((p0) => RegExp(r'^[15]').hasMatch(p0.code!))
+          .where((p0) => RegExp(r'^[125]').hasMatch(p0.code!))
           .toList();
     } else if (selectedTransactionType!.id == 3) {
       return accountList.where((p0) => p0.code == "1-1300").toList();

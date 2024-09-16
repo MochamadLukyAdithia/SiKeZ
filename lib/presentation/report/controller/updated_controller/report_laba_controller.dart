@@ -112,13 +112,23 @@ class ReportLabaController extends ReportBaseController<LabaCompilationModel> {
         transactionListController.getTodayReport(),
       );
 
-  LabaCompilationModel getLabaBeforeMonth({required int month}) {
+  LabaCompilationModel getLabaBeforeDay({required DateTime day}) {
     final rawData = allDatas
         .where(
-          (element) =>
-              element.date.isBefore(DateTime(now.year, month, 1).simplified),
+          (element) => element.date.isBefore(day.simplified),
         )
         .toList();
+
+    return getProcessedData(rawData);
+  }
+
+  LabaCompilationModel getLabaSpecificDay({required DateTime day}) {
+    final rawData = allDatas
+        .where(
+          (element) => element.date.isSameDate(day),
+        )
+        .toList();
+
     return getProcessedData(rawData);
   }
 

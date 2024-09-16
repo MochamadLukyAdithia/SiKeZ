@@ -16,6 +16,7 @@ enum FilterMode {
   selectMonth,
   selectRangeDate,
   selectRangeMonth,
+  selectDay,
 }
 
 abstract class ReportBaseController<T> extends BaseController {
@@ -64,6 +65,8 @@ abstract class ReportBaseController<T> extends BaseController {
           text = "Pilih rentang tanggal";
         case FilterMode.selectRangeMonth:
           text = "Pilih rentang bulan";
+        case FilterMode.selectDay:
+          text = "Pilih hari";
       }
       return DropdownMenuItem(
         value: filters[index],
@@ -143,6 +146,8 @@ abstract class ReportBaseController<T> extends BaseController {
         return getSelectRangeDayReport();
       case FilterMode.selectRangeMonth:
         return getSelectRangeMonthReport();
+      case FilterMode.selectDay:
+        return getTodayReport();
     }
   }
 }

@@ -59,6 +59,10 @@ class TransaksiListScreen extends GetView<ReportTransactionListController> {
                           color: Colors.white,
                         ),
                       ),
+                      onDismissed: (direction) {
+                        controller.dashboardController
+                            .removeTransaction(dataList[index].index);
+                      },
                       key: ValueKey(dataList[index].date.toIso8601String()),
                       child: InkWell(
                         onTap: () {

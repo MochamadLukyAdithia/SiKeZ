@@ -7,6 +7,7 @@ import 'package:hmj_apps/presentation/report/controller/report_controller.dart';
 import 'package:hmj_apps/presentation/report/controller/updated_controller/report_journal_controller.dart';
 import 'package:hmj_apps/presentation/report/controller/updated_controller/report_laba_controller.dart';
 import 'package:hmj_apps/presentation/report/controller/updated_controller/report_modal_controller.dart';
+import 'package:hmj_apps/presentation/report/controller/updated_controller/report_neraca_controller.dart';
 import 'package:hmj_apps/presentation/report/controller/updated_controller/report_neraca_saldo_controller.dart';
 import 'package:hmj_apps/presentation/report/controller/updated_controller/report_transaction_list_controller.dart';
 
@@ -39,6 +40,9 @@ class NavigationBinding extends Bindings {
     );
     Get.put(
       ReportModalController(),
+    );
+    Get.put(
+      ReportNeracaController(),
     );
   }
 }
