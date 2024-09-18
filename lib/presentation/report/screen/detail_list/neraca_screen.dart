@@ -173,38 +173,17 @@ class NeracaListScreen extends GetView<ReportNeracaController> {
                         ),
                         const SizedBox(height: 12),
                         Row(children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
-                              data.labaRugi >= 0
-                                  ? "Laba Bersih"
-                                  : "Rugi Bersih",
+                              "Modal Pemilik",
                             ),
                           ),
                           Text(
                             data.labaRugi >= 0
-                                ? data.labaRugi.toString().currentcy
+                                ? data.modalTotal.toString().currentcy
                                 : "(${data.labaRugi.abs().toString().currentcy})",
                           ),
                         ]),
-                        ...List.generate(
-                          data.modalList.length,
-                          (index) => Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  data.modalList[index].name,
-                                ),
-                              ),
-                              Text(
-                                data.modalList[index].nominal >= 0
-                                    ? data.modalList[index].nominal
-                                        .toString()
-                                        .currentcy
-                                    : "(${data.modalList[index].nominal.abs().toString().currentcy})",
-                              ),
-                            ],
-                          ),
-                        ),
                         const SizedBox(height: 12),
                         Row(
                           children: [
