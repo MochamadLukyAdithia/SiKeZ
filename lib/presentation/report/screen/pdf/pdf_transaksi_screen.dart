@@ -4,15 +4,17 @@ import 'dart:typed_data';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/extension/string_extension.dart';
+import 'package:hmj_apps/core/helper/format_currency.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
-import 'package:hmj_apps/presentation/report/controller/updated_controller/report_journal_controller.dart';
+import 'package:hmj_apps/presentation/report/controller/updated_controller/report_transaction_list_controller.dart';
+
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
-class PdfJurnalUmumPreview extends GetView<ReportJournalController> {
-  const PdfJurnalUmumPreview({super.key});
+class PdfTransaksiPreview extends GetView<ReportTransactionListController> {
+  const PdfTransaksiPreview({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,20 +26,21 @@ class PdfJurnalUmumPreview extends GetView<ReportJournalController> {
           ),
         ),
         foregroundColor: Colors.white,
-        title: const Text("PDF Jurnal Umum Preview"),
+        title: const Text("PDF Transaksi Preview"),
       ),
       body: PdfPreview(
           actionBarTheme: const PdfActionBarTheme(
               backgroundColor: AppColors.secondaryColor),
-          build: (context) => makeJurnalUmumPdf(controller)),
+          build: (context) => makeTransaksiPdf(controller)),
     );
   }
 }
 
-Future<Uint8List> makeJurnalUmumPdf(ReportJournalController controller) async {
+Future<Uint8List> makeTransaksiPdf(
+    ReportTransactionListController controller) async {
   final transactionList = controller.getReport();
   final pdf = pw.Document();
-  int rowPerPage = 6;
+  int rowPerPage = 10;
   int totalPage = (transactionList.length / rowPerPage).ceil();
   pw.Widget paddedCell(pw.Widget child) {
     return pw.Padding(
@@ -88,43 +91,47 @@ Future<Uint8List> makeJurnalUmumPdf(ReportJournalController controller) async {
                                 style: pw.TextStyle(
                                     fontWeight: pw.FontWeight.bold)),
                           ),
-                          paddedCell(pw.Text("Debit",
+                          paddedCell(pw.Text("Nominal",
                               style: pw.TextStyle(
                                   fontWeight: pw.FontWeight.bold))),
-                          paddedCell(pw.Text("Kredit",
-                              style: pw.TextStyle(
-                                  fontWeight: pw.FontWeight.bold))),
+                          // paddedCell(pw.Text("Kredit",
+                          //     style:
+                          //         pw.TextStyle(fontWeight: pw.FontWeight.bold))),
                         ]),
                         for (var index = pageIdx * rowPerPage;
                             index < (pageIdx + 1) * rowPerPage &&
                                 index < transactionList.length;
                             index++) ...[
+                          // pw.TableRow(children: [
+                          //   paddedCell(pw.Text(
+                          //       transactionList[index].transactionName,
+                          //       style: pw.TextStyle(
+                          //           fontWeight: pw.FontWeight.bold))),
+                          // ]),
                           pw.TableRow(children: [
+                            paddedCell(pw.Text(DateFormat.yMMMd()
+                                .format(transactionList[index].date))),
                             paddedCell(pw.Text(
                                 transactionList[index].transactionName,
                                 style: pw.TextStyle(
                                     fontWeight: pw.FontWeight.bold))),
-                          ]),
-                          pw.TableRow(children: [
-                            paddedCell(pw.Text(DateFormat.yMMMd()
-                                .format(transactionList[index].date))),
-                            paddedCell(
-                                pw.Text(transactionList[index].debitName)),
-                            paddedCell(pw.Text(transactionList[index]
-                                .nominal
-                                .toString()
-                                .currentcy)),
-                            paddedCell(pw.Text("Rp.0"))
+                            pw.SizedBox(),
+                            // paddedCell(pw.Text(transactionList[index]
+                            //     .nominal
+                            //     .toString()
+                            //     .currentcy)),
+                            // paddedCell(pw.Text("Rp.0"))
                           ]),
                           pw.TableRow(children: [
                             pw.SizedBox(),
-                            paddedCell(
-                                pw.Text(transactionList[index].creditName)),
-                            paddedCell(pw.Text("Rp.0")),
-                            paddedCell(pw.Text(transactionList[index]
-                                .nominal
-                                .toString()
-                                .currentcy))
+                            paddedCell(pw.Text(
+                                "${transactionList[index].debitName} -> ${transactionList[index].creditName}")),
+                            paddedCell(pw.Text(formatCurrency(
+                                transactionList[index].nominal))),
+                            // paddedCell(pw.Text(transactionList[index]
+                            //     .nominal
+                            //     .toString()
+                            //     .currentcy))
                           ]),
                         ],
                       ]),
@@ -134,5 +141,6 @@ Future<Uint8List> makeJurnalUmumPdf(ReportJournalController controller) async {
       );
     }
   }
+
   return pdf.save();
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
+import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -13,6 +14,12 @@ class PdfNeracaSaldoPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+             flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: AppColors.primaryGradient,
+          ),
+        ),
+        foregroundColor: Colors.white,
         title: const Text("PDF Neraca Saldo Preview"),
       ),
       body: PdfPreview(build: (context) => makeNeracaSaldoPdf()),

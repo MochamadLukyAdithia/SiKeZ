@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hmj_apps/core/extension/string_extension.dart';
+import 'package:hmj_apps/core/theme/app_colors.dart';
 
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -19,9 +20,17 @@ class PdfPreveiw extends GetView<ReportNeracaController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: AppColors.primaryGradient,
+          ),
+        ),
+        foregroundColor: Colors.white,
         title: const Text("Pdf Neraca Preview"),
       ),
       body: PdfPreview(
+        actionBarTheme:
+            const PdfActionBarTheme(backgroundColor: AppColors.secondaryColor),
         build: (context) => makePdf(controller),
       ),
     );

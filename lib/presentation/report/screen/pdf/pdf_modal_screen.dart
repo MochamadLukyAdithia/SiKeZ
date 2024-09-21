@@ -1,26 +1,40 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:hmj_apps/core/extension/string_extension.dart';
+import 'package:hmj_apps/core/theme/app_colors.dart';
+
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
-class PdfModalPreviewname extends StatelessWidget {
+import '../../controller/updated_controller/report_modal_controller.dart';
+
+class PdfModalPreviewname extends GetView<ReportModalController> {
   const PdfModalPreviewname({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+             flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: AppColors.primaryGradient,
+          ),
+        ),
+        foregroundColor: Colors.white,
         title: const Text("PDF Modal Preview"),
       ),
-      body: PdfPreview(build: (context) => makeModalPdf()),
+      body: PdfPreview(build: (context) => makeModalPdf(controller)),
     );
   }
 }
 
-Future<Uint8List> makeModalPdf() async {
+Future<Uint8List> makeModalPdf(ReportModalController controller) async {
   final pdf = pw.Document();
   // final ByteData bytes = await rootBundle.load('assets/phone.png');
   // final Uint8List byteList = bytes.buffer.asUint8List();
@@ -36,6 +50,7 @@ Future<Uint8List> makeModalPdf() async {
       margin: const pw.EdgeInsets.all(10),
       pageFormat: PdfPageFormat.a4,
       build: (context) {
+        final modalData = controller.getReport();
         return pw.Padding(
             padding: const pw.EdgeInsets.only(
                 top: 40, left: 40, right: 30, bottom: 30),
@@ -80,14 +95,30 @@ Future<Uint8List> makeModalPdf() async {
                                   pw.TextStyle(fontWeight: pw.FontWeight.bold)))
                         ]),
                         pw.TableRow(children: [
+                          pw.SizedBox(),
+                          paddedCell(pw.Text("Modal Awal",
+                              style: pw.TextStyle(
+                                  fontWeight: pw.FontWeight.bold))),
+                          paddedCell(pw.Text(
+                              modalData.modalAwal.toString().currentcy,
+                              style:
+                                  pw.TextStyle(fontWeight: pw.FontWeight.bold)))
+                        ]),
+                        pw.TableRow(children: [
                           paddedCell(pw.Text("1")),
                           paddedCell(pw.Text("Penambahan Modal")),
-                          paddedCell(pw.Text("Rp.2000"))
+                          paddedCell(pw.Text(
+                            modalData.addedModalAmount.toString().currentcy,
+                          ))
                         ]),
                         pw.TableRow(children: [
                           paddedCell(pw.Text("2")),
                           paddedCell(pw.Text("Laba Bersih")),
-                          paddedCell(pw.Text("Rp.2000"))
+                          paddedCell(pw.Text(
+                            (modalData.cleanLaba > 0 ? modalData.cleanLaba : 0)
+                                .toString()
+                                .currentcy,
+                          ))
                         ]),
                         pw.TableRow(children: [
                           pw.SizedBox(),
@@ -100,20 +131,42 @@ Future<Uint8List> makeModalPdf() async {
                         ]),
                         pw.TableRow(children: [
                           paddedCell(pw.Text("1")),
-                          paddedCell(pw.Text("Prive")),
-                          paddedCell(pw.Text("Rp.2000"))
+                          paddedCell(pw.Text("Pengambilan Modal")),
+                          paddedCell(pw.Text(
+                            modalData.takedModalAmount.toString().currentcy,
+                          ))
                         ]),
                         pw.TableRow(children: [
                           paddedCell(pw.Text("2")),
                           paddedCell(pw.Text("Rugi Bersih")),
-                          paddedCell(pw.Text("Rp.2000"))
+                          paddedCell(pw.Text(
+                            min(modalData.cleanLaba, 0).toString().currentcy,
+                          ))
                         ]),
                         pw.TableRow(children: [
                           pw.SizedBox(),
                           paddedCell(pw.Text("Total Pengurang",
                               style: pw.TextStyle(
                                   fontWeight: pw.FontWeight.bold))),
-                          paddedCell(pw.Text("Rp.2000",
+                          paddedCell(pw.Text(
+                              ((modalData.cleanLaba < 0
+                                          ? modalData.cleanLaba
+                                          : 0) +
+                                      modalData.takedModalAmount)
+                                  .toString()
+                                  .currentcy,
+                              style:
+                                  pw.TextStyle(fontWeight: pw.FontWeight.bold)))
+                        ]),
+                        pw.TableRow(children: [
+                          pw.SizedBox(),
+                          paddedCell(pw.Text("Perubahan Modal",
+                              style: pw.TextStyle(
+                                  fontWeight: pw.FontWeight.bold))),
+                          paddedCell(pw.Text(
+                              (modalData.getModalAkhir - modalData.modalAwal)
+                                  .toString()
+                                  .currentcy,
                               style:
                                   pw.TextStyle(fontWeight: pw.FontWeight.bold)))
                         ]),
@@ -126,7 +179,7 @@ Future<Uint8List> makeModalPdf() async {
                             style:
                                 pw.TextStyle(fontWeight: pw.FontWeight.bold)),
                         pw.SizedBox(width: 20),
-                        pw.Text("Rp.2000",
+                        pw.Text(modalData.getModalAkhir.toString().currentcy,
                             style: pw.TextStyle(fontWeight: pw.FontWeight.bold))
                       ]),
                 ]));

@@ -184,7 +184,7 @@ class ModalItemCard extends GetView<ReportModalController> {
                         children: [
                           const Expanded(
                             child: Text(
-                              "Modal Akhit",
+                              "Modal Akhir",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ),
