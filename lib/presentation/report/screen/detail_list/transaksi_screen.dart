@@ -27,7 +27,9 @@ class TransaksiListScreen extends GetView<ReportTransactionListController> {
         actions: [
           IconButton(
             icon: const Icon(Icons.print),
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(AppRoute.pdfTransaksiPreview);
+            },
           )
         ],
       ),
