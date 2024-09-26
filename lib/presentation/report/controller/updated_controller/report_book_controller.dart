@@ -59,8 +59,8 @@ class ReportBookController extends ReportBaseController<List<BookModel>> {
   List<BookModel> getSelectMonthReport({
     int? month,
   }) {
-    final rawData =
-        transactionList.getSelectMonthReport(month: selectedMonth.value);
+    final rawData = transactionList.getSelectMonthReport(
+        month: month ?? selectedMonth.value);
     return getProccessedData(rawData);
   }
 

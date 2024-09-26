@@ -20,8 +20,16 @@ class ReportNeracaSaldoController
     extends ReportBaseController<List<NeracaSaldoModel>> {
   @override
   List<FilterMode> get filters => [
-        FilterMode.today,
+        FilterMode.thisMonth,
+        if (now.month != 1) FilterMode.lastMonth,
+        FilterMode.selectMonth,
       ];
+
+  @override
+  void onInit() {
+    currentFilter.value = FilterMode.thisMonth;
+    super.onInit();
+  }
 
   final ReportBookController reportBookController =
       Get.find<ReportBookController>();
@@ -33,7 +41,7 @@ class ReportNeracaSaldoController
 
   @override
   List<NeracaSaldoModel> getLastMonthReport() {
-    throw UnimplementedError();
+    return getProccessedData(reportBookController.getLastMonthReport());
   }
 
   @override
@@ -43,7 +51,8 @@ class ReportNeracaSaldoController
 
   @override
   List<NeracaSaldoModel> getSelectMonthReport({int? month}) {
-    throw UnimplementedError();
+    return getProccessedData(
+        reportBookController.getSelectMonthReport(month: selectedMonth.value));
   }
 
   @override
@@ -64,13 +73,12 @@ class ReportNeracaSaldoController
 
   @override
   List<NeracaSaldoModel> getThisMonthReport() {
-    throw UnimplementedError();
+    return getProccessedData(reportBookController.getThisMonthReport());
   }
 
   @override
   List<NeracaSaldoModel> getTodayReport() {
-    final processedData = reportBookController.getTodayReport();
-    return getProccessedData(processedData);
+    throw UnimplementedError();
   }
 
   List<NeracaSaldoModel> getProccessedData(List<BookModel> list) {
@@ -95,9 +103,5 @@ class ReportNeracaSaldoController
   @override
   List<NeracaSaldoModel> getYesterdayReport() {
     throw UnimplementedError();
-  }
-
-  List<NeracaSaldoModel> getAllReport() {
-    return getProccessedData(reportBookController.getAllReport());
   }
 }

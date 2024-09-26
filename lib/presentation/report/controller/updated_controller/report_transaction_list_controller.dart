@@ -49,11 +49,6 @@ class ReportTransactionListController
       }
     }
     return tempList;
-    // return allDatas
-    //     .where(
-    //       (p0) => p0.date.month == (now.month - 1),
-    //     )
-    //     .toList();
   }
 
   @override
