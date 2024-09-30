@@ -21,7 +21,7 @@ class PdfModalPreviewname extends GetView<ReportModalController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-             flexibleSpace: Container(
+        flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: AppColors.primaryGradient,
           ),
@@ -29,7 +29,11 @@ class PdfModalPreviewname extends GetView<ReportModalController> {
         foregroundColor: Colors.white,
         title: const Text("PDF Modal Preview"),
       ),
-      body: PdfPreview(build: (context) => makeModalPdf(controller)),
+      body: PdfPreview(
+        build: (context) => makeModalPdf(controller),
+        actionBarTheme:
+            const PdfActionBarTheme(backgroundColor: AppColors.secondaryColor),
+      ),
     );
   }
 }

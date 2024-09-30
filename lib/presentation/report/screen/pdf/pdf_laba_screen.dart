@@ -17,7 +17,7 @@ class PdfLabaPreviewname extends GetView<ReportLabaController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-             flexibleSpace: Container(
+        flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: AppColors.primaryGradient,
           ),
@@ -25,7 +25,11 @@ class PdfLabaPreviewname extends GetView<ReportLabaController> {
         foregroundColor: Colors.white,
         title: const Text("PDF Laba Rugi Preview"),
       ),
-      body: PdfPreview(build: (context) => makeLabaPdf(controller)),
+      body: PdfPreview(
+        build: (context) => makeLabaPdf(controller),
+        actionBarTheme:
+            const PdfActionBarTheme(backgroundColor: AppColors.secondaryColor),
+      ),
     );
   }
 }
