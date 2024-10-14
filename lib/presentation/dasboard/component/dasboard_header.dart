@@ -22,7 +22,7 @@ class DasboardHeader extends GetView<DashboardController> {
 
       final result = (thisMonthResult - lastMonthResult) / lastMonthResult;
       final text =
-          "${result == 0 ? 'Sama dengan' : result > 0 ? '${(result * 100).toStringAsFixed(0)}% lebih banyak dari' : '${(result * 100).toStringAsFixed(0)}% lebih sedikit dari'} bulan sebelumnya";
+          "${result == 0 ? 'Sama dengan' : result > 0 ? '${(result * 100).toStringAsFixed(0)}% lebih banyak dari' : '${(result.abs() * 100).toStringAsFixed(0)}% lebih sedikit dari'} bulan sebelumnya";
 
       final color = result >= 0 ? Colors.amber : Colors.grey;
 
