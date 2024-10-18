@@ -119,22 +119,28 @@ class LoginScreen extends GetView<AuthController> {
                         ),
                         const SizedBox(height: 24),
                         SiKePeLinearButton(
-                          title: "Masuk dengan Google",
-                          onPressed: controller.loginWithGoogle,
-                          customWidget: Assets.icons.google.svg(width: 24),
+                          title: "Daftar",
+                          onPressed: controller.register,
+                          linearGradient: AppColors.secondaryGradient,
                           color: Colors.black,
-                          linearGradient: const LinearGradient(
-                            colors: [
-                              Colors.white,
-                              AppColors.lightGrey,
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                        )
+                        // SiKePeLinearButton(
+                        //   title: "Masuk dengan Google",
+                        //   onPressed: controller.loginWithGoogle,
+                        //   customWidget: Assets.icons.google.svg(width: 24),
+                        //   color: Colors.black,
+                        //   linearGradient: const LinearGradient(
+                        //     colors: [
+                        //       Colors.white,
+                        //       AppColors.lightGrey,
+                        //     ],
+                        //     begin: Alignment.topCenter,
+                        //     end: Alignment.bottomCenter,
+                        //   ),
+                        // ),
+                        // const SizedBox(
+                        //   height: 10,
+                        // ),
                       ],
                     ),
                   ),

@@ -15,9 +15,9 @@ class DasboardHeader extends GetView<DashboardController> {
         Get.find<ReportLabaController>();
 
     Map<String, dynamic> getResult() {
-      final lastMonthResult =
+      var lastMonthResult =
           reportLabaController.getLastMonthReport().cleanResult;
-      final thisMonthResult =
+      var thisMonthResult =
           reportLabaController.getThisMonthReport().cleanResult;
 
       final result = (thisMonthResult - lastMonthResult) / lastMonthResult;
@@ -27,7 +27,7 @@ class DasboardHeader extends GetView<DashboardController> {
       final color = result >= 0 ? Colors.amber : Colors.grey;
 
       return {
-        "text": text,
+        "text": lastMonthResult == 0 || thisMonthResult == 0 ? null : text,
         "color": color,
       };
     }
@@ -107,13 +107,19 @@ class DasboardHeader extends GetView<DashboardController> {
                       const SizedBox(
                         height: 2,
                       ),
-                      Text(
-                        getResult()['text'],
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: getResult()['color'],
-                        ),
-                      ),
+                      Builder(builder: (context) {
+                        final result = getResult();
+                        if (result['text'] != null) {
+                          return Text(
+                            getResult()['text'],
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: getResult()['color'],
+                            ),
+                          );
+                        }
+                        return const SizedBox();
+                      }),
                     ],
                   ),
                   const Spacer(),

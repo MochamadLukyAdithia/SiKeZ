@@ -34,6 +34,25 @@ class AuthController extends BaseController {
 
   User? get firebaseCrrentUser => FirebaseAuth.instance.currentUser;
 
+  void register() async {
+    if (formKey.currentState?.saveAndValidate() ?? false) {
+      showLoading();
+      final email = formKey.currentState!.value['email'];
+      final password = formKey.currentState!.value['password'];
+      try {
+        await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: password);
+        Get.back();
+        Get.toNamed(AppRoute.navigation);
+        showSuccessSnackbar(message: "Berhasil mendaftar!");
+      } on FirebaseAuthException catch (error) {
+        Get.back();
+        showErrorSnackbar(
+            errorMessage: error.message ?? 'Terjadi kesalahan server.');
+      }
+    }
+  }
+
   void getUser() async {
     try {
       if (firebaseCrrentUser != null) {
