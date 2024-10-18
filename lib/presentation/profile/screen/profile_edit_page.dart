@@ -1,4 +1,4 @@
-import "package:cached_network_image/cached_network_image.dart";
+// import "package:cached_network_image/cached_network_image.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:flutter_form_builder/flutter_form_builder.dart";
@@ -34,30 +34,51 @@ class ProfileEditPage extends GetView<ProfileController> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Container(
+                  height: 100,
+                  width: 100,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: controller.selectedImage.value == null
+                          ? NetworkImage(
+                              userModel?.imageUrl != null &&
+                                      userModel!.imageUrl!.isNotEmpty
+                                  ? userModel.imageUrl!
+                                  : "https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450.jpg",
+                            )
+                          : FileImage(controller.selectedImage.value!)
+                              as ImageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 16),
                 GestureDetector(
                   onTap: () {
                     controller.getImageFromGallery();
                   },
-                  child: Container(
-                    height: 100,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: controller.selectedImage.value == null
-                            ? CachedNetworkImageProvider(
-                                userModel?.imageUrl != null &&
-                                        userModel!.imageUrl!.isNotEmpty
-                                    ? userModel.imageUrl!
-                                    : "https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450.jpg",
-                              )
-                            : FileImage(controller.selectedImage.value!)
-                                as ImageProvider,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
+                  child: Image.network(
+                      "https://firebasestorage.googleapis.com/v0/b/sikepi.appspot.com/o/driver_images%2F1000839321.jpg?alt=media&token=ede86ac5-5596-4d25-88ce-ab00aa51f42c"),
+                  // child: Container(
+                  //   height: 100,
+                  //   width: 100,
+                  //   decoration: BoxDecoration(
+                  //     shape: BoxShape.circle,
+                  //     image: DecorationImage(
+                  //       image: controller.selectedImage.value == null
+                  //           ? CachedNetworkImageProvider(
+                  //               userModel?.imageUrl != null &&
+                  //                       userModel!.imageUrl!.isNotEmpty
+                  //                   ? userModel.imageUrl!
+                  //                   : "https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450.jpg",
+                  //             )
+                  //           : FileImage(controller.selectedImage.value!)
+                  //               as ImageProvider,
+                  //       fit: BoxFit.cover,
+                  //     ),
+                  //   ),
+                  // ),
                 ),
                 const SizedBox(
                   height: 20,

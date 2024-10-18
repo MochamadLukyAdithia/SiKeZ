@@ -15,7 +15,8 @@ class DashboardPage extends GetView<DashboardController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff19282F),
+      // backgroundColor: const Color(0xff19282F),
+      backgroundColor: Colors.white,
       body: RefreshIndicator.adaptive(
         onRefresh: () => controller.getTransactions(),
         child: CustomScrollView(

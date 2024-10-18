@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
+// import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hmj_apps/core/theme/app_colors.dart';
 import 'package:photo_view/photo_view.dart';
@@ -29,7 +29,7 @@ class ImageViewer extends StatelessWidget {
       body: PhotoView(
         imageProvider: file != null
             ? FileImage(file!)
-            : CachedNetworkImageProvider(string!) as ImageProvider,
+            : NetworkImage(string!) as ImageProvider,
       ),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:hmj_apps/core/injector/injector.dart';
+// import 'package:hmj_apps/core/injector/injector.dart';
 import 'package:hmj_apps/presentation/dasboard/controller/dashboard_controller.dart';
 import 'package:hmj_apps/presentation/navigation/controller/navigation_controller.dart';
 import 'package:hmj_apps/presentation/report/controller/updated_controller/report_book_controller.dart';
@@ -15,10 +15,10 @@ class NavigationBinding extends Bindings {
   @override
   void dependencies() {
     Get.put(
-      getIt<NavigationController>(),
+      NavigationController(),
     );
     Get.put(
-      getIt<ReportController>(),
+      ReportController(),
     );
     Get.put(
       DashboardController(),
