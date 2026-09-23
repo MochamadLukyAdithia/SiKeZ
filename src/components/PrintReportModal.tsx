@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { X, Printer, Download, Loader2 } from 'lucide-react';
+import React, { useRef, useState, useEffect } from 'react';
+import { X, Printer, Download, Loader2, CheckCircle2, ExternalLink } from 'lucide-react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas-pro';
 import { formatDate } from '../utils/formatters';
@@ -23,6 +23,17 @@ export const PrintReportModal: React.FC<PrintReportModalProps> = ({
   const { showNotification } = useApp();
   const reportRef = useRef<HTMLDivElement>(null);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [generatedPdfUrl, setGeneratedPdfUrl] = useState<string | null>(null);
+  const [generatedPdfName, setGeneratedPdfName] = useState<string>('');
+
+  useEffect(() => {
+    // Clean up created object URL when modal unmounts or closes
+    return () => {
+      if (generatedPdfUrl) {
+        URL.revokeObjectURL(generatedPdfUrl);
+      }
+    };
+  }, [generatedPdfUrl]);
 
   if (!isOpen) return null;
 
@@ -36,8 +47,19 @@ export const PrintReportModal: React.FC<PrintReportModalProps> = ({
     setIsGenerating(true);
 
     try {
+      const sheetEl = reportRef.current;
+      const scrollParent = sheetEl.parentElement;
+      const originalScrollLeft = scrollParent ? scrollParent.scrollLeft : 0;
+      const originalScrollTop = scrollParent ? scrollParent.scrollTop : 0;
+
+      // Temporarily reset scroll to (0,0) to prevent html2canvas clipping/displacement on mobile Android
+      if (scrollParent) {
+        scrollParent.scrollLeft = 0;
+        scrollParent.scrollTop = 0;
+      }
+
       // Ensure all images inside are loaded before canvas rendering
-      const images = reportRef.current.querySelectorAll('img');
+      const images = sheetEl.querySelectorAll('img');
       await Promise.all(
         Array.from(images).map((img) => {
           if (img.complete) return Promise.resolve();
@@ -48,15 +70,23 @@ export const PrintReportModal: React.FC<PrintReportModalProps> = ({
         })
       );
 
-      // Render DOM element to canvas at high resolution
-      const canvas = await html2canvas(reportRef.current, {
-        scale: 2,
+      // Render DOM element to canvas with safe memory limits for mobile Android
+      const canvas = await html2canvas(sheetEl, {
+        scale: 1.5, // 1.5 provides crisp 150+ DPI for A4 without triggering Android GPU canvas memory overflow
         useCORS: true,
         allowTaint: true,
         backgroundColor: '#ffffff',
         logging: false,
-        windowWidth: 1024,
+        scrollX: 0,
+        scrollY: 0,
+        windowWidth: 800,
       });
+
+      // Restore user scroll
+      if (scrollParent) {
+        scrollParent.scrollLeft = originalScrollLeft;
+        scrollParent.scrollTop = originalScrollTop;
+      }
 
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p', 'mm', 'a4');
@@ -98,12 +128,62 @@ export const PrintReportModal: React.FC<PrintReportModalProps> = ({
       const dateStr = new Date().toISOString().slice(0, 10);
       const filename = `sikez_${cleanTitle}_${dateStr}.pdf`;
 
-      // Trigger direct download
-      pdf.save(filename);
-      showNotification?.(`Berhasil mengunduh ${filename}`, 'success');
+      // Create PDF Blob
+      const pdfBlob = pdf.output('blob');
+      const blobUrl = URL.createObjectURL(pdfBlob);
+
+      setGeneratedPdfUrl(blobUrl);
+      setGeneratedPdfName(filename);
+
+      // Multi-strategy Android & Mobile Delivery:
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      let handledViaShare = false;
+
+      // Strategy 1: Web Share API for files (Supported by Android Chrome/Samsung Internet)
+      // This is the native Android share sheet allowing direct "Save to Downloads", "Drive", etc.
+      if (isMobile && typeof navigator.share === 'function') {
+        try {
+          const pdfFile = new File([pdfBlob], filename, { type: 'application/pdf' });
+          if (navigator.canShare && navigator.canShare({ files: [pdfFile] })) {
+            await navigator.share({
+              files: [pdfFile],
+              title: filename,
+              text: `Laporan ${title} - SiKeZ`,
+            });
+            handledViaShare = true;
+            showNotification('Laporan PDF berhasil dibagikan / disimpan', 'success');
+          }
+        } catch (shareErr: unknown) {
+          const err = shareErr as { name?: string };
+          if (err?.name === 'AbortError') {
+            handledViaShare = true;
+          }
+        }
+      }
+
+      // Strategy 2: Programmatic download anchor
+      if (!handledViaShare) {
+        try {
+          const link = document.createElement('a');
+          link.href = blobUrl;
+          link.download = filename;
+          link.rel = 'noopener';
+          link.target = '_blank';
+          document.body.appendChild(link);
+          link.click();
+          setTimeout(() => {
+            if (document.body.contains(link)) {
+              document.body.removeChild(link);
+            }
+          }, 3000);
+          showNotification(`PDF siap diunduh!`, 'success');
+        } catch {
+          showNotification(`PDF siap. Silakan ketuk tombol unduh di bawah.`, 'success');
+        }
+      }
     } catch (error) {
       console.error('Gagal membuat PDF:', error);
-      showNotification?.('Membuka dialog cetak sistem sebagai alternatif...', 'success');
+      showNotification('Membuka dialog cetak sistem HP sebagai alternatif...', 'success');
       window.print();
     } finally {
       setIsGenerating(false);
@@ -149,7 +229,7 @@ export const PrintReportModal: React.FC<PrintReportModalProps> = ({
             {title}
           </span>
           <span className="hidden sm:inline-block text-[11px] bg-emerald-900/80 text-emerald-300 px-2 py-0.5 rounded font-medium">
-            Ukuran Asli 100% (A4)
+            Ukuran A4
           </span>
         </div>
 
@@ -163,7 +243,7 @@ export const PrintReportModal: React.FC<PrintReportModalProps> = ({
             {isGenerating ? (
               <>
                 <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                <span>Menyimpan...</span>
+                <span>Memproses...</span>
               </>
             ) : (
               <>
@@ -173,14 +253,15 @@ export const PrintReportModal: React.FC<PrintReportModalProps> = ({
             )}
           </button>
 
-          {/* Secondary Print Button (desktop/tablet) */}
+          {/* System Print / Save as PDF Button (Visible on mobile & desktop) */}
           <button
             onClick={handlePrint}
             disabled={isGenerating}
-            className="hidden sm:flex items-center space-x-1.5 bg-white/10 hover:bg-white/20 text-white text-xs px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer"
+            className="flex items-center space-x-1.5 bg-white/10 hover:bg-white/20 text-white text-xs px-2.5 sm:px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer"
+            title="Cetak atau Simpan PDF lewat menu printer HP"
           >
             <Printer className="w-3.5 h-3.5" />
-            <span>Cetak</span>
+            <span className="hidden xs:inline sm:inline">Cetak</span>
           </button>
 
           {/* Close Button */}
@@ -193,6 +274,39 @@ export const PrintReportModal: React.FC<PrintReportModalProps> = ({
           </button>
         </div>
       </div>
+
+      {/* Persistent Action Bar if PDF is generated */}
+      {generatedPdfUrl && (
+        <div className="bg-[#0A2E24] border-b border-emerald-500/30 px-4 py-2.5 text-white flex flex-wrap items-center justify-between gap-2 shadow-lg no-print z-20">
+          <div className="flex items-center space-x-2 min-w-0">
+            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+            <span className="text-xs text-emerald-100 truncate">
+              PDF siap:{' '}
+              <span className="font-semibold text-white">{generatedPdfName}</span>
+            </span>
+          </div>
+
+          <div className="flex items-center space-x-2 w-full sm:w-auto justify-end">
+            <a
+              href={generatedPdfUrl}
+              download={generatedPdfName}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 sm:flex-none text-center bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs px-3.5 py-1.5 rounded-lg shadow-sm flex items-center justify-center space-x-1.5 transition-colors cursor-pointer"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+              <span>Buka / Unduh PDF</span>
+            </a>
+            <button
+              onClick={handlePrint}
+              className="flex-1 sm:flex-none text-center bg-white/15 hover:bg-white/25 text-white font-medium text-xs px-3 py-1.5 rounded-lg flex items-center justify-center space-x-1.5 transition-colors cursor-pointer"
+            >
+              <Printer className="w-3.5 h-3.5" />
+              <span>Cetak HP</span>
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Sheet Viewport - Direct 100% size with smooth horizontal and vertical scrolling */}
       <div className="flex-1 overflow-x-auto overflow-y-auto p-4 sm:p-8 flex justify-start sm:justify-center items-start bg-[#061812] select-text">

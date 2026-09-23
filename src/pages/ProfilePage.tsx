@@ -1,9 +1,15 @@
 import React from 'react';
-import { User, Phone, MapPin, Edit3, LogOut, RefreshCw, Mail } from 'lucide-react';
+import { User, Phone, MapPin, Edit3, LogOut, Trash2, Mail } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
 export const ProfilePage: React.FC = () => {
-  const { currentUser, logout, navigate, resetDemoData } = useApp();
+  const { currentUser, logout, navigate, clearAllTransactions, transactions } = useApp();
+
+  const handleClearData = () => {
+    if (window.confirm('Apakah Anda yakin ingin menghapus semua catatan transaksi? Tindakan ini tidak dapat dibatalkan.')) {
+      clearAllTransactions();
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#F4F9F5] pb-24">
@@ -22,14 +28,18 @@ export const ProfilePage: React.FC = () => {
           </div>
         </div>
 
-        {/* Circular Avatar */}
+        {/* Circular Avatar: Shows User single person icon by default */}
         <div className="absolute -bottom-12 left-1/2 -translate-x-1/2">
-          <div className="w-24 h-24 rounded-full border-4 border-white shadow-lg overflow-hidden bg-gray-200">
-            <img
-              src={currentUser?.imageUrl || 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=400&auto=format&fit=crop&q=80'}
-              alt="Avatar"
-              className="w-full h-full object-cover"
-            />
+          <div className="w-24 h-24 rounded-full border-4 border-white shadow-lg overflow-hidden bg-emerald-50/90 flex items-center justify-center text-emerald-800">
+            {currentUser?.imageUrl ? (
+              <img
+                src={currentUser.imageUrl}
+                alt="Avatar"
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <User className="w-12 h-12 text-[#0E3B2F]/70" />
+            )}
           </div>
         </div>
       </div>
@@ -40,8 +50,10 @@ export const ProfilePage: React.FC = () => {
       <div className="max-w-md mx-auto px-4 space-y-4">
         {/* Name & Title */}
         <div className="text-center mb-2">
-          <h2 className="text-lg font-bold text-gray-900">{currentUser?.name || 'Pengguna SiKeZ'}</h2>
-          <p className="text-xs text-gray-500">{currentUser?.email || 'sikez@unej.ac.id'}</p>
+          <h2 className="text-lg font-bold text-gray-900">
+            {currentUser?.name ? currentUser.name : 'Nama Belum Diatur'}
+          </h2>
+          <p className="text-xs text-gray-500">{currentUser?.email || '-'}</p>
         </div>
 
         {/* User Info Card with Primary Gradient */}
@@ -105,23 +117,25 @@ export const ProfilePage: React.FC = () => {
         <div className="space-y-2 pt-2">
           <button
             onClick={() => navigate('profile/edit')}
-            className="w-full py-3 px-4 bg-gradient-quaternary text-white rounded-xl font-bold text-xs shadow-sm hover:shadow-md transition-all active:scale-[0.99] flex items-center justify-center space-x-2"
+            className="w-full py-3 px-4 bg-gradient-quaternary text-white rounded-xl font-bold text-xs shadow-sm hover:shadow-md transition-all active:scale-[0.99] flex items-center justify-center space-x-2 cursor-pointer"
           >
             <Edit3 className="w-4 h-4" />
             <span>Edit Profil</span>
           </button>
 
-          <button
-            onClick={resetDemoData}
-            className="w-full py-3 px-4 bg-white border border-gray-200 text-gray-700 rounded-xl font-semibold text-xs shadow-xs hover:bg-gray-50 transition-all flex items-center justify-center space-x-2"
-          >
-            <RefreshCw className="w-4 h-4 text-gray-500" />
-            <span>Reset Data Contoh (Demo)</span>
-          </button>
+          {transactions.length > 0 && (
+            <button
+              onClick={handleClearData}
+              className="w-full py-2.5 px-4 bg-white border border-gray-200 text-gray-700 rounded-xl font-semibold text-xs shadow-xs hover:bg-gray-50 transition-all flex items-center justify-center space-x-2 cursor-pointer"
+            >
+              <Trash2 className="w-4 h-4 text-gray-400" />
+              <span>Bersihkan Semua Transaksi</span>
+            </button>
+          )}
 
           <button
             onClick={logout}
-            className="w-full py-3 px-4 bg-white border border-rose-200 text-rose-600 rounded-xl font-bold text-xs shadow-xs hover:bg-rose-50 transition-all flex items-center justify-center space-x-2"
+            className="w-full py-3 px-4 bg-white border border-rose-200 text-rose-600 rounded-xl font-bold text-xs shadow-xs hover:bg-rose-50 transition-all flex items-center justify-center space-x-2 cursor-pointer"
           >
             <LogOut className="w-4 h-4" />
             <span>Keluar (Log Out)</span>

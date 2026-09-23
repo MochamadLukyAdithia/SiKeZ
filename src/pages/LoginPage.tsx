@@ -4,8 +4,8 @@ import { useApp } from '../context/AppContext';
 export const LoginPage: React.FC = () => {
   const { login, register } = useApp();
   const [isRegisterMode, setIsRegisterMode] = useState(false);
-  const [email, setEmail] = useState('sikez@unej.ac.id');
-  const [password, setPassword] = useState('password123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -17,12 +17,6 @@ export const LoginPage: React.FC = () => {
     } else {
       await login(email, password);
     }
-    setIsLoading(false);
-  };
-
-  const handleDemoLogin = async () => {
-    setIsLoading(true);
-    await login('sikez@unej.ac.id', 'demo123');
     setIsLoading(false);
   };
 
@@ -109,21 +103,13 @@ export const LoginPage: React.FC = () => {
               />
             </div>
 
-            <div className="pt-2 space-y-2">
+            <div className="pt-2">
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-3 px-4 bg-gradient-primary text-white rounded-xl font-bold text-xs shadow-md hover:shadow-lg transition-transform active:scale-[0.98]"
+                className="w-full py-3 px-4 bg-gradient-primary text-white rounded-xl font-bold text-xs shadow-md hover:shadow-lg transition-transform active:scale-[0.98] cursor-pointer"
               >
                 {isLoading ? 'Memproses...' : isRegisterMode ? 'Daftar Sekarang' : 'Masuk'}
-              </button>
-
-              <button
-                type="button"
-                onClick={handleDemoLogin}
-                className="w-full py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-semibold text-xs shadow-xs transition-colors"
-              >
-                Masuk Cepat Sebagai Demo SiKeZ
               </button>
             </div>
           </form>

@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { TransactionModel, UserModel } from '../types';
-import { INITIAL_TRANSACTIONS, INITIAL_USER } from '../constants/initialData';
 
 interface AppContextType {
   currentUser: UserModel | null;
@@ -12,6 +11,7 @@ interface AppContextType {
   transactions: TransactionModel[];
   addTransaction: (tx: Omit<TransactionModel, 'id'>) => Promise<void>;
   removeTransaction: (id: string) => Promise<void>;
+  clearAllTransactions: () => void;
   selectedDate: Date;
   setSelectedDate: (d: Date) => void;
   resetDemoData: () => void;
@@ -24,32 +24,35 @@ interface AppContextType {
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-const STORAGE_KEY_TX = 'sikez_transactions_v1';
-const STORAGE_KEY_USER = 'sikez_user_v1';
+const STORAGE_KEY_TX = 'sikez_transactions_v2';
+const STORAGE_KEY_USER = 'sikez_user_v2';
+const STORAGE_KEY_USERS_DB = 'sikez_users_db_v2';
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<UserModel | null>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY_USER) || localStorage.getItem('sikepi_user_v1');
+    const saved = localStorage.getItem(STORAGE_KEY_USER);
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        if (parsed && parsed.email) return parsed;
       } catch {
-        return INITIAL_USER;
+        return null;
       }
     }
-    return INITIAL_USER;
+    return null;
   });
 
   const [transactions, setTransactions] = useState<TransactionModel[]>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY_TX) || localStorage.getItem('sikepi_transactions_v1');
+    const saved = localStorage.getItem(STORAGE_KEY_TX);
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) return parsed;
       } catch {
-        return INITIAL_TRANSACTIONS;
+        return [];
       }
     }
-    return INITIAL_TRANSACTIONS;
+    return [];
   });
 
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
@@ -76,30 +79,89 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }, 3500);
   };
 
-  const login = async (email: string, _pass: string): Promise<boolean> => {
-    // Authenticate
-    const user: UserModel = {
-      ...INITIAL_USER,
-      email: email || INITIAL_USER.email,
-    };
-    setCurrentUser(user);
-    showNotification('Berhasil masuk!');
-    navigate('dashboard');
-    return true;
+  const login = async (email: string, pass: string): Promise<boolean> => {
+    if (!email.trim()) {
+      showNotification('Silakan masukkan email Anda.', 'error');
+      return false;
+    }
+
+    try {
+      const usersDbRaw = localStorage.getItem(STORAGE_KEY_USERS_DB);
+      const usersDb: Record<string, { password?: string; user: UserModel }> = usersDbRaw ? JSON.parse(usersDbRaw) : {};
+      const normalizedEmail = email.trim().toLowerCase();
+
+      let targetUser: UserModel;
+      if (usersDb[normalizedEmail]) {
+        // Registered user found
+        if (pass && usersDb[normalizedEmail].password && usersDb[normalizedEmail].password !== pass) {
+          showNotification('Kata sandi salah. Silakan coba lagi.', 'error');
+          return false;
+        }
+        targetUser = usersDb[normalizedEmail].user;
+      } else {
+        // Allow seamless login for new real users
+        targetUser = {
+          id: 'usr_' + Date.now(),
+          name: '',
+          email: email.trim(),
+          phoneNumber: '',
+          address: '',
+          imageUrl: '',
+          joinedAt: Date.now(),
+        };
+        usersDb[normalizedEmail] = { password: pass, user: targetUser };
+        localStorage.setItem(STORAGE_KEY_USERS_DB, JSON.stringify(usersDb));
+      }
+
+      setCurrentUser(targetUser);
+      showNotification('Berhasil masuk!');
+      navigate('dashboard');
+      return true;
+    } catch {
+      const fallbackUser: UserModel = {
+        id: 'usr_' + Date.now(),
+        name: '',
+        email: email.trim(),
+        phoneNumber: '',
+        address: '',
+        imageUrl: '',
+        joinedAt: Date.now(),
+      };
+      setCurrentUser(fallbackUser);
+      showNotification('Berhasil masuk!');
+      navigate('dashboard');
+      return true;
+    }
   };
 
-  const register = async (email: string, _pass: string, name?: string): Promise<boolean> => {
-    const user: UserModel = {
+  const register = async (email: string, pass: string, name?: string): Promise<boolean> => {
+    if (!email.trim()) {
+      showNotification('Silakan masukkan email Anda.', 'error');
+      return false;
+    }
+
+    const normalizedEmail = email.trim().toLowerCase();
+    const newUser: UserModel = {
       id: 'usr_' + Date.now(),
-      name: name || 'Pengguna SiKeZ',
-      email,
+      name: name?.trim() || '',
+      email: normalizedEmail,
       phoneNumber: '',
       address: '',
       imageUrl: '',
       joinedAt: Date.now(),
     };
-    setCurrentUser(user);
-    showNotification('Berhasil mendaftar akun baru!');
+
+    try {
+      const usersDbRaw = localStorage.getItem(STORAGE_KEY_USERS_DB);
+      const usersDb: Record<string, { password?: string; user: UserModel }> = usersDbRaw ? JSON.parse(usersDbRaw) : {};
+      usersDb[normalizedEmail] = { password: pass, user: newUser };
+      localStorage.setItem(STORAGE_KEY_USERS_DB, JSON.stringify(usersDb));
+    } catch (e) {
+      console.warn('Gagal menyimpan ke users DB', e);
+    }
+
+    setCurrentUser(newUser);
+    showNotification('Akun berhasil didaftarkan!');
     navigate('dashboard');
     return true;
   };
@@ -112,8 +174,22 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const updateProfile = (data: Partial<UserModel>) => {
     if (!currentUser) return;
-    const updated = { ...currentUser, ...data };
+    const updated: UserModel = { ...currentUser, ...data };
     setCurrentUser(updated);
+
+    // Also update users DB
+    try {
+      const usersDbRaw = localStorage.getItem(STORAGE_KEY_USERS_DB);
+      const usersDb: Record<string, { password?: string; user: UserModel }> = usersDbRaw ? JSON.parse(usersDbRaw) : {};
+      const normalizedEmail = currentUser.email.trim().toLowerCase();
+      if (usersDb[normalizedEmail]) {
+        usersDb[normalizedEmail].user = updated;
+        localStorage.setItem(STORAGE_KEY_USERS_DB, JSON.stringify(usersDb));
+      }
+    } catch (e) {
+      console.warn('Gagal update users DB', e);
+    }
+
     showNotification('Profil berhasil diperbarui!');
   };
 
@@ -123,7 +199,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       id: 'tx_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7),
     };
     setTransactions((prev) => [newTx, ...prev]);
-    showNotification('Transaksi berhasil dibuat!');
+    showNotification('Transaksi berhasil dicatat!');
   };
 
   const removeTransaction = async (id: string) => {
@@ -131,10 +207,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     showNotification('Transaksi telah dihapus.');
   };
 
+  const clearAllTransactions = () => {
+    setTransactions([]);
+    localStorage.removeItem(STORAGE_KEY_TX);
+    showNotification('Semua transaksi telah dibersihkan.');
+  };
+
   const resetDemoData = () => {
-    setTransactions(INITIAL_TRANSACTIONS);
-    setCurrentUser(INITIAL_USER);
-    showNotification('Data telah direset ke data contoh.');
+    clearAllTransactions();
   };
 
   const navigate = (route: string, state?: unknown) => {
@@ -155,6 +235,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         transactions,
         addTransaction,
         removeTransaction,
+        clearAllTransactions,
         selectedDate,
         setSelectedDate,
         resetDemoData,

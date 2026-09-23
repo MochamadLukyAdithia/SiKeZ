@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Camera, Check } from 'lucide-react';
+import { ArrowLeft, Camera, Check, User, Trash2 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
 export const ProfileEditPage: React.FC = () => {
@@ -44,7 +44,7 @@ export const ProfileEditPage: React.FC = () => {
             >
               <ArrowLeft className="w-5 h-5" />
             </button>
-            <h1 className="text-lg font-semibold tracking-wide">Edit Profile</h1>
+            <h1 className="text-lg font-semibold tracking-wide">Edit Profil</h1>
           </div>
         </div>
       </div>
@@ -54,17 +54,21 @@ export const ProfileEditPage: React.FC = () => {
           {/* Avatar edit section */}
           <div className="bg-white p-6 rounded-2xl shadow-xs border border-gray-100 flex flex-col items-center">
             <div className="relative mb-3">
-              <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-emerald-500 shadow-sm bg-gray-100">
-                <img
-                  src={
-                    imageUrl ||
-                    'https://images.unsplash.com/photo-1544717305-2782549b5136?w=400&auto=format&fit=crop&q=80'
-                  }
-                  alt="Avatar"
-                  className="w-full h-full object-cover"
-                />
+              <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-emerald-500 shadow-sm bg-emerald-50/90 flex items-center justify-center text-emerald-800">
+                {imageUrl ? (
+                  <img
+                    src={imageUrl}
+                    alt="Avatar"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <User className="w-12 h-12 text-[#0E3B2F]/70" />
+                )}
               </div>
-              <label className="absolute bottom-0 right-0 p-2 bg-[#0E3B2F] text-white rounded-full shadow-md cursor-pointer hover:bg-[#134638] transition-colors">
+              <label
+                className="absolute bottom-0 right-0 p-2 bg-[#0E3B2F] text-white rounded-full shadow-md cursor-pointer hover:bg-[#134638] transition-colors"
+                title="Pilih Foto"
+              >
                 <Camera className="w-4 h-4" />
                 <input
                   type="file"
@@ -74,7 +78,20 @@ export const ProfileEditPage: React.FC = () => {
                 />
               </label>
             </div>
-            <span className="text-xs text-gray-500 font-medium">Ketuk kamera untuk ubah foto</span>
+
+            <div className="flex items-center space-x-3 text-xs">
+              <span className="text-gray-500 font-medium">Ketuk kamera untuk upload foto</span>
+              {imageUrl && (
+                <button
+                  type="button"
+                  onClick={() => setImageUrl('')}
+                  className="text-rose-600 hover:text-rose-700 font-semibold flex items-center gap-1 cursor-pointer"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                  <span>Hapus Foto</span>
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Form Fields */}
@@ -87,8 +104,8 @@ export const ProfileEditPage: React.FC = () => {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Masukkan nama anda..."
-                className="w-full bg-gray-50 border border-gray-300 rounded-lg p-2.5 text-xs text-gray-900 font-medium outline-none focus:ring-2 focus:ring-[#A1B57D]"
+                placeholder="Masukkan nama lengkap atau usaha anda..."
+                className="w-full bg-gray-50 border border-gray-300 rounded-lg p-2.5 text-xs text-gray-900 font-medium outline-none focus:ring-2 focus:ring-[#10B981]"
                 required
               />
             </div>
@@ -108,29 +125,27 @@ export const ProfileEditPage: React.FC = () => {
 
             <div>
               <label className="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1">
-                Nomor WhatsApp / HP*
+                Nomor WhatsApp / HP
               </label>
               <input
                 type="tel"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="Contoh: 081234567890"
-                className="w-full bg-gray-50 border border-gray-300 rounded-lg p-2.5 text-xs text-gray-900 font-medium outline-none focus:ring-2 focus:ring-[#A1B57D]"
-                required
+                className="w-full bg-gray-50 border border-gray-300 rounded-lg p-2.5 text-xs text-gray-900 font-medium outline-none focus:ring-2 focus:ring-[#10B981]"
               />
             </div>
 
             <div>
               <label className="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1">
-                Alamat Kebun / Domisili*
+                Alamat Kebun / Domisili
               </label>
               <textarea
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                placeholder="Masukkan alamat lengkap kebun kopi anda..."
+                placeholder="Masukkan alamat domisili atau lokasi kebun/usaha..."
                 rows={2}
-                className="w-full bg-gray-50 border border-gray-300 rounded-lg p-2.5 text-xs text-gray-900 font-medium outline-none focus:ring-2 focus:ring-[#A1B57D]"
-                required
+                className="w-full bg-gray-50 border border-gray-300 rounded-lg p-2.5 text-xs text-gray-900 font-medium outline-none focus:ring-2 focus:ring-[#10B981] resize-none"
               />
             </div>
           </div>
@@ -139,7 +154,7 @@ export const ProfileEditPage: React.FC = () => {
           <div className="pt-2">
             <button
               type="submit"
-              className="w-full py-3.5 px-4 bg-gradient-quaternary text-white rounded-xl font-bold text-sm shadow-md hover:shadow-lg transition-transform active:scale-[0.98] flex items-center justify-center space-x-2"
+              className="w-full py-3.5 px-4 bg-gradient-primary text-white rounded-xl font-bold text-sm shadow-md hover:shadow-lg transition-transform active:scale-[0.98] flex items-center justify-center space-x-2 cursor-pointer"
             >
               <Check className="w-4 h-4" />
               <span>Simpan Perubahan</span>
