@@ -120,7 +120,7 @@ export const NeracaSaldoPage: React.FC = () => {
       {/* Print PDF Preview Modal */}
       <PrintReportModal
         title="LAPORAN NERACA SALDO"
-        subtitle="SIKEPI - Petani Kopi"
+        subtitle="SiKeZ - Sistem Keuangan Gen Z"
         isOpen={showPrintModal}
         onClose={() => setShowPrintModal(false)}
       >

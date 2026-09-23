@@ -4,7 +4,7 @@ import { useApp } from '../context/AppContext';
 export const LoginPage: React.FC = () => {
   const { login, register } = useApp();
   const [isRegisterMode, setIsRegisterMode] = useState(false);
-  const [email, setEmail] = useState('petanikopi@unej.ac.id');
+  const [email, setEmail] = useState('sikez@unej.ac.id');
   const [password, setPassword] = useState('password123');
   const [name, setName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +22,7 @@ export const LoginPage: React.FC = () => {
 
   const handleDemoLogin = async () => {
     setIsLoading(true);
-    await login('petanikopi@unej.ac.id', 'demo123');
+    await login('sikez@unej.ac.id', 'demo123');
     setIsLoading(false);
   };
 
@@ -49,29 +49,29 @@ export const LoginPage: React.FC = () => {
 
         {/* Title */}
         <div className="text-center mb-6">
-          <h1 className="text-3xl font-extrabold tracking-tight text-[#B33030]">SIKEPI</h1>
+          <h1 className="text-3xl font-extrabold tracking-tight text-[#B33030]">SiKeZ</h1>
           <p className="text-xs font-semibold text-[#4D1515] italic mt-0.5">
-            "Sistem Keuangan Petani Kopi"
+            "Sistem Keuangan Gen Z"
           </p>
         </div>
 
         {/* Auth Box */}
         <div className="bg-white/95 backdrop-blur-md rounded-3xl p-6 shadow-xl border border-white/60">
           <h2 className="text-base font-bold text-gray-800 mb-4 text-center">
-            {isRegisterMode ? 'Daftar Akun Petani' : 'Masuk ke Akun Anda'}
+            {isRegisterMode ? 'Daftar Akun SiKeZ' : 'Masuk ke Akun Anda'}
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-3.5">
             {isRegisterMode && (
               <div>
                 <label className="text-xs font-bold text-gray-700 block mb-1">
-                  Nama Petani / Kelompok Tani
+                  Nama Lengkap / Usaha
                 </label>
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Contoh: Pak Ahmad"
+                  placeholder="Contoh: Alex Pratama"
                   className="w-full bg-gray-50 border border-gray-300 rounded-xl p-2.5 text-xs text-gray-900 outline-none focus:ring-2 focus:ring-[#A1B57D]"
                   required
                 />
@@ -116,7 +116,7 @@ export const LoginPage: React.FC = () => {
                 onClick={handleDemoLogin}
                 className="w-full py-2.5 px-4 bg-[#A1B57D] hover:bg-[#8f9e6b] text-white rounded-xl font-semibold text-xs shadow-xs transition-colors"
               >
-                Masuk Cepat Sebagai Demo Petani
+                Masuk Cepat Sebagai Demo SiKeZ
               </button>
             </div>
           </form>

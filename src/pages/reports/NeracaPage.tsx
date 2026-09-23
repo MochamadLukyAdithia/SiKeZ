@@ -151,7 +151,7 @@ export const NeracaPage: React.FC = () => {
       {/* Print PDF Preview Modal */}
       <PrintReportModal
         title="LAPORAN NERACA (POSISI KEUANGAN)"
-        subtitle="SIKEPI - Petani Kopi (Standar SAK EMKM)"
+        subtitle="SiKeZ - Sistem Keuangan Gen Z (Standar SAK EMKM)"
         isOpen={showPrintModal}
         onClose={() => setShowPrintModal(false)}
       >

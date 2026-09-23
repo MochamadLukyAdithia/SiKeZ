@@ -12,7 +12,7 @@ interface PrintReportModalProps {
 
 export const PrintReportModal: React.FC<PrintReportModalProps> = ({
   title,
-  subtitle = 'Sistem Keuangan Petani Kopi (SIKEPI)',
+  subtitle = 'Sistem Keuangan Gen Z (SiKeZ)',
   isOpen,
   onClose,
   children,
@@ -78,11 +78,11 @@ export const PrintReportModal: React.FC<PrintReportModalProps> = ({
           <div className="mt-12 pt-6 border-t border-gray-200 flex justify-between items-end text-xs text-gray-600">
             <div>
               <p className="text-[11px] text-gray-500">
-                Dicetak melalui aplikasi SIKEPI (Sistem Keuangan Petani Kopi)
+                Dicetak melalui aplikasi SiKeZ (Sistem Keuangan Gen Z)
               </p>
             </div>
             <div className="text-center w-40">
-              <p className="text-gray-500 mb-14">Petani / Pengelola</p>
+              <p className="text-gray-500 mb-14">Pengelola / Pemilik Usaha</p>
               <div className="border-b border-gray-400 w-full mb-1"></div>
               <p className="font-semibold text-gray-800">( Pengurus Usaha )</p>
             </div>

@@ -162,7 +162,7 @@ export const ReportDetailPage: React.FC = () => {
       {/* Printable Voucher Modal */}
       <PrintReportModal
         title="BUKTI TRANSAKSI KEUANGAN"
-        subtitle="SIKEPI - Sistem Keuangan Petani Kopi"
+        subtitle="SiKeZ - Sistem Keuangan Gen Z"
         isOpen={showPrintModal}
         onClose={() => setShowPrintModal(false)}
       >

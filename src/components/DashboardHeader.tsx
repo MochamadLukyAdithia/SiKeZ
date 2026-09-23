@@ -32,9 +32,9 @@ export const DashboardHeader: React.FC = () => {
         <div className="flex items-center justify-between mb-4">
           <div>
             <span className="text-[11px] uppercase tracking-wider text-rose-200 font-semibold">
-              Sistem Keuangan Petani Kopi
+              Sistem Keuangan Gen Z
             </span>
-            <h2 className="text-xl font-bold tracking-tight">SIKEPI</h2>
+            <h2 className="text-xl font-bold tracking-tight">SiKeZ</h2>
           </div>
           <img
             src="/assets/images/logo.png"

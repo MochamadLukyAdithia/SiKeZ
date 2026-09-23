@@ -24,12 +24,12 @@ interface AppContextType {
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-const STORAGE_KEY_TX = 'sikepi_transactions_v1';
-const STORAGE_KEY_USER = 'sikepi_user_v1';
+const STORAGE_KEY_TX = 'sikez_transactions_v1';
+const STORAGE_KEY_USER = 'sikez_user_v1';
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<UserModel | null>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY_USER);
+    const saved = localStorage.getItem(STORAGE_KEY_USER) || localStorage.getItem('sikepi_user_v1');
     if (saved) {
       try {
         return JSON.parse(saved);
@@ -41,7 +41,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   });
 
   const [transactions, setTransactions] = useState<TransactionModel[]>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY_TX);
+    const saved = localStorage.getItem(STORAGE_KEY_TX) || localStorage.getItem('sikepi_transactions_v1');
     if (saved) {
       try {
         return JSON.parse(saved);
@@ -91,7 +91,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const register = async (email: string, _pass: string, name?: string): Promise<boolean> => {
     const user: UserModel = {
       id: 'usr_' + Date.now(),
-      name: name || 'Petani Kopi Baru',
+      name: name || 'Pengguna SiKeZ',
       email,
       phoneNumber: '',
       address: '',

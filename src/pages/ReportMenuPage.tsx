@@ -85,7 +85,7 @@ export const ReportMenuPage: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <span className="text-[11px] uppercase tracking-wider text-rose-200 font-semibold">
-                Sistem Keuangan Petani Kopi
+                Sistem Keuangan Gen Z
               </span>
               <h1 className="text-xl font-bold tracking-tight">Laporan Keuangan</h1>
             </div>
@@ -96,7 +96,7 @@ export const ReportMenuPage: React.FC = () => {
             />
           </div>
           <p className="text-xs text-rose-100 mt-2">
-            Laporan akuntansi standar untuk evaluasi usaha tani dan syarat perbankan / KUR.
+            Laporan akuntansi standar untuk evaluasi keuangan dan performa usaha.
           </p>
         </div>
       </div>

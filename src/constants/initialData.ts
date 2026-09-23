@@ -1,11 +1,11 @@
 import { TransactionModel, UserModel } from '../types';
 
 export const INITIAL_USER: UserModel = {
-  id: 'usr_petani_kopi_01',
-  name: 'Pak Ahmad (Kelompok Tani Kopi Sukorejo)',
-  email: 'petanikopi@unej.ac.id',
+  id: 'usr_sikez_01',
+  name: 'Alex Pratama (SiKeZ)',
+  email: 'sikez@unej.ac.id',
   phoneNumber: '081234567890',
-  address: 'Desa Sukorejo, Kec. Sumberwringin, Bondowoso / Jember',
+  address: 'Jember, Jawa Timur',
   imageUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=400&auto=format&fit=crop&q=80',
   joinedAt: Date.now() - 90 * 24 * 60 * 60 * 1000,
 };

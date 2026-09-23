@@ -81,7 +81,7 @@ export const ProfileEditPage: React.FC = () => {
           <div className="bg-white p-4 rounded-2xl shadow-xs border border-gray-100 space-y-3">
             <div>
               <label className="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1">
-                Nama Lengkap / Nama Kelompok Tani*
+                Nama Lengkap / Nama Usaha*
               </label>
               <input
                 type="text"

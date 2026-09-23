@@ -17,7 +17,7 @@ export const ProfilePage: React.FC = () => {
           <div className="absolute top-4 left-4 right-4 flex justify-between items-center text-white">
             <h1 className="text-lg font-bold">Profil Pengguna</h1>
             <span className="text-xs bg-white/20 px-2 py-0.5 rounded-full font-medium">
-              Petani Kopi
+              SiKeZ
             </span>
           </div>
         </div>
@@ -40,8 +40,8 @@ export const ProfilePage: React.FC = () => {
       <div className="max-w-md mx-auto px-4 space-y-4">
         {/* Name & Title */}
         <div className="text-center mb-2">
-          <h2 className="text-lg font-bold text-gray-900">{currentUser?.name || 'Petani Kopi'}</h2>
-          <p className="text-xs text-gray-500">{currentUser?.email || 'petanikopi@unej.ac.id'}</p>
+          <h2 className="text-lg font-bold text-gray-900">{currentUser?.name || 'Pengguna SiKeZ'}</h2>
+          <p className="text-xs text-gray-500">{currentUser?.email || 'sikez@unej.ac.id'}</p>
         </div>
 
         {/* User Info Card with Primary Gradient */}
@@ -143,7 +143,7 @@ export const ProfilePage: React.FC = () => {
             <img src="/assets/images/ojk.png" alt="OJK" className="h-8 object-contain" />
           </div>
           <p className="text-[10px] text-center text-gray-400 mt-4 leading-relaxed">
-            SIKEPI • Sistem Keuangan Petani Kopi
+            SiKeZ • Sistem Keuangan Gen Z
             <br />
             Program Penguatan Kapasitas Organisasi Kemahasiswaan (PPK Ormawa)
             <br />

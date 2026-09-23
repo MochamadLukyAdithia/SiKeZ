@@ -109,7 +109,7 @@ export const PerubahanModalPage: React.FC = () => {
       {/* Print PDF Preview Modal */}
       <PrintReportModal
         title="LAPORAN PERUBAHAN MODAL"
-        subtitle="SIKEPI - Petani Kopi"
+        subtitle="SiKeZ - Sistem Keuangan Gen Z"
         isOpen={showPrintModal}
         onClose={() => setShowPrintModal(false)}
       >
