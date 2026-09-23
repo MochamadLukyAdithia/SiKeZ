@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --primary: #D3ECA7;
+    --secondary: #A1B57D;
+    --tertiary: #B33030;
+    --quaternary: #4D1515;
+    --border: #AEAEAE;
+    --light-grey: #d3d3d3;
+  }
+
+  body {
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  }
+}
+
+/* Custom Gradients matching the Flutter app */
+.bg-gradient-primary {
+  background: linear-gradient(180deg, #B33030 0%, #4D1515 100%);
+}
+
+.bg-gradient-header {
+  background: linear-gradient(180deg, #19282F 1%, #B33030 50%, #D23939 90%);
+}
+
+.bg-gradient-secondary {
+  background: linear-gradient(180deg, #FFFFFF 0%, #D3D3D3 100%);
+}
+
+.bg-gradient-tertiary {
+  background: linear-gradient(180deg, #D3ECA7 0%, #A1B57D 100%);
+}
+
+.bg-gradient-quaternary {
+  background: linear-gradient(180deg, #A1B57D 0%, #464F37 100%);
+}
+
+.bg-gradient-dark-button {
+  background: linear-gradient(180deg, #cecece 0%, #000000 100%);
+}
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+}
