@@ -6,17 +6,17 @@ export const ProfilePage: React.FC = () => {
   const { currentUser, logout, navigate, resetDemoData } = useApp();
 
   return (
-    <div className="min-h-screen bg-[#F4F7F0] pb-24">
-      {/* Header Banner with Coffee Background */}
+    <div className="min-h-screen bg-[#F4F9F5] pb-24">
+      {/* Header Banner */}
       <div className="relative">
         <div
           className="h-44 w-full bg-cover bg-center relative"
           style={{ backgroundImage: "url('/assets/images/coffee_background.png')" }}
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-[#19282F]/70 via-[#19282F]/50 to-[#B33030]/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#09231C]/90 via-[#0E3B2F]/80 to-[#134638]/90" />
           <div className="absolute top-4 left-4 right-4 flex justify-between items-center text-white">
             <h1 className="text-lg font-bold">Profil Pengguna</h1>
-            <span className="text-xs bg-white/20 px-2 py-0.5 rounded-full font-medium">
+            <span className="text-xs bg-white/20 px-2.5 py-0.5 rounded-full font-bold">
               SiKeZ
             </span>
           </div>
@@ -51,8 +51,8 @@ export const ProfilePage: React.FC = () => {
               <User className="w-5 h-5 text-white" />
             </div>
             <div className="min-w-0">
-              <span className="text-[10px] text-rose-200 block uppercase tracking-wider font-semibold">
-                Nama Lengkap / Kelompok
+              <span className="text-[10px] text-emerald-200 block uppercase tracking-wider font-semibold">
+                Nama Lengkap / Usaha
               </span>
               <p className="text-sm font-bold truncate">{currentUser?.name || '-'}</p>
             </div>
@@ -65,7 +65,7 @@ export const ProfilePage: React.FC = () => {
               <Mail className="w-5 h-5 text-white" />
             </div>
             <div className="min-w-0">
-              <span className="text-[10px] text-rose-200 block uppercase tracking-wider font-semibold">
+              <span className="text-[10px] text-emerald-200 block uppercase tracking-wider font-semibold">
                 Email
               </span>
               <p className="text-sm font-medium truncate">{currentUser?.email || '-'}</p>
@@ -79,7 +79,7 @@ export const ProfilePage: React.FC = () => {
               <Phone className="w-5 h-5 text-white" />
             </div>
             <div className="min-w-0">
-              <span className="text-[10px] text-rose-200 block uppercase tracking-wider font-semibold">
+              <span className="text-[10px] text-emerald-200 block uppercase tracking-wider font-semibold">
                 Nomor Telepon / WhatsApp
               </span>
               <p className="text-sm font-medium truncate">{currentUser?.phoneNumber || '-'}</p>
@@ -93,8 +93,8 @@ export const ProfilePage: React.FC = () => {
               <MapPin className="w-5 h-5 text-white" />
             </div>
             <div className="min-w-0">
-              <span className="text-[10px] text-rose-200 block uppercase tracking-wider font-semibold">
-                Alamat Kebun / Domisili
+              <span className="text-[10px] text-emerald-200 block uppercase tracking-wider font-semibold">
+                Alamat Domisili / Usaha
               </span>
               <p className="text-sm font-medium leading-tight">{currentUser?.address || '-'}</p>
             </div>
@@ -143,7 +143,7 @@ export const ProfilePage: React.FC = () => {
             <img src="/assets/images/ojk.png" alt="OJK" className="h-8 object-contain" />
           </div>
           <p className="text-[10px] text-center text-gray-400 mt-4 leading-relaxed">
-            SiKeZ • Sistem Keuangan Gen Z
+            SiKeZ • Aplikasi Keuangan Gen Z
             <br />
             Program Penguatan Kapasitas Organisasi Kemahasiswaan (PPK Ormawa)
             <br />

@@ -164,7 +164,7 @@ export const BukuBesarPage: React.FC = () => {
       {/* Print PDF Preview Modal */}
       <PrintReportModal
         title="LAPORAN BUKU BESAR"
-        subtitle="SiKeZ - Sistem Keuangan Gen Z"
+        subtitle="SiKeZ - Aplikasi Keuangan Gen Z"
         isOpen={showPrintModal}
         onClose={() => setShowPrintModal(false)}
       >

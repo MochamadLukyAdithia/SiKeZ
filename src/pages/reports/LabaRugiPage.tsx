@@ -167,7 +167,7 @@ export const LabaRugiPage: React.FC = () => {
       {/* Print PDF Preview Modal */}
       <PrintReportModal
         title="LAPORAN LABA RUGI"
-        subtitle="SiKeZ - Sistem Keuangan Gen Z"
+        subtitle="SiKeZ - Aplikasi Keuangan Gen Z"
         isOpen={showPrintModal}
         onClose={() => setShowPrintModal(false)}
       >

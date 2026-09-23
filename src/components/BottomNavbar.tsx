@@ -26,7 +26,7 @@ export const BottomNavbar: React.FC = () => {
           />
           <span
             className={`text-xs mt-1 font-medium ${
-              currentRoute === 'dashboard' ? 'text-[#A1B57D] font-semibold' : 'text-gray-600'
+              currentRoute === 'dashboard' ? 'text-[#0E3B2F] font-bold' : 'text-gray-500'
             }`}
           >
             Dashboard
@@ -49,7 +49,7 @@ export const BottomNavbar: React.FC = () => {
           />
           <span
             className={`text-xs mt-1 font-medium ${
-              currentRoute === 'report' ? 'text-[#A1B57D] font-semibold' : 'text-gray-600'
+              currentRoute === 'report' ? 'text-[#0E3B2F] font-bold' : 'text-gray-500'
             }`}
           >
             Laporan
@@ -72,7 +72,7 @@ export const BottomNavbar: React.FC = () => {
           />
           <span
             className={`text-xs mt-1 font-medium ${
-              currentRoute === 'profile' ? 'text-[#A1B57D] font-semibold' : 'text-gray-600'
+              currentRoute === 'profile' ? 'text-[#0E3B2F] font-bold' : 'text-gray-500'
             }`}
           >
             Profile

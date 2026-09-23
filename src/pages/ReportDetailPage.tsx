@@ -12,11 +12,11 @@ export const ReportDetailPage: React.FC = () => {
 
   if (!transaction) {
     return (
-      <div className="min-h-screen bg-[#F4F7F0] flex flex-col items-center justify-center p-6 text-center">
+      <div className="min-h-screen bg-[#F4F9F5] flex flex-col items-center justify-center p-6 text-center">
         <p className="text-sm text-gray-600 mb-4">Transaksi tidak ditemukan.</p>
         <button
           onClick={() => navigate('dashboard')}
-          className="px-4 py-2 bg-[#B33030] text-white rounded-lg text-xs font-semibold"
+          className="px-4 py-2 bg-[#0E3B2F] hover:bg-[#134638] text-white rounded-lg text-xs font-semibold"
         >
           Kembali ke Dashboard
         </button>
@@ -25,7 +25,7 @@ export const ReportDetailPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#F4F7F0] pb-24">
+    <div className="min-h-screen bg-[#F4F9F5] pb-24">
       {/* Header */}
       <div className="sticky top-0 z-30 bg-gradient-primary text-white shadow-md">
         <div className="flex items-center justify-between px-4 h-14">
@@ -77,7 +77,7 @@ export const ReportDetailPage: React.FC = () => {
           {/* Nominal */}
           <div className="flex justify-between items-center text-sm">
             <span className="text-gray-500 font-medium">Nominal</span>
-            <span className="text-lg font-extrabold text-[#B33030]">
+            <span className="text-lg font-extrabold text-[#0E3B2F]">
               {formatCurrency(transaction.nominal)}
             </span>
           </div>
@@ -162,7 +162,7 @@ export const ReportDetailPage: React.FC = () => {
       {/* Printable Voucher Modal */}
       <PrintReportModal
         title="BUKTI TRANSAKSI KEUANGAN"
-        subtitle="SiKeZ - Sistem Keuangan Gen Z"
+        subtitle="SiKeZ - Aplikasi Keuangan Gen Z"
         isOpen={showPrintModal}
         onClose={() => setShowPrintModal(false)}
       >

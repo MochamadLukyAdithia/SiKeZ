@@ -27,16 +27,16 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#D3ECA7] relative flex flex-col justify-center items-center p-4 overflow-hidden">
-      {/* Coffee background texture overlay */}
+    <div className="min-h-screen bg-gradient-to-b from-[#E8F5E9] via-[#F2F9F5] to-[#E2F5EB] relative flex flex-col justify-center items-center p-4 overflow-hidden">
+      {/* Subtle organic pattern overlay */}
       <div
-        className="absolute inset-x-0 bottom-0 top-[28%] bg-cover bg-bottom opacity-20 pointer-events-none"
+        className="absolute inset-x-0 bottom-0 top-[28%] bg-cover bg-bottom opacity-10 pointer-events-none"
         style={{ backgroundImage: "url('/assets/images/coffee_background.png')" }}
       />
 
       <div className="relative z-10 w-full max-w-sm my-auto">
         {/* Collaboration Partner Logos Grid */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-4 bg-white/40 p-2.5 rounded-2xl backdrop-blur-xs">
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-4 bg-white/70 p-2.5 rounded-2xl backdrop-blur-xs border border-emerald-100 shadow-xs">
           <img src="/assets/images/kemendikbud.png" alt="Kemendikbud" className="h-6 object-contain" />
           <img src="/assets/images/kampusmerdeka.png" alt="Kampus Merdeka" className="h-6 object-contain" />
           <img src="/assets/images/simbelmawa.png" alt="Simbelmawa" className="h-6 object-contain" />
@@ -47,16 +47,23 @@ export const LoginPage: React.FC = () => {
           <img src="/assets/images/ojk.png" alt="OJK" className="h-6 object-contain" />
         </div>
 
-        {/* Title */}
-        <div className="text-center mb-6">
-          <h1 className="text-3xl font-extrabold tracking-tight text-[#B33030]">SiKeZ</h1>
-          <p className="text-xs font-semibold text-[#4D1515] italic mt-0.5">
-            "Sistem Keuangan Gen Z"
+        {/* Logo and Brand Title matching the uploaded design */}
+        <div className="text-center mb-5">
+          <div className="w-24 h-24 mx-auto mb-2 bg-white rounded-3xl p-2.5 shadow-lg border border-emerald-100 flex items-center justify-center">
+            <img
+              src="/assets/images/logo.png"
+              alt="SiKeZ Logo"
+              className="w-full h-full object-contain drop-shadow-sm"
+            />
+          </div>
+          <h1 className="text-3xl font-black tracking-tight text-[#0E3B2F]">SiKeZ</h1>
+          <p className="text-xs font-bold text-[#134638] tracking-wide mt-0.5">
+            Aplikasi Keuangan Gen Z
           </p>
         </div>
 
         {/* Auth Box */}
-        <div className="bg-white/95 backdrop-blur-md rounded-3xl p-6 shadow-xl border border-white/60">
+        <div className="bg-white/95 backdrop-blur-md rounded-3xl p-6 shadow-xl border border-emerald-100">
           <h2 className="text-base font-bold text-gray-800 mb-4 text-center">
             {isRegisterMode ? 'Daftar Akun SiKeZ' : 'Masuk ke Akun Anda'}
           </h2>
@@ -72,7 +79,7 @@ export const LoginPage: React.FC = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Contoh: Alex Pratama"
-                  className="w-full bg-gray-50 border border-gray-300 rounded-xl p-2.5 text-xs text-gray-900 outline-none focus:ring-2 focus:ring-[#A1B57D]"
+                  className="w-full bg-emerald-50/50 border border-gray-200 rounded-xl p-2.5 text-xs text-gray-900 outline-none focus:ring-2 focus:ring-[#10B981] focus:border-[#10B981]"
                   required
                 />
               </div>
@@ -85,7 +92,7 @@ export const LoginPage: React.FC = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Masukkan email anda..."
-                className="w-full bg-gray-50 border border-gray-300 rounded-xl p-2.5 text-xs text-gray-900 outline-none focus:ring-2 focus:ring-[#A1B57D]"
+                className="w-full bg-emerald-50/50 border border-gray-200 rounded-xl p-2.5 text-xs text-gray-900 outline-none focus:ring-2 focus:ring-[#10B981] focus:border-[#10B981]"
                 required
               />
             </div>
@@ -97,7 +104,7 @@ export const LoginPage: React.FC = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Masukkan kata sandi anda..."
-                className="w-full bg-gray-50 border border-gray-300 rounded-xl p-2.5 text-xs text-gray-900 outline-none focus:ring-2 focus:ring-[#A1B57D]"
+                className="w-full bg-emerald-50/50 border border-gray-200 rounded-xl p-2.5 text-xs text-gray-900 outline-none focus:ring-2 focus:ring-[#10B981] focus:border-[#10B981]"
                 required
               />
             </div>
@@ -114,7 +121,7 @@ export const LoginPage: React.FC = () => {
               <button
                 type="button"
                 onClick={handleDemoLogin}
-                className="w-full py-2.5 px-4 bg-[#A1B57D] hover:bg-[#8f9e6b] text-white rounded-xl font-semibold text-xs shadow-xs transition-colors"
+                className="w-full py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-semibold text-xs shadow-xs transition-colors"
               >
                 Masuk Cepat Sebagai Demo SiKeZ
               </button>
@@ -131,13 +138,13 @@ export const LoginPage: React.FC = () => {
           <button
             type="button"
             onClick={() => setIsRegisterMode(!isRegisterMode)}
-            className="w-full py-2.5 px-4 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-xl font-semibold text-xs transition-colors"
+            className="w-full py-2.5 px-4 bg-gray-50 hover:bg-gray-100 text-gray-700 rounded-xl font-semibold text-xs transition-colors border border-gray-200"
           >
             {isRegisterMode ? 'Sudah punya akun? Masuk' : 'Belum punya akun? Daftar'}
           </button>
         </div>
 
-        <p className="text-[10px] text-center text-[#4D1515] mt-4 font-medium">
+        <p className="text-[10px] text-center text-[#0E3B2F] mt-4 font-semibold opacity-80">
           PPK Ormawa HMJA FEB Universitas Jember © {new Date().getFullYear()}
         </p>
       </div>

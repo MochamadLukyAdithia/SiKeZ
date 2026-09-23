@@ -127,7 +127,7 @@ export const JurnalUmumPage: React.FC = () => {
       {/* Print PDF Preview Modal */}
       <PrintReportModal
         title="LAPORAN JURNAL UMUM"
-        subtitle="SiKeZ - Sistem Keuangan Gen Z"
+        subtitle="SiKeZ - Aplikasi Keuangan Gen Z"
         isOpen={showPrintModal}
         onClose={() => setShowPrintModal(false)}
       >

@@ -100,7 +100,7 @@ export const TransaksiListPage: React.FC = () => {
       {/* Print PDF Preview Modal */}
       <PrintReportModal
         title="LAPORAN DAFTAR TRANSAKSI"
-        subtitle="SiKeZ - Sistem Keuangan Gen Z"
+        subtitle="SiKeZ - Aplikasi Keuangan Gen Z"
         isOpen={showPrintModal}
         onClose={() => setShowPrintModal(false)}
       >

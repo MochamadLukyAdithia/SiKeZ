@@ -37,7 +37,7 @@ export const DashboardPage: React.FC = () => {
                 onClick={() => setViewMode('selectedDate')}
                 className={`px-2.5 py-1 rounded-full font-medium transition-colors ${
                   viewMode === 'selectedDate'
-                    ? 'bg-[#A1B57D] text-white'
+                    ? 'bg-[#0E3B2F] text-white font-semibold'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
@@ -47,7 +47,7 @@ export const DashboardPage: React.FC = () => {
                 onClick={() => setViewMode('all')}
                 className={`px-2.5 py-1 rounded-full font-medium transition-colors ${
                   viewMode === 'all'
-                    ? 'bg-[#A1B57D] text-white'
+                    ? 'bg-[#0E3B2F] text-white font-semibold'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
@@ -58,7 +58,7 @@ export const DashboardPage: React.FC = () => {
 
           <div className="flex items-center justify-between pt-1">
             <div className="flex items-center space-x-2">
-              <Calendar className="w-5 h-5 text-[#B33030]" />
+              <Calendar className="w-5 h-5 text-[#0E3B2F]" />
               <span className="text-base font-bold text-gray-900">
                 {viewMode === 'all'
                   ? 'Semua Transaksi'
@@ -67,7 +67,7 @@ export const DashboardPage: React.FC = () => {
             </div>
 
             {viewMode === 'selectedDate' && (
-              <label className="cursor-pointer text-xs font-semibold text-[#A1B57D] hover:underline flex items-center">
+              <label className="cursor-pointer text-xs font-semibold text-emerald-700 hover:underline flex items-center">
                 <span>Ganti Tanggal</span>
                 <input
                   type="date"
@@ -94,7 +94,7 @@ export const DashboardPage: React.FC = () => {
           {filteredTransactions.length > 0 && (
             <button
               onClick={() => navigate('report/transaksi')}
-              className="text-xs font-semibold text-[#B33030] hover:underline"
+              className="text-xs font-semibold text-[#0E3B2F] hover:underline"
             >
               Lihat di Laporan
             </button>
@@ -104,7 +104,7 @@ export const DashboardPage: React.FC = () => {
         {filteredTransactions.length === 0 ? (
           <EmptyWarning
             title="Tidak ada transaksi pada tanggal ini"
-            message="Ketuk tombol '+' di bawah untuk mencatat transaksi keuangan kopi Anda."
+            message="Ketuk tombol '+' di bawah untuk mencatat transaksi keuangan Anda."
           />
         ) : (
           <div className="space-y-2">

@@ -55,9 +55,9 @@ export const NeracaPage: React.FC = () => {
 
         {/* 1. AKTIVA (Aset / Harta) */}
         <div className="bg-white rounded-2xl shadow-xs border border-gray-100 overflow-hidden">
-          <div className="bg-[#19282F] text-white px-4 py-2.5 flex justify-between items-center">
+          <div className="bg-[#09231C] text-white px-4 py-2.5 flex justify-between items-center">
             <h3 className="text-xs font-bold uppercase tracking-wider">AKTIVA (ASET USAHA)</h3>
-            <span className="text-xs font-bold text-[#D3ECA7]">
+            <span className="text-xs font-bold text-[#7BE495]">
               {formatCurrency(neracaData.hartaLancarTotal)}
             </span>
           </div>
@@ -82,7 +82,7 @@ export const NeracaPage: React.FC = () => {
 
         {/* 2. PASIVA (Kewajiban & Ekuitas) */}
         <div className="bg-white rounded-2xl shadow-xs border border-gray-100 overflow-hidden">
-          <div className="bg-[#B33030] text-white px-4 py-2.5 flex justify-between items-center">
+          <div className="bg-[#0E3B2F] text-white px-4 py-2.5 flex justify-between items-center">
             <h3 className="text-xs font-bold uppercase tracking-wider">
               PASIVA (KEWAJIBAN & EKUITAS)
             </h3>
@@ -143,7 +143,7 @@ export const NeracaPage: React.FC = () => {
 
           <div className="bg-gray-100 px-4 py-3 border-t-2 border-gray-300 flex justify-between items-center text-xs font-bold text-gray-900">
             <span>TOTAL PASIVA (Hutang + Modal):</span>
-            <span className="text-rose-700">{formatCurrency(totalPasiva)}</span>
+            <span className="text-[#0E3B2F]">{formatCurrency(totalPasiva)}</span>
           </div>
         </div>
       </div>
@@ -151,7 +151,7 @@ export const NeracaPage: React.FC = () => {
       {/* Print PDF Preview Modal */}
       <PrintReportModal
         title="LAPORAN NERACA (POSISI KEUANGAN)"
-        subtitle="SiKeZ - Sistem Keuangan Gen Z (Standar SAK EMKM)"
+        subtitle="SiKeZ - Aplikasi Keuangan Gen Z (Standar SAK EMKM)"
         isOpen={showPrintModal}
         onClose={() => setShowPrintModal(false)}
       >

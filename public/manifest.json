@@ -1,11 +1,11 @@
 {
-  "name": "SiKeZ - Sistem Keuangan Gen Z",
+  "name": "SiKeZ - Aplikasi Keuangan Gen Z",
   "short_name": "SiKeZ",
-  "description": "SiKeZ - Sistem Keuangan Gen Z. Aplikasi pembukuan dan akuntansi keuangan praktis dan modern.",
+  "description": "SiKeZ - Aplikasi Keuangan Gen Z. Aplikasi pembukuan dan akuntansi keuangan praktis dan modern.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#F4F7F0",
-  "theme_color": "#B33030",
+  "background_color": "#F4F9F5",
+  "theme_color": "#0E3B2F",
   "orientation": "portrait",
   "icons": [
     {

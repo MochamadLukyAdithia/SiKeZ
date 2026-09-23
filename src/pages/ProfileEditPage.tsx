@@ -54,7 +54,7 @@ export const ProfileEditPage: React.FC = () => {
           {/* Avatar edit section */}
           <div className="bg-white p-6 rounded-2xl shadow-xs border border-gray-100 flex flex-col items-center">
             <div className="relative mb-3">
-              <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-[#A1B57D] shadow-sm bg-gray-100">
+              <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-emerald-500 shadow-sm bg-gray-100">
                 <img
                   src={
                     imageUrl ||
@@ -64,7 +64,7 @@ export const ProfileEditPage: React.FC = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <label className="absolute bottom-0 right-0 p-2 bg-[#B33030] text-white rounded-full shadow-md cursor-pointer hover:bg-[#8e2424] transition-colors">
+              <label className="absolute bottom-0 right-0 p-2 bg-[#0E3B2F] text-white rounded-full shadow-md cursor-pointer hover:bg-[#134638] transition-colors">
                 <Camera className="w-4 h-4" />
                 <input
                   type="file"

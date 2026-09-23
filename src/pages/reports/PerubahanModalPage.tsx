@@ -34,13 +34,13 @@ export const PerubahanModalPage: React.FC = () => {
       <div className="max-w-md mx-auto p-4 space-y-4">
         {/* Modal Akhir Banner */}
         <div className="bg-gradient-header text-white rounded-2xl p-5 shadow-sm">
-          <span className="text-xs uppercase tracking-wider text-rose-200 font-semibold">
+          <span className="text-xs uppercase tracking-wider text-emerald-200 font-semibold">
             Modal Akhir ({formatDate(selectedDate, 'short')})
           </span>
           <h2 className="text-2xl font-extrabold mt-1">
             {formatCurrency(modalData.getModalAkhir)}
           </h2>
-          <p className="text-[11px] text-rose-100 mt-2">
+          <p className="text-[11px] text-emerald-100/90 mt-2">
             Posisi modal pemilik setelah penyesuaian laba bersih dan mutasi prive.
           </p>
         </div>
@@ -101,7 +101,7 @@ export const PerubahanModalPage: React.FC = () => {
 
           <div className="border-t-2 border-gray-200 pt-2 flex justify-between items-center text-sm font-bold text-gray-900">
             <span>Modal Akhir:</span>
-            <span className="text-[#B33030]">{formatCurrency(modalData.getModalAkhir)}</span>
+            <span className="text-[#0E3B2F]">{formatCurrency(modalData.getModalAkhir)}</span>
           </div>
         </div>
       </div>
@@ -109,7 +109,7 @@ export const PerubahanModalPage: React.FC = () => {
       {/* Print PDF Preview Modal */}
       <PrintReportModal
         title="LAPORAN PERUBAHAN MODAL"
-        subtitle="SiKeZ - Sistem Keuangan Gen Z"
+        subtitle="SiKeZ - Aplikasi Keuangan Gen Z"
         isOpen={showPrintModal}
         onClose={() => setShowPrintModal(false)}
       >

@@ -58,7 +58,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F4F7F0] flex justify-center text-gray-800 antialiased font-['Poppins',sans-serif]">
+    <div className="min-h-screen bg-[#F4F9F5] flex justify-center text-gray-800 antialiased font-['Poppins',sans-serif]">
       {/* Toast Notification */}
       {notification && (
         <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 animate-bounce duration-300">
@@ -66,7 +66,7 @@ export const App: React.FC = () => {
             className={`flex items-center space-x-2 px-4 py-2.5 rounded-full shadow-lg text-xs font-semibold ${
               notification.type === 'error'
                 ? 'bg-rose-600 text-white'
-                : 'bg-emerald-700 text-white'
+                : 'bg-[#0E3B2F] text-white'
             }`}
           >
             {notification.type === 'error' ? (
@@ -80,7 +80,7 @@ export const App: React.FC = () => {
       )}
 
       {/* Main Container constrained to mobile phone screen / desktop card */}
-      <div className="w-full max-w-md bg-[#F4F7F0] min-h-screen relative shadow-lg">
+      <div className="w-full max-w-md bg-[#F4F9F5] min-h-screen relative shadow-lg">
         {renderRoute()}
         <BottomNavbar />
       </div>

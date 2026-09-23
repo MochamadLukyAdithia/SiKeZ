@@ -2,10 +2,11 @@
 
 @layer base {
   :root {
-    --primary: #D3ECA7;
-    --secondary: #A1B57D;
-    --tertiary: #B33030;
-    --quaternary: #4D1515;
+    --primary: #7BE495;
+    --secondary: #34D399;
+    --tertiary: #0E3B2F;
+    --quaternary: #06231C;
+    --accent: #F59E0B;
     --border: #AEAEAE;
     --light-grey: #d3d3d3;
   }
@@ -15,13 +16,13 @@
   }
 }
 
-/* Custom Gradients matching the Flutter app */
+/* Custom Gradients matching the SiKeZ green brand */
 .bg-gradient-primary {
-  background: linear-gradient(180deg, #B33030 0%, #4D1515 100%);
+  background: linear-gradient(180deg, #0E3B2F 0%, #06231C 100%);
 }
 
 .bg-gradient-header {
-  background: linear-gradient(180deg, #19282F 1%, #B33030 50%, #D23939 90%);
+  background: linear-gradient(180deg, #0A2921 0%, #0E3B2F 55%, #134638 100%);
 }
 
 .bg-gradient-secondary {
