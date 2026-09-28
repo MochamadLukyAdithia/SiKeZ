@@ -28,7 +28,7 @@ export const ReportMenuPage: React.FC = () => {
       id: 'transaksi',
       route: 'report/transaksi',
       title: 'Transaksi',
-      subtitle: 'Daftar riwayat semua transaksi keuangan',
+      subtitle: 'Daftar riwayat semua transaksi keuangan Dirty Ledger',
       icon: <Receipt className="w-5 h-5 text-amber-700" />,
     },
     {
@@ -56,7 +56,7 @@ export const ReportMenuPage: React.FC = () => {
       id: 'laba_rugi',
       route: 'report/laba',
       title: 'Laba Rugi',
-      subtitle: 'Pendapatan vs biaya operasional perkebunan',
+      subtitle: 'Pendapatan vs beban operasional Dirty Ledger',
       icon: <TrendingUp className="w-5 h-5 text-emerald-600" />,
       badge: 'Utama',
     },
@@ -98,7 +98,7 @@ export const ReportMenuPage: React.FC = () => {
             </div>
           </div>
           <p className="text-xs text-emerald-100/90 mt-2">
-            Laporan akuntansi standar untuk evaluasi keuangan dan performa usaha.
+            Siklus akuntansi keuangan terpadu Dirty Ledger (1 - 15 September 2026).
           </p>
         </div>
       </div>
@@ -109,7 +109,7 @@ export const ReportMenuPage: React.FC = () => {
           <button
             key={item.id}
             onClick={() => navigate(item.route)}
-            className="w-full bg-white rounded-2xl p-4 shadow-xs border border-gray-100 flex items-center justify-between text-left hover:shadow-md transition-all active:scale-[0.99] group"
+            className="w-full bg-white rounded-2xl p-4 shadow-xs border border-gray-100 flex items-center justify-between text-left hover:shadow-md transition-all active:scale-[0.99] group cursor-pointer"
           >
             <div className="flex items-center space-x-3.5 min-w-0">
               <div className="w-11 h-11 rounded-xl bg-gray-50 flex items-center justify-center shrink-0 border border-gray-100 group-hover:scale-105 transition-transform">

@@ -10,11 +10,11 @@ import { filterTransactions, formatCurrency } from '../../utils/formatters';
 
 export const NeracaSaldoPage: React.FC = () => {
   const { transactions } = useApp();
-  const [filterMode, setFilterMode] = useState<FilterMode>('thisMonth');
-  const [selectedMonth, setSelectedMonth] = useState<number>(new Date().getMonth());
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-  const [rangeStart, setRangeStart] = useState<Date>(new Date(Date.now() - 30 * 24 * 60 * 60 * 1000));
-  const [rangeEnd, setRangeEnd] = useState<Date>(new Date());
+  const [filterMode, setFilterMode] = useState<FilterMode>('all');
+  const [selectedMonth, setSelectedMonth] = useState<number>(8);
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date(2026, 8, 15));
+  const [rangeStart, setRangeStart] = useState<Date>(new Date(2026, 8, 1));
+  const [rangeEnd, setRangeEnd] = useState<Date>(new Date(2026, 8, 15));
   const [showPrintModal, setShowPrintModal] = useState(false);
 
   const filteredTx = filterTransactions(transactions, filterMode, {

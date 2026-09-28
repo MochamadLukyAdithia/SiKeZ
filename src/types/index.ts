@@ -36,6 +36,7 @@ export interface UserModel {
 }
 
 export type FilterMode =
+  | 'all'
   | 'today'
   | 'yesterday'
   | 'last7Days'

@@ -10,7 +10,7 @@ import { formatCurrency, formatDate } from '../../utils/formatters';
 export const PerubahanModalPage: React.FC = () => {
   const { transactions } = useApp();
   const [filterMode, setFilterMode] = useState<FilterMode>('today');
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date(2026, 8, 15));
   const [showPrintModal, setShowPrintModal] = useState(false);
 
   const modalData = calculatePerubahanModal(transactions, selectedDate);

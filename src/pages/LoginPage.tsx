@@ -4,8 +4,8 @@ import { useApp } from '../context/AppContext';
 export const LoginPage: React.FC = () => {
   const { login, register } = useApp();
   const [isRegisterMode, setIsRegisterMode] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('dirtyledgergame@gmail.com');
+  const [password, setPassword] = useState('dirtyledgergame');
   const [name, setName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -41,7 +41,7 @@ export const LoginPage: React.FC = () => {
           <img src="/assets/images/ojk.png" alt="OJK" className="h-6 object-contain" />
         </div>
 
-        {/* Logo and Brand Title matching the uploaded design */}
+        {/* Logo and Brand Title */}
         <div className="text-center mb-5">
           <div className="w-24 h-24 mx-auto mb-2 bg-white rounded-3xl p-2.5 shadow-lg border border-emerald-100 flex items-center justify-center">
             <img
@@ -72,7 +72,7 @@ export const LoginPage: React.FC = () => {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Contoh: Alex Pratama"
+                  placeholder="Contoh: Dirty Ledger"
                   className="w-full bg-emerald-50/50 border border-gray-200 rounded-xl p-2.5 text-xs text-gray-900 outline-none focus:ring-2 focus:ring-[#10B981] focus:border-[#10B981]"
                   required
                 />
@@ -124,9 +124,9 @@ export const LoginPage: React.FC = () => {
           <button
             type="button"
             onClick={() => setIsRegisterMode(!isRegisterMode)}
-            className="w-full py-2.5 px-4 bg-gray-50 hover:bg-gray-100 text-gray-700 rounded-xl font-semibold text-xs transition-colors border border-gray-200"
+            className="w-full py-2.5 px-4 bg-gray-50 hover:bg-gray-100 text-gray-700 rounded-xl font-semibold text-xs transition-colors border border-gray-200 cursor-pointer"
           >
-            {isRegisterMode ? 'Sudah punya akun? Masuk' : 'Belum punya akun? Daftar'}
+            {isRegisterMode ? 'Sudah punya akun? Masuk' : 'Belum punya akun? Daftar Akun Baru'}
           </button>
         </div>
 

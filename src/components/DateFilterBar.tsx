@@ -25,24 +25,27 @@ export const DateFilterBar: React.FC<DateFilterBarProps> = ({
   currentFilter,
   onFilterChange,
   availableFilters = [
-    'today',
+    'all',
     'thisMonth',
+    'today',
     'lastMonth',
     'selectMonth',
     'last7Days',
     'last30Days',
     'selectRangeDate',
   ],
-  selectedDate = new Date(),
+  selectedDate = new Date(2026, 8, 15),
   onDateChange,
-  selectedMonth = new Date().getMonth(),
+  selectedMonth = 8,
   onMonthChange,
-  rangeStart = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
-  rangeEnd = new Date(),
+  rangeStart = new Date(2026, 8, 1),
+  rangeEnd = new Date(2026, 8, 15),
   onRangeChange,
 }) => {
   const getFilterLabel = (filter: FilterMode): string => {
     switch (filter) {
+      case 'all':
+        return 'Semua Periode Siklus (15 September 2026)';
       case 'today':
         return `Hari ini, ${formatDate(new Date(), 'short')}`;
       case 'yesterday':

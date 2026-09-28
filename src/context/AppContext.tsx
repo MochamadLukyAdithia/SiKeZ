@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { TransactionModel, UserModel } from '../types';
+import { INITIAL_TRANSACTIONS, INITIAL_USER } from '../constants/initialData';
 
 interface AppContextType {
   currentUser: UserModel | null;
@@ -11,10 +12,10 @@ interface AppContextType {
   transactions: TransactionModel[];
   addTransaction: (tx: Omit<TransactionModel, 'id'>) => Promise<void>;
   removeTransaction: (id: string) => Promise<void>;
-  clearAllTransactions: () => void;
+  importTransactions: (newTxs: TransactionModel[], replace?: boolean) => void;
   selectedDate: Date;
   setSelectedDate: (d: Date) => void;
-  resetDemoData: () => void;
+  resetDefaultData: () => void;
   currentRoute: string;
   navigate: (route: string, state?: unknown) => void;
   routeState: unknown;
@@ -24,9 +25,9 @@ interface AppContextType {
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-const STORAGE_KEY_TX = 'sikez_transactions_v2';
-const STORAGE_KEY_USER = 'sikez_user_v2';
-const STORAGE_KEY_USERS_DB = 'sikez_users_db_v2';
+// Bumped to v5 to ensure fresh Dirty Ledger dataset
+const STORAGE_KEY_TX = 'sikez_transactions_v5';
+const STORAGE_KEY_USER = 'sikez_user_v5';
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<UserModel | null>(() => {
@@ -34,12 +35,22 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        if (parsed && parsed.email) return parsed;
+        if (parsed.email === 'dirtyledgergame@gmail.com') {
+          return {
+            ...INITIAL_USER,
+            ...parsed,
+            name: 'Dirty Ledger',
+            address: 'Dusun Krajan, Lojejer, Wuluhan, Jember, Jawa Timur 68162',
+            phoneNumber: '0821-4200-8899',
+            imageUrl: '',
+          };
+        }
+        return parsed;
       } catch {
-        return null;
+        return INITIAL_USER;
       }
     }
-    return null;
+    return INITIAL_USER;
   });
 
   const [transactions, setTransactions] = useState<TransactionModel[]>(() => {
@@ -47,15 +58,28 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) return parsed;
+        // Cleanse if old coffee mock data was stored
+        const hasStaleCoffee =
+          Array.isArray(parsed) &&
+          parsed.some(
+            (t: TransactionModel) =>
+              (t.debitName || '').toLowerCase().includes('kopi') ||
+              (t.creditName || '').toLowerCase().includes('kopi') ||
+              (t.notes || '').toLowerCase().includes('kopi') ||
+              (t.notes || '').toLowerCase().includes('pupuk')
+          );
+        if (hasStaleCoffee || parsed.length === 0) {
+          return INITIAL_TRANSACTIONS;
+        }
+        return parsed;
       } catch {
-        return [];
+        return INITIAL_TRANSACTIONS;
       }
     }
-    return [];
+    return INITIAL_TRANSACTIONS;
   });
 
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date(2026, 8, 15));
   const [currentRoute, setCurrentRoute] = useState<string>('dashboard');
   const [routeState, setRouteState] = useState<unknown>(null);
   const [notification, setNotification] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
@@ -79,89 +103,39 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }, 3500);
   };
 
-  const login = async (email: string, pass: string): Promise<boolean> => {
-    if (!email.trim()) {
-      showNotification('Silakan masukkan email Anda.', 'error');
-      return false;
+  const login = async (email: string, _pass: string): Promise<boolean> => {
+    const cleanEmail = email.trim() || 'dirtyledgergame@gmail.com';
+    const isDirtyLedger = cleanEmail.toLowerCase().includes('dirtyledger');
+    const user: UserModel = {
+      ...INITIAL_USER,
+      id: isDirtyLedger ? 'usr_dirtyledger' : 'usr_' + Date.now(),
+      email: cleanEmail,
+      name: isDirtyLedger ? 'Dirty Ledger' : 'Pengguna SiKeZ',
+      phoneNumber: isDirtyLedger ? '0821-4200-8899' : '',
+      address: isDirtyLedger ? 'Dusun Krajan, Lojejer, Wuluhan, Jember, Jawa Timur 68162' : '',
+      imageUrl: '', // Blank by default, icon orang single
+    };
+    setCurrentUser(user);
+    if (isDirtyLedger) {
+      setTransactions(INITIAL_TRANSACTIONS);
     }
-
-    try {
-      const usersDbRaw = localStorage.getItem(STORAGE_KEY_USERS_DB);
-      const usersDb: Record<string, { password?: string; user: UserModel }> = usersDbRaw ? JSON.parse(usersDbRaw) : {};
-      const normalizedEmail = email.trim().toLowerCase();
-
-      let targetUser: UserModel;
-      if (usersDb[normalizedEmail]) {
-        // Registered user found
-        if (pass && usersDb[normalizedEmail].password && usersDb[normalizedEmail].password !== pass) {
-          showNotification('Kata sandi salah. Silakan coba lagi.', 'error');
-          return false;
-        }
-        targetUser = usersDb[normalizedEmail].user;
-      } else {
-        // Allow seamless login for new real users
-        targetUser = {
-          id: 'usr_' + Date.now(),
-          name: '',
-          email: email.trim(),
-          phoneNumber: '',
-          address: '',
-          imageUrl: '',
-          joinedAt: Date.now(),
-        };
-        usersDb[normalizedEmail] = { password: pass, user: targetUser };
-        localStorage.setItem(STORAGE_KEY_USERS_DB, JSON.stringify(usersDb));
-      }
-
-      setCurrentUser(targetUser);
-      showNotification('Berhasil masuk!');
-      navigate('dashboard');
-      return true;
-    } catch {
-      const fallbackUser: UserModel = {
-        id: 'usr_' + Date.now(),
-        name: '',
-        email: email.trim(),
-        phoneNumber: '',
-        address: '',
-        imageUrl: '',
-        joinedAt: Date.now(),
-      };
-      setCurrentUser(fallbackUser);
-      showNotification('Berhasil masuk!');
-      navigate('dashboard');
-      return true;
-    }
+    showNotification('Berhasil masuk ke akun ' + cleanEmail);
+    navigate('dashboard');
+    return true;
   };
 
-  const register = async (email: string, pass: string, name?: string): Promise<boolean> => {
-    if (!email.trim()) {
-      showNotification('Silakan masukkan email Anda.', 'error');
-      return false;
-    }
-
-    const normalizedEmail = email.trim().toLowerCase();
-    const newUser: UserModel = {
+  const register = async (email: string, _pass: string, name?: string): Promise<boolean> => {
+    const user: UserModel = {
       id: 'usr_' + Date.now(),
-      name: name?.trim() || '',
-      email: normalizedEmail,
+      name: name?.trim() || 'Pengguna SiKeZ',
+      email: email.trim(),
       phoneNumber: '',
       address: '',
       imageUrl: '',
       joinedAt: Date.now(),
     };
-
-    try {
-      const usersDbRaw = localStorage.getItem(STORAGE_KEY_USERS_DB);
-      const usersDb: Record<string, { password?: string; user: UserModel }> = usersDbRaw ? JSON.parse(usersDbRaw) : {};
-      usersDb[normalizedEmail] = { password: pass, user: newUser };
-      localStorage.setItem(STORAGE_KEY_USERS_DB, JSON.stringify(usersDb));
-    } catch (e) {
-      console.warn('Gagal menyimpan ke users DB', e);
-    }
-
-    setCurrentUser(newUser);
-    showNotification('Akun berhasil didaftarkan!');
+    setCurrentUser(user);
+    showNotification('Berhasil mendaftar akun baru!');
     navigate('dashboard');
     return true;
   };
@@ -174,22 +148,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const updateProfile = (data: Partial<UserModel>) => {
     if (!currentUser) return;
-    const updated: UserModel = { ...currentUser, ...data };
+    const updated = { ...currentUser, ...data };
     setCurrentUser(updated);
-
-    // Also update users DB
-    try {
-      const usersDbRaw = localStorage.getItem(STORAGE_KEY_USERS_DB);
-      const usersDb: Record<string, { password?: string; user: UserModel }> = usersDbRaw ? JSON.parse(usersDbRaw) : {};
-      const normalizedEmail = currentUser.email.trim().toLowerCase();
-      if (usersDb[normalizedEmail]) {
-        usersDb[normalizedEmail].user = updated;
-        localStorage.setItem(STORAGE_KEY_USERS_DB, JSON.stringify(usersDb));
-      }
-    } catch (e) {
-      console.warn('Gagal update users DB', e);
-    }
-
     showNotification('Profil berhasil diperbarui!');
   };
 
@@ -207,14 +167,20 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     showNotification('Transaksi telah dihapus.');
   };
 
-  const clearAllTransactions = () => {
-    setTransactions([]);
-    localStorage.removeItem(STORAGE_KEY_TX);
-    showNotification('Semua transaksi telah dibersihkan.');
+  const importTransactions = (newTxs: TransactionModel[], replace: boolean = false) => {
+    if (replace) {
+      setTransactions(newTxs);
+      showNotification(`Berhasil mengganti data dengan ${newTxs.length} transaksi dari CSV!`);
+    } else {
+      setTransactions((prev) => [...newTxs, ...prev]);
+      showNotification(`Berhasil mengimpor ${newTxs.length} transaksi baru!`);
+    }
   };
 
-  const resetDemoData = () => {
-    clearAllTransactions();
+  const resetDefaultData = () => {
+    setTransactions(INITIAL_TRANSACTIONS);
+    setCurrentUser(INITIAL_USER);
+    showNotification('Data telah dipulihkan ke siklus akuntansi Dirty Ledger 15 September 2026.');
   };
 
   const navigate = (route: string, state?: unknown) => {
@@ -235,10 +201,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         transactions,
         addTransaction,
         removeTransaction,
-        clearAllTransactions,
+        importTransactions,
         selectedDate,
         setSelectedDate,
-        resetDemoData,
+        resetDefaultData,
         currentRoute,
         navigate,
         routeState,

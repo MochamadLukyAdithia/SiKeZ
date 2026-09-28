@@ -94,6 +94,8 @@ export function filterTransactions(
     const txDate = new Date(txTime);
 
     switch (filter) {
+      case 'all':
+        return true;
       case 'today':
         return txTime >= todayStart && txTime <= todayEnd;
       case 'yesterday':

@@ -1,15 +1,9 @@
 import React from 'react';
-import { User, Phone, MapPin, Edit3, LogOut, Trash2, Mail } from 'lucide-react';
+import { User, Phone, MapPin, Edit3, LogOut, RefreshCw, Mail } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
 export const ProfilePage: React.FC = () => {
-  const { currentUser, logout, navigate, clearAllTransactions, transactions } = useApp();
-
-  const handleClearData = () => {
-    if (window.confirm('Apakah Anda yakin ingin menghapus semua catatan transaksi? Tindakan ini tidak dapat dibatalkan.')) {
-      clearAllTransactions();
-    }
-  };
+  const { currentUser, logout, navigate, resetDefaultData } = useApp();
 
   return (
     <div className="min-h-screen bg-[#F4F9F5] pb-24">
@@ -28,9 +22,9 @@ export const ProfilePage: React.FC = () => {
           </div>
         </div>
 
-        {/* Circular Avatar: Shows User single person icon by default */}
+        {/* Circular Avatar: Default single person icon */}
         <div className="absolute -bottom-12 left-1/2 -translate-x-1/2">
-          <div className="w-24 h-24 rounded-full border-4 border-white shadow-lg overflow-hidden bg-emerald-50/90 flex items-center justify-center text-emerald-800">
+          <div className="w-24 h-24 rounded-full border-4 border-white shadow-lg overflow-hidden bg-emerald-800 flex items-center justify-center">
             {currentUser?.imageUrl ? (
               <img
                 src={currentUser.imageUrl}
@@ -38,7 +32,7 @@ export const ProfilePage: React.FC = () => {
                 className="w-full h-full object-cover"
               />
             ) : (
-              <User className="w-12 h-12 text-[#0E3B2F]/70" />
+              <User className="w-12 h-12 text-emerald-100" />
             )}
           </div>
         </div>
@@ -50,10 +44,8 @@ export const ProfilePage: React.FC = () => {
       <div className="max-w-md mx-auto px-4 space-y-4">
         {/* Name & Title */}
         <div className="text-center mb-2">
-          <h2 className="text-lg font-bold text-gray-900">
-            {currentUser?.name ? currentUser.name : 'Nama Belum Diatur'}
-          </h2>
-          <p className="text-xs text-gray-500">{currentUser?.email || '-'}</p>
+          <h2 className="text-lg font-bold text-gray-900">{currentUser?.name || 'Dirty Ledger'}</h2>
+          <p className="text-xs text-gray-500">{currentUser?.email || 'dirtyledgergame@gmail.com'}</p>
         </div>
 
         {/* User Info Card with Primary Gradient */}
@@ -66,7 +58,7 @@ export const ProfilePage: React.FC = () => {
               <span className="text-[10px] text-emerald-200 block uppercase tracking-wider font-semibold">
                 Nama Lengkap / Usaha
               </span>
-              <p className="text-sm font-bold truncate">{currentUser?.name || '-'}</p>
+              <p className="text-sm font-bold truncate">{currentUser?.name || 'Dirty Ledger'}</p>
             </div>
           </div>
 
@@ -80,7 +72,7 @@ export const ProfilePage: React.FC = () => {
               <span className="text-[10px] text-emerald-200 block uppercase tracking-wider font-semibold">
                 Email
               </span>
-              <p className="text-sm font-medium truncate">{currentUser?.email || '-'}</p>
+              <p className="text-sm font-medium truncate">{currentUser?.email || 'dirtyledgergame@gmail.com'}</p>
             </div>
           </div>
 
@@ -94,7 +86,7 @@ export const ProfilePage: React.FC = () => {
               <span className="text-[10px] text-emerald-200 block uppercase tracking-wider font-semibold">
                 Nomor Telepon / WhatsApp
               </span>
-              <p className="text-sm font-medium truncate">{currentUser?.phoneNumber || '-'}</p>
+              <p className="text-sm font-medium truncate">{currentUser?.phoneNumber || '081234567890'}</p>
             </div>
           </div>
 
@@ -108,7 +100,7 @@ export const ProfilePage: React.FC = () => {
               <span className="text-[10px] text-emerald-200 block uppercase tracking-wider font-semibold">
                 Alamat Domisili / Usaha
               </span>
-              <p className="text-sm font-medium leading-tight">{currentUser?.address || '-'}</p>
+              <p className="text-sm font-medium leading-tight">{currentUser?.address || 'Indonesia'}</p>
             </div>
           </div>
         </div>
@@ -123,15 +115,13 @@ export const ProfilePage: React.FC = () => {
             <span>Edit Profil</span>
           </button>
 
-          {transactions.length > 0 && (
-            <button
-              onClick={handleClearData}
-              className="w-full py-2.5 px-4 bg-white border border-gray-200 text-gray-700 rounded-xl font-semibold text-xs shadow-xs hover:bg-gray-50 transition-all flex items-center justify-center space-x-2 cursor-pointer"
-            >
-              <Trash2 className="w-4 h-4 text-gray-400" />
-              <span>Bersihkan Semua Transaksi</span>
-            </button>
-          )}
+          <button
+            onClick={resetDefaultData}
+            className="w-full py-3 px-4 bg-white border border-gray-200 text-gray-700 rounded-xl font-semibold text-xs shadow-xs hover:bg-gray-50 transition-all flex items-center justify-center space-x-2 cursor-pointer"
+          >
+            <RefreshCw className="w-4 h-4 text-emerald-600" />
+            <span>Pulihkan Data Siklus 15 September 2026</span>
+          </button>
 
           <button
             onClick={logout}

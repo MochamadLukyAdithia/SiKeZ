@@ -11,11 +11,11 @@ import { filterTransactions, formatCurrency, formatDate } from '../../utils/form
 
 export const TransaksiListPage: React.FC = () => {
   const { transactions, navigate, removeTransaction } = useApp();
-  const [filterMode, setFilterMode] = useState<FilterMode>('thisMonth');
-  const [selectedMonth, setSelectedMonth] = useState<number>(new Date().getMonth());
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-  const [rangeStart, setRangeStart] = useState<Date>(new Date(Date.now() - 30 * 24 * 60 * 60 * 1000));
-  const [rangeEnd, setRangeEnd] = useState<Date>(new Date());
+  const [filterMode, setFilterMode] = useState<FilterMode>('all');
+  const [selectedMonth, setSelectedMonth] = useState<number>(8); // September
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date(2026, 8, 15));
+  const [rangeStart, setRangeStart] = useState<Date>(new Date(2026, 8, 1));
+  const [rangeEnd, setRangeEnd] = useState<Date>(new Date(2026, 8, 15));
   const [searchQuery, setSearchQuery] = useState('');
   const [showPrintModal, setShowPrintModal] = useState(false);
 
@@ -70,7 +70,7 @@ export const TransaksiListPage: React.FC = () => {
             placeholder="Cari transaksi, akun, atau catatan..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-white border border-gray-200 rounded-xl py-2 pl-9 pr-3 text-xs outline-none focus:ring-2 focus:ring-[#A1B57D] shadow-xs"
+            className="w-full bg-white border border-gray-200 rounded-xl py-2 pl-9 pr-3 text-xs outline-none focus:ring-2 focus:ring-[#10B981] shadow-xs"
           />
         </div>
 
@@ -97,21 +97,21 @@ export const TransaksiListPage: React.FC = () => {
         )}
       </div>
 
-      {/* Print PDF Preview Modal */}
+      {/* Print / Export Report Modal */}
       <PrintReportModal
-        title="LAPORAN DAFTAR TRANSAKSI"
-        subtitle="SiKeZ - Aplikasi Keuangan Gen Z"
+        title="Laporan Daftar Transaksi"
+        subtitle="Siklus Akuntansi Keuangan Dirty Ledger"
         isOpen={showPrintModal}
         onClose={() => setShowPrintModal(false)}
       >
-        <table className="w-full text-xs border border-gray-400">
-          <thead className="bg-gray-100 font-bold border-b border-gray-400">
+        <table className="w-full text-xs border border-gray-300">
+          <thead className="bg-[#0E3B2F] text-white">
             <tr>
-              <th className="p-2 border-r border-gray-400 text-left">Tanggal</th>
-              <th className="p-2 border-r border-gray-400 text-left">Nama Transaksi</th>
-              <th className="p-2 border-r border-gray-400 text-left">Akun Terlibat</th>
-              <th className="p-2 border-r border-gray-400 text-left">Catatan</th>
-              <th className="p-2 text-right">Nominal (Rp)</th>
+              <th className="p-2 border-r border-emerald-800 text-left">Tanggal</th>
+              <th className="p-2 border-r border-emerald-800 text-left">Transaksi</th>
+              <th className="p-2 border-r border-emerald-800 text-left">Akun (Debit → Kredit)</th>
+              <th className="p-2 border-r border-emerald-800 text-left">Keterangan</th>
+              <th className="p-2 text-right">Nominal</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-300">
