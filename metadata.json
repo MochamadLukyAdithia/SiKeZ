@@ -1,6 +1,6 @@
 {
-  "name": "SIKEPI - Sistem Keuangan Petani Kopi",
-  "description": "Aplikasi pembukuan dan akuntansi keuangan untuk petani dan UMKM kopi, mencakup pencatatan transaksi kas/kredit, jurnal umum, buku besar, neraca saldo, laba rugi, perubahan modal, neraca, dan cetak laporan PDF.",
+  "name": "SiKeZ - Aplikasi Keuangan Gen Z",
+  "description": "SiKeZ - Aplikasi Keuangan Gen Z. Aplikasi pembukuan dan akuntansi keuangan praktis dan modern, mencakup pencatatan transaksi kas/kredit, jurnal umum, buku besar, neraca saldo, laba rugi, perubahan modal, neraca, dan cetak laporan PDF.",
   "capabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
   ]
